@@ -4,6 +4,7 @@ import LandingPage from './paths/LandingPage'
 import Register from './paths/Register'
 import Login from './paths/Login'
 import Events from './paths/Events'
+import Account from './paths/Account'
 import './App.css';
 
 const App = () =>
@@ -13,6 +14,7 @@ const App = () =>
       <Route exact path="/register" component={Register} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/events" component={Events} />
+      <Route exact path="/account" component={Account} />
     </div>
   </Router>
 

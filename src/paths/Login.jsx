@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import LandingButton from '../components/buttons/LandingButton';
+import LoginButton from '../components/buttons/LoginButton';
 
 class Login extends Component {
   render() {
     return(
       <div>
         Login Page
-        <LandingButton />
+        <LoginButton />
       </div>
     );
   }

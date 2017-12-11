@@ -2,19 +2,19 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import {Button} from 'react-materialize'
 
-const LoginLink = () => (
+const EventLink = () => (
 
-  <Link to="/login">
+  <Link to="/events">
       <Button
         type="button"
         floating
-        icon='fingerprint'
-        className='blue'
-        title="Login"
+        icon='event'
+        className='yellow'
+        title="Event"
         >
 
       </Button>
   </Link>
 )
 
-export default LoginLink;
+export default EventLink;

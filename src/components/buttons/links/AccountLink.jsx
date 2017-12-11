@@ -2,19 +2,19 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import {Button} from 'react-materialize'
 
-const LoginLink = () => (
+const AccountLink = () => (
 
-  <Link to="/login">
+  <Link to="/account">
       <Button
         type="button"
         floating
-        icon='fingerprint'
-        className='blue'
-        title="Login"
+        icon='account_circle'
+        className='teal darken-4'
+        title="Account Info"
         >
 
       </Button>
   </Link>
 )
 
-export default LoginLink;
+export default AccountLink;

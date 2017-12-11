@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import LandingButton from '../components/buttons/LandingButton';
+import RegisterButton from '../components/buttons/RegisterButton';
 
 class Register extends Component {
   render() {
     return(
       <div>
         Register Page
-        <LandingButton />
+        <RegisterButton />
       </div>
     );
   }
