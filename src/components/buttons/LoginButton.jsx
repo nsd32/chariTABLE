@@ -5,7 +5,7 @@ import RegisterLink from './links/RegisterLink'
 
 const LandingButton = () => (
 
-  <Button floating fab='vertical add' icon='add' className='red' large style={{bottom: '45px', right: '24px'}}>
+  <Button floating fab='vertical' icon='add' className='red' large style={{bottom: '45px', right: '24px'}}>
 
     <RegisterLink />
     <LandingLink />

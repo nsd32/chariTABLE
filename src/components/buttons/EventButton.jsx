@@ -5,7 +5,7 @@ import LogoutLink from './links/LogoutLink'
 
 const EventButton = () => (
 
-  <Button floating fab='vertical add' icon='add' className='red' large style={{bottom: '45px', right: '24px'}}>
+  <Button floating fab='vertical' icon='add' className='red' large style={{bottom: '45px', right: '24px'}}>
     <AccountLink />
     <LogoutLink />
 

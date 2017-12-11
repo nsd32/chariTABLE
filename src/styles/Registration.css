@@ -1,0 +1,28 @@
+body {
+  background-color: cadetblue;
+  /*background-image: 'image('../images/table_1.jpg')';*/
+}
+.companyRegistration {
+  /*margin:20px;*/
+  justify-content: center;
+  padding:20px;
+}
+
+.companyHR {
+  border-bottom: 4px groove #303f9f;
+}
+
+.companyInfo {
+  border: 5px groove #303f9f ;
+  border-radius: 10px;
+  padding: 20px;
+  justify-content: center;
+  box-shadow: 5px 5px gray;
+  background-color: beige;
+
+}
+
+Button {
+  float: right;
+  margin:10px 10px 20px 10px;
+}

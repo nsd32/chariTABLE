@@ -2,7 +2,8 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const mongoose = require('mongoose');
 
-const Post = require('./models/Post');
+const Company = require('./models/Company');
+const User = require('./models/User');
 
 const PORT = 8080;
 const app = express();
@@ -10,8 +11,8 @@ app.use(bodyParser.json());
 
 app.get('/api', (req, res) => res.send('Hello backend world!'));
 
-app.get('/api/posts', (req, res) => {
-	Post.find({})
+app.get('/api/companies', (req, res) => {
+	Company.find({})
 		.then((data) => {
 			res.json(data);
 		})
@@ -21,12 +22,17 @@ app.get('/api/posts', (req, res) => {
 		});
 });
 
-app.post('/api/posts', (req, res) => {
-	let newPost = new Post();
-	newPost.title = req.body.title;
-	newPost.body = req.body.body;
-	newPost.author = req.body.author;
-	newPost.save()
+app.post('/api/companies', (req, res) => {
+	let newCompany = new Company();
+	newCompany.companyName = req.body.companyName;
+	newCompany.addressLine1 = req.body.addressLine1;
+	newCompany.addressLine2 = req.body.addressLine2;
+	newCompany.city = req.body.city;
+	newCompany.state = req.body.state;
+	newCompany.zipCode = req.body.zipCode;
+	newCompany.phoneNumber = req.body.phoneNumber;
+	newCompany.website = req.body.website;
+	newCompany.save()
 		.then(() => {
 			res.sendStatus(204);
 		})
@@ -38,6 +44,6 @@ app.post('/api/posts', (req, res) => {
 
 
 
-mongoose.connect('mongodb://localhost/forum');
+mongoose.connect('mongodb://localhost/chariTABLE');
 
 app.listen(PORT, () => console.log(`Example app listening on port ${PORT}`));
