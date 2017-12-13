@@ -2,27 +2,33 @@ body {
   background-color: cadetblue;
   /*background-image: 'image('../images/table_1.jpg')';*/
 }
-.companyRegistration {
-  /*margin:20px;*/
+.companyRegistration, .adminRegistration{
+  margin:20px;
   justify-content: center;
   padding:20px;
 }
 
-.companyHR {
+.companyHR, .userHR{
   border-bottom: 4px groove #303f9f;
 }
 
-.companyInfo {
+.companyInfo, .adminInfo{
   border: 5px groove #303f9f ;
   border-radius: 10px;
-  padding: 20px;
+  padding: 40px;
   justify-content: center;
   box-shadow: 5px 5px gray;
   background-color: beige;
+  /*margin:20px;*/
 
 }
 
 Button {
   float: right;
   margin:10px 10px 20px 10px;
+}
+
+.companyRegisterTitle, .userRegisterTitle {
+  font-weight: bolder;
+  color: #303f9f;
 }

@@ -11,11 +11,12 @@ import '../styles/Hero.css';
 const Hero = () => (
 
       <Slider
-        fullscreen="true"
+        fullscreen = "true"
         >
       	<Slide
       		src={Table1}
       		title="chariTABLE Host">
+
       		<h5>Here's our small slogan.</h5>
       	</Slide>
       	<Slide

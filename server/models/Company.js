@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 let Schema = mongoose.Schema;
 
@@ -49,7 +50,47 @@ let CompanySchema = new Schema({
 	website: {
 		type:String,
 		trim: true
+	},
+
+	email: {
+		type: String,
+		required: true,
+		unique: true,
+		trim: true
+	},
+
+	username: {
+		type: String,
+		required: true,
+		unique: true,
+		trim: true
+	},
+
+	password: {
+		type:String,
+		required: true
 	}
+});
+
+// hash password before saving to database
+CompanySchema.pre('save', function(next) {
+    var user = this;
+    bcrypt.hash(user.password, 10, function(err, hash) {
+        if(err) {
+            return next(err);
+        }
+        user.password = hash;
+        next();
+    });
+
+	// users: [
+	// 	{
+  //   	user: {
+	// 			type: Schema.Types.ObjectId,
+  //   		ref: "User"
+	// 		}
+  // 	}
+	// ]
 });
 
 let Company = mongoose.model('Company', CompanySchema);

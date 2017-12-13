@@ -1,0 +1,26 @@
+Col {
+  border: 5px solid red;
+}
+
+.loginColumn {
+  padding: 0px;
+}
+
+.loginBox {
+  background-color: beige;
+  border: 5px groove #303f9f ;
+  border-radius:10px;
+  height:400px;
+  margin: 100px 20px;
+  box-shadow: 10px 10px 20px;
+}
+
+.loginTitle {
+  padding:5px 20px 5px 20px;
+
+  background-color: #303f9f;
+  color: #ffffff;
+}
+
+.loginTitle h3 {
+}

@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import RegisterButton from '../components/buttons/RegisterButton';
-import Registration from '../components/Registration'
+import CompanyForm from '../components/CompanyForm'
 import '../styles/Register.css';
 import axios from 'axios';
 
 class Register extends Component {
   state ={
-    companies: []
+    companyID: '',
+    companies: [],
+    users: []
   }
 
   componentDidMount() {
     axios.get('/api/companies')
       .then((response) => {
-        console.log(response.data);
+        console.log('Did Mount: ' ,response.data);
         this.setState({ companies: response.data });
       })
       .catch((error) => {
@@ -21,8 +23,8 @@ class Register extends Component {
   }
 
   handleCompanySubmit = (event) => {
-    event.preventDefault();
     console.log('Company Submit selected!!')
+    event.preventDefault();
     axios.post('/api/companies', {
       companyName: this.state.companyName,
       addressLine1: this.state.addressLine1,
@@ -34,6 +36,35 @@ class Register extends Component {
       website: this.state.website
     })
       .then((response) => {
+        this.setState({ companies: response.data });
+        axios.get('/api/companies')
+          .then((response) => {
+            console.log('Company Submit: ' ,response.data);
+            console.log('Company Length: ', response.data.length-1);
+            let companyID = response.data[response.data.length-1]._id;
+            console.log('Company ID: ', companyID)
+            this.setState({ companyID: companyID });
+            console.log('Company ID State: ', this.state.companyID);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  handleUserSubmit = (event) => {
+    event.preventDefault();
+    console.log('Company Submit selected!!')
+    axios.post(`/api/companies/${this.state.companyID}`, {
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      email: this.state.email,
+      password: this.state.password,
+    })
+      .then((response) => {
         console.log(response.data);
       })
       .catch((error) => {
@@ -42,7 +73,6 @@ class Register extends Component {
   }
 
   handleInputChange = (event) => {
-    console.log(this.state)
     this.setState({
       [event.target.name]: event.target.value
     });
@@ -51,7 +81,7 @@ class Register extends Component {
   render() {
     return(
       <div className="Registration">
-        <Registration
+        <CompanyForm
           onChange={this.handleInputChange}
           onSubmit={this.handleCompanySubmit}
         />
