@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import LoginButton from '../components/buttons/LoginButton';
 import LoginContainer from '../components/LoginContainer';
@@ -6,29 +7,43 @@ import LoginContainer from '../components/LoginContainer';
 
 class Login extends Component {
 
-  state = {
-    credentials: '',
-    companies: []
-  }
+
+    state = {
+      companyID: "",
+      company: []
+    }
+
 
   componentDidMount() {
-    axios.get('/api/companies')
+    // console.log(props.companyID);
+  }
+
+  handleLoginSubmit = (event) => {
+    event.preventDefault();
+    console.log('Login Submitted')
+    axios.post('/login', {
+      username: this.state.username,
+      password: this.state.password
+    })
       .then((response) => {
-        console.log('Did Mount: ' ,response.data);
-        this.setState({ companies: response.data });
+        console.log('Login Successful');
+        console.log('User Information: ', response.data);
+        this.setState( {company: response.data});
+        this.setState( {companyID: response.data._id});
+        console.log('Current State: ', this.state);
+        console.log('Current Company ID: ', this.state.companyID);
+        <Redirect to='/account' />
       })
       .catch((error) => {
         console.log(error);
-      });
-  }
+      })
+  };
 
-  handleLoginSubmit(event) {
-    event.preventDefault();
-    console.log('Login Submitted')
-  }
+
+
+
 
   handleInputChange = (event) => {
-    console.log(this.state);
     this.setState({
       [event.target.name]: event.target.value
     });

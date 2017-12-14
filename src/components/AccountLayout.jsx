@@ -3,22 +3,21 @@ import { Link } from 'react-router-dom';
 import { Col, Row, Input, Icon, Button } from 'react-materialize';
 import '../styles/Registration.css';
 
-let TestForm = (props) => {
-
-  return(
+let AccountLayout = (props) => {
+    return(
       <form action="">
 
         <Row>
-          <Col className="leftSide" m={2} s={12}>
+          <Col className="leftSide" m={1} s={12}>
 
           </Col>
-          <Col className="leftSide" m={8} s={12}>
+          <Col className="leftSide" m={10} s={12}>
             <div className="registration" m={12}>
               <div className="companyRegistration">
                 <Col className="companyInfo">
-                  <h2 className="companyRegisterTitle"><span><Icon medium></Icon></span> Registration</h2>
+                  <h2 className="companyRegisterTitle"><span><Icon medium>business</Icon></span> Account Information</h2>
                   <hr className="companyHR" />
-                  <Input name="username" s={12} label="Username" onChange={props.onChange} validate type='text'><Icon>account_circle</Icon></Input>
+                  <Input name="username" s={12} label="Username" onChange={props.onChange} validate type='text' value={props.companyID}><Icon>account_circle</Icon></Input>
                   <Input name='companyName' s={12} label="Company Name *" onChange={props.onChange} validate><Icon>business</Icon></Input>
                   <Input name="email" s={12} label="Company Email" onChange={props.onChange} validate type='email'><Icon>email</Icon></Input>
                   <Input name="password" s={12} label="Password" onChange={props.onChange} validate type='password'><Icon>fingerprint</Icon></Input>
@@ -67,15 +66,13 @@ let TestForm = (props) => {
             </div>
           </div>
           </Col>
-          <Col className="rightSide" m={2} s={12}>
+          <Col className="rightSide" m={1} s={12}>
 
           </Col>
         </Row>
 
-    </form>
+      </form>
+    )
+}
 
-    );
-  }
-
-
-export default TestForm;
+export default AccountLayout;

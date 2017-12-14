@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import RegisterButton from '../components/buttons/RegisterButton';
 import TestForm from '../components/TestForm'
 import '../styles/Register.css';
@@ -25,7 +26,7 @@ class TestRegistration extends Component {
   handleCompanySubmit = (event) => {
     console.log('Company Submit selected!!')
     event.preventDefault();
-    axios.post('/api/companies', {
+    axios.post('/register', {
       companyName: this.state.companyName,
       addressLine1: this.state.addressLine1,
       addressLine2: this.state.addressLine2,
@@ -48,6 +49,8 @@ class TestRegistration extends Component {
             console.log('Company ID: ', companyID)
             this.setState({ companyID: companyID });
             console.log('Company ID State: ', this.state.companyID);
+          }).then(() => {
+            return <Redirect to='/account'  />
           })
           .catch((error) => {
             console.log(error);

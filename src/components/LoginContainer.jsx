@@ -10,7 +10,7 @@ const LoginContainer =(props) => {
       <div>
         <Row>
           <Col className="leftSide" s={12} m={2}>
-            Test1
+
           </Col>
           <Col className="loginColumn" s={12} m={8}>
             <div className="loginBox">
@@ -20,17 +20,18 @@ const LoginContainer =(props) => {
               <div className="loginForm">
                 <form>
                   <Input
-                    name='loginUsername'
                     s={12}
+                    name='username'
                     label="Username"
                     onChange={props.onChange}
                     >
                       <Icon>account_circle</Icon>
                     </Input>
                   <Input
-                    name='loginPassword'
                     s={12}
-                    label="Passowrd"
+                    name='password'
+                    label="Password"
+                    type="password"
                     onChange={props.onChange}
                     >
                       <Icon>fingerprint</Icon>
@@ -52,7 +53,7 @@ const LoginContainer =(props) => {
             </div>
           </Col>
           <Col className="rightSide" s={12} m={2}>
-            Test3
+            
           </Col>
         </Row>
       </div>
