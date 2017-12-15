@@ -62,26 +62,39 @@ app.get('/api/companies', (req, res) => {
 
 app.post('/register', (req, res) => {
 
-	let newUser = new User();
-	newUser.companyName = req.body.companyName;
-	newUser.addressLine1 = req.body.addressLine1;
-	newUser.addressLine2 = req.body.addressLine2;
-	newUser.city = req.body.city;
-	newUser.state = req.body.state;
-	newUser.zipCode = req.body.zipCode;
-	newUser.phoneNumber = req.body.phoneNumber;
-	newUser.website = req.body.website;
-	newUser.email = req.body.email;
-	newUser.username = req.body.username;
-	newUser.password = req.body.password;
-	newUser.save()
-		.then(() => {
-			req.session.userId = User._id;
-			// return res.redirect('/account');
+			let newUser = new User();
+			newUser.companyName = req.body.companyName;
+			newUser.addressLine1 = req.body.addressLine1;
+			newUser.addressLine2 = req.body.addressLine2;
+			newUser.city = req.body.city;
+			newUser.state = req.body.state;
+			newUser.zipCode = req.body.zipCode;
+			newUser.phoneNumber = req.body.phoneNumber;
+			newUser.website = req.body.website;
+			newUser.email = req.body.email;
+			newUser.username = req.body.username;
+			newUser.password = req.body.password;
+			newUser.save()
+		.then((user) => {
+					req.session.userId = user._id;
+					res.json(user);
+					// return res.redirect('/login');
 		})
 		.catch((err) => {
 			console.log(err);
 			res.status(500).send(err.message ? err.message : 'Internal server blowup');
+		});
+});
+
+app.get('api/events', (req, res) => {
+	Event.find({})
+		.then((data) => {
+			res.json(data);
+			console.log(data);
+		})
+		.catch((err) => {
+			console.log(err);
+			// res.status(500).send(err.message ? err.message : 'Internal server blowup');
 		});
 });
 
@@ -101,11 +114,11 @@ app.post('/events', (req, res) => {
 	// Put req.body into an object
 	console.log(req.body);
 	let newEvent = req.body;
-	Event.create(newEvent) 
+	Event.create(newEvent)
 	.then(function(event) {
 		console.log(event);
 		res.json(event);
-						
+
 	})
 	.catch(function(err) {
 		console.log(err);
@@ -127,19 +140,19 @@ app.post("/event/:id", function(req, res) {
 		TableHost
   	.create(tableHostArray[i])
     .then(function(tableHost) {
-   
+
       return Event.findOneAndUpdate({ _id: req.params.id }, { $push: { tableHosts: tableHost._id }}, { new: true });
 
     })
     .then(function(event) {
-      
+
     })
     .catch(function(err) {
-      
+
     });
 	}
 	res.send('hello')
-  
+
 });
 
 // app.get('/login', req, res) => {
@@ -153,7 +166,7 @@ app.post("/event/:id", function(req, res) {
 // 			res.status(500).send(err.message ? err.message : 'Internal server blowup');
 // 		});
 // }
-=======
+
 app.get('/account', (req, res, next) => {
 	if(! req.session.userId ) {
 		var err = new Error("You are not authorized to view this page");
