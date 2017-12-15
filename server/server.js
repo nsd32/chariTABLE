@@ -86,7 +86,7 @@ app.post('/register', (req, res) => {
 		});
 });
 
-app.get('api/events', (req, res) => {
+app.get('/api/events', (req, res) => {
 	Event.find({})
 		.then((data) => {
 			res.json(data);
@@ -94,7 +94,7 @@ app.get('api/events', (req, res) => {
 		})
 		.catch((err) => {
 			console.log(err);
-			// res.status(500).send(err.message ? err.message : 'Internal server blowup');
+			res.status(500).send(err.message ? err.message : 'Internal server blowup');
 		});
 });
 
@@ -144,7 +144,7 @@ app.post("/event/tablehosts/:eventId", function(req, res) {
 		TableHost
   	.create(tableHostArray[i])
     .then(function(tableHost) {
-   
+
       return Event.findOneAndUpdate({ _id: req.params.eventId }, { $push: { tableHosts: tableHost._id }}, { new: true });
 
 
@@ -175,19 +175,19 @@ app.post("/event/sponsors/:eventId", function(req, res) {
 		Sponsor
   	.create(sponsorArray[i])
     .then(function(sponsor) {
-   
+
       return Event.findOneAndUpdate({ _id: req.params.eventId }, { $push: { sponsors: sponsor._id }}, { new: true });
 
     })
     .then(function(event) {
-      
+
     })
     .catch(function(err) {
-      
+
     });
 	}
 	res.send('hello')
-  
+
 });
 
 // Route for creating Guests and associating them with a TableHost
@@ -199,19 +199,19 @@ app.post("/event/guest/:tableHostId", function(req, res) {
 	Guest
 	.create(guest)
   .then(function(guest) {
- 
+
     return TableHost.findOneAndUpdate({ _id: req.params.tableHostId }, { $push: { guests: guest._id }}, { new: true });
 
   })
   .then(function(event) {
-    
+
   })
   .catch(function(err) {
-    
+
   });
-	
+
 	res.send('hello')
-  
+
 });
 
 // Route for unique TableHost URL for guest registration
@@ -222,7 +222,7 @@ app.get('/GuestRegistration/:eventId/:tableHostId', (req, res) => {
 		searchedEvent: '',
 		tableHost: ''
 	}
-	
+
 	Event.findOne({ _id: req.params.eventId })
 		.then(function(event) {
 			eventDetails.searchedEvent = event;

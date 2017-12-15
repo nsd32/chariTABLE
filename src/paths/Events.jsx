@@ -45,14 +45,9 @@ class Events extends Component {
     return(
       <div>
         <EventTitle />
-        {this.state.events.map((event) => {
-					return (
-						<EventList eventData={event}/>
-					);
-				})}
-
-        <EventButton />
+        <EventList />
         <button onClick={this.addEventButton}>Add Event</button>
+        <EventButton />
       </div>
     );
   }
