@@ -3,6 +3,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const Company = require('./models/Company');
 const User = require('./models/User');
+const Event = require('./models/Event');
+const TableHost = require('./models/TableHost');
 
 const PORT = 8080;
 const app = express();
@@ -50,6 +52,62 @@ app.post('/api/companies', (req, res) => {
 			console.log(err);
 			res.status(500).send(err.message ? err.message : 'Internal server blowup');
 		});
+});
+
+app.get('/api/event/:eventId', (req, res) => {
+	Event.find({ _id: req.params.eventId })
+		.then(function(event) {
+			res.json(event);
+			console.log(event);
+		})
+		.catch(function(err) {
+			console.log(err);
+		})
+})
+
+app.post('/events', (req, res) => {
+	// Put req.body into an object
+	console.log(req.body);
+	let newEvent = req.body;
+	Event.create(newEvent) 
+	.then(function(event) {
+		console.log(event);
+		res.json(event);
+						
+	})
+	.catch(function(err) {
+		console.log(err);
+	});
+});
+
+// Route for saving/updating an Article's associated Note
+app.post("/event/:id", function(req, res) {
+	console.log(req.params.id);
+	let tableHosts = req.body;
+	console.log(tableHosts);
+
+	let tableHostArray = [];
+	for (tableHost in tableHosts) {
+		tableHostArray.push(tableHosts[tableHost])
+	}
+	console.log(tableHostArray);
+	for (let i = 0; i < tableHostArray.length; i++) {
+		TableHost
+  	.create(tableHostArray[i])
+    .then(function(tableHost) {
+   
+      return Event.findOneAndUpdate({ _id: req.params.id }, { $push: { tableHosts: tableHost._id }}, { new: true });
+
+    })
+    .then(function(event) {
+      
+    })
+    .catch(function(err) {
+      
+    });
+	}
+	res.send('hello')
+  
 });
 
 // app.get('/login', req, res) => {
