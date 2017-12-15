@@ -8,7 +8,7 @@ const PORT = 8080;
 const app = express();
 
 app.use(session({
-	secret: 'treehouse loves you',
+	secret: 'chariTABLE Host',
 	resave: true,
 	saveUninitialized: false
 }));
@@ -29,6 +29,7 @@ app.post('/login', (req, res, next) => {
 				return next(err);
 			} else {
 				req.session.userId = user._id;
+				console.log(req.session.userId);
 				return res.redirect('/account');
 
 			}

@@ -7,15 +7,13 @@ import LoginContainer from '../components/LoginContainer';
 
 class Login extends Component {
 
-
-    state = {
-      companyID: "",
-      company: []
-    }
-
+  state = {
+    CompanyID: "",
+    company: []
+  }
 
   componentDidMount() {
-    // console.log(props.companyID);
+
   }
 
   handleLoginSubmit = (event) => {
@@ -32,7 +30,7 @@ class Login extends Component {
         this.setState( {companyID: response.data._id});
         console.log('Current State: ', this.state);
         console.log('Current Company ID: ', this.state.companyID);
-        <Redirect to='/account' />
+        return <Redirect to='/account' />
       })
       .catch((error) => {
         console.log(error);
