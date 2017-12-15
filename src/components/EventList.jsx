@@ -1,32 +1,52 @@
-import React from 'react';
+import React, { Component } from 'react';
+import axios from 'axios';
+import EventRow from '../components/EventRow'
 import '../styles/Registration.css';
 
-let EventList = (props) => {
+class EventList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      events: []
+    }
 
-  return(
-    <table className="striped">
-      <thead>
-        <tr>
-            <th>Event Name</th>
-            <th>Event Date</th>
-            <th>Event Time</th>
-            <th>Actions</th>
-        </tr>
+  }
+  componentDidMount() {
+    axios.get('/api/events')
+      .then((response) => {
+        console.log(response.data);
+        this.setState({ events: response.data });
+        console.log('New State: ', this.state);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
-      </thead>
+  render() {
+    return(
+      <table className="striped">
+        <thead>
+          <tr>
+              <th>Event Name</th>
+              <th>Event Date</th>
+              <th>Event Time</th>
+              <th>Actions</th>
+          </tr>
 
-      <tbody>
-        <tr>
-          {/* <td></td> */}
-          <td>{props.eventData.eventName}</td>
-          <td>Eclair</td>
-          <td>$0.87</td>
-          <td><button>Details</button></td>
-        </tr>
-      </tbody>
-    </table>
+        </thead>
 
-    );
+        <tbody>
+          {this.state.events.map((event) => {
+  					return (
+  						<EventRow eventData={event}/>
+  					);
+  				})}
+        </tbody>
+      </table>
+
+      );
+    };
   }
 
 

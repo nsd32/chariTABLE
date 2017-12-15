@@ -38,16 +38,12 @@ class Events extends Component {
     return(
       <div>
         <EventTitle />
-        {this.state.events.map((event) => {
-					return (
-						<EventList eventData={event}/>
-					);
-				})}
+        <EventList />
 
-        <EventButton />
         <button><Link to={{
 		  pathname: '/addevent'
 		}}> Add Event </Link></button>
+      <EventButton />
       </div>
     );
   }
