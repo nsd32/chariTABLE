@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import EventButton from '../components/buttons/EventButton'
+import EventButton from '../components/buttons/EventButton';
+import { Link } from 'react-router-dom';
 
 class Events extends Component {
   render() {
@@ -7,6 +8,9 @@ class Events extends Component {
       <div>
         Events Page
         <EventButton />
+        <button><Link to={{
+		  pathname: '/addevent'
+		}}> Add Event </Link></button>
       </div>
     );
   }

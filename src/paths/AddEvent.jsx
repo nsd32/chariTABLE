@@ -14,7 +14,7 @@ class AddEvent extends Component {
 		numberOfTables: 0,
 		numberOfTableHosts: 4,
 		numberOfGuestsPerTable: 0,
-		numberOfSponsors: 0,
+		numberOfSponsors: 5,
 		tableHosts: [],
 		sponsors: []
 	}
