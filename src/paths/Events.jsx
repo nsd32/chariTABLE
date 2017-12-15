@@ -32,6 +32,13 @@ class Events extends Component {
 
   }
 
+  addEventButton = () => {
+    this.props.history.push({
+        pathname: '/addevent',
+        state: { companyID: this.props.location.state.companyID }
+      });
+  }
+
 
 
   render() {
@@ -45,9 +52,7 @@ class Events extends Component {
 				})}
 
         <EventButton />
-        <button><Link to={{
-		  pathname: '/addevent'
-		}}> Add Event </Link></button>
+        <button onClick={this.addEventButton}>Add Event</button>
       </div>
     );
   }

@@ -6,7 +6,7 @@ class TableHost extends Component {
 	state = {};
 
 	componentWillMount() {
-    
+    // Setting initial state based on how many tablehosts there are
 	  for (let i = 0; i < this.props.location.state.eventObj.numberOfTableHosts; i++) {
 	  	var tableHost = `tableHost${i}`;
 	  	console.log([tableHost]);

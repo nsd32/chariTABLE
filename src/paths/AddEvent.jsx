@@ -21,9 +21,9 @@ class AddEvent extends Component {
 
 	nextButton = () => {
 		// Put state into an object??
-		axios.post('/events', this.state)
+		axios.post(`/events/${this.props.location.state.companyID}`, this.state)
 	  .then( (response) => {
-	    console.log(response);
+	    console.log('server response: ', response);
 	    this.props.history.push({
 				pathname: "/tablehost",
 				state: { eventObj: response.data }
@@ -42,6 +42,7 @@ class AddEvent extends Component {
   };
 
   render() {
+  	console.log('companyID: ' + this.props.location.state.companyID)
     return(
     	<div>
 	      <form class="col s12">

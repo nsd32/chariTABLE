@@ -108,29 +108,33 @@ app.get('/api/event/:eventId', (req, res) => {
 		.catch(function(err) {
 			console.log(err);
 		})
-})
-
-app.post('/events', (req, res) => {
-	// Put req.body into an object
-	console.log(req.body);
-	let newEvent = req.body;
-	Event.create(newEvent)
-	.then(function(event) {
-		console.log(event);
-		res.json(event);
-
-	})
-	.catch(function(err) {
-		console.log(err);
-	});
 });
 
-// Route for saving/updating an Events associated TableHosts
+// Route for creating Events and associating them with a Company
+app.post("/events/:companyID", function(req, res) {
+	console.log(req.params.companyID);
+	let newEvent = req.body;
+	console.log(newEvent);
+
+	Event
+	.create(newEvent)
+  	.then(function(event) {
+ 			res.json(event)
+    	return User.findOneAndUpdate({ _id: req.params.companyID }, { $push: { events: event._id }}, { new: true });
+
+  })
+  .catch(function(err) {
+    console.log(err);
+  });
+  
+});
+
+// Route for creating TableHosts and associating them with an Event
 app.post("/event/tablehosts/:eventId", function(req, res) {
 	console.log(req.params.eventId);
 	let tableHosts = req.body;
 	console.log(tableHosts);
-
+	// Converting Object containing Objects to Array containing Objects
 	let tableHostArray = [];
 	for (tableHost in tableHosts) {
 		tableHostArray.push(tableHosts[tableHost])
@@ -156,7 +160,7 @@ app.post("/event/tablehosts/:eventId", function(req, res) {
 
 });
 
-// Route for saving/updating an Events associated Sponsors
+// Route for creating Sponsors and associating them with an Event
 app.post("/event/sponsors/:eventId", function(req, res) {
 	console.log(req.params.eventId);
 	let sponsors = req.body;
@@ -186,7 +190,7 @@ app.post("/event/sponsors/:eventId", function(req, res) {
   
 });
 
-// Route for saving/updating a TableHost associated Guests
+// Route for creating Guests and associating them with a TableHost
 app.post("/event/guest/:tableHostId", function(req, res) {
 	console.log(req.params.tableHostId);
 	let guest = req.body;
@@ -210,6 +214,7 @@ app.post("/event/guest/:tableHostId", function(req, res) {
   
 });
 
+// Route for unique TableHost URL for guest registration
 app.get('/GuestRegistration/:eventId/:tableHostId', (req, res) => {
 	console.log(req.params.eventId);
 	console.log(req.params.tableHostId);
