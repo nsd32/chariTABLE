@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import LoginButton from '../components/buttons/LoginButton';
 import LoginContainer from '../components/LoginContainer';
@@ -26,11 +25,18 @@ class Login extends Component {
       .then((response) => {
         console.log('Login Successful');
         console.log('User Information: ', response.data);
-        this.setState( {company: response.data});
+        this.setState( {companyInfo: response.data});
         this.setState( {companyID: response.data._id});
         console.log('Current State: ', this.state);
         console.log('Current Company ID: ', this.state.companyID);
-        return <Redirect to='/account' />
+        this.props.history.push({
+          pathname: "/events",
+          state: {
+            companyInfo: response.data,
+            companyID: response.data._id,
+            companyTitle: response.data.companyName
+          }
+        });
       })
       .catch((error) => {
         console.log(error);
