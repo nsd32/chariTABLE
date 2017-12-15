@@ -22,5 +22,6 @@ Col {
   color: #ffffff;
 }
 
-.loginTitle h3 {
+.loginForm {
+  padding:20px;
 }

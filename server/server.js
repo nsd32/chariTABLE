@@ -1,19 +1,55 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const mongoose = require('mongoose');
-const Company = require('./models/Company');
 const User = require('./models/User');
+
 const Event = require('./models/Event');
 const TableHost = require('./models/TableHost');
 
+const session = require('express-session');
+
+
 const PORT = 8080;
 const app = express();
+
+app.use(session({
+	secret: 'treehouse loves you',
+	resave: true,
+	saveUninitialized: false
+}));
+
 app.use(bodyParser.json());
+
+app.get('/login', (req, res, next) => {
+
+});
+
+// POST /login
+app.post('/login', (req, res, next) => {
+	if(req.body.username && req.body.password) {
+		User.authenticate(req.body.username, req.body.password, (error, user) => {
+			if (error || !user) {
+				var err = new Error('Wrong username or password!!');
+				err.status = 401;
+				return next(err);
+			} else {
+				req.session.userId = user._id;
+				return res.redirect('/account');
+
+			}
+		});
+
+	} else {
+		var err = new Error('Username and password are Required');
+		err.status = 401
+		return next (err);
+	}
+})
 
 app.get('/api', (req, res) => res.send('Hello backend world!'));
 
 app.get('/api/companies', (req, res) => {
-	Company.find({})
+	User.find({})
 		.then((data) => {
 			res.json(data);
 		})
@@ -23,36 +59,31 @@ app.get('/api/companies', (req, res) => {
 		});
 });
 
-app.post('/api/companies', (req, res) => {
-	// if(
-	// 	req.body.username &&
-	// 	req.body.password &&
-	// 	req.body.confirmPassword &&
-	// 	req.body.companyName
-  //
-	// ) { }
+app.post('/register', (req, res) => {
 
-	let newCompany = new Company();
-	newCompany.companyName = req.body.companyName;
-	newCompany.addressLine1 = req.body.addressLine1;
-	newCompany.addressLine2 = req.body.addressLine2;
-	newCompany.city = req.body.city;
-	newCompany.state = req.body.state;
-	newCompany.zipCode = req.body.zipCode;
-	newCompany.phoneNumber = req.body.phoneNumber;
-	newCompany.website = req.body.website;
-	newCompany.email = req.body.email;
-	newCompany.username = req.body.username;
-	newCompany.password = req.body.password;
-	newCompany.save()
+	let newUser = new User();
+	newUser.companyName = req.body.companyName;
+	newUser.addressLine1 = req.body.addressLine1;
+	newUser.addressLine2 = req.body.addressLine2;
+	newUser.city = req.body.city;
+	newUser.state = req.body.state;
+	newUser.zipCode = req.body.zipCode;
+	newUser.phoneNumber = req.body.phoneNumber;
+	newUser.website = req.body.website;
+	newUser.email = req.body.email;
+	newUser.username = req.body.username;
+	newUser.password = req.body.password;
+	newUser.save()
 		.then(() => {
-			res.sendStatus(204);
+			req.session.userId = User._id;
+			// return res.redirect('/account');
 		})
 		.catch((err) => {
 			console.log(err);
 			res.status(500).send(err.message ? err.message : 'Internal server blowup');
 		});
 });
+
 
 app.get('/api/event/:eventId', (req, res) => {
 	Event.find({ _id: req.params.eventId })
@@ -80,7 +111,7 @@ app.post('/events', (req, res) => {
 	});
 });
 
-// Route for saving/updating an Article's associated Note
+// Route for saving/updating an Events associated TableHosts
 app.post("/event/:id", function(req, res) {
 	console.log(req.params.id);
 	let tableHosts = req.body;
@@ -121,6 +152,24 @@ app.post("/event/:id", function(req, res) {
 // 			res.status(500).send(err.message ? err.message : 'Internal server blowup');
 // 		});
 // }
+=======
+app.get('/account', (req, res, next) => {
+	if(! req.session.userId ) {
+		var err = new Error("You are not authorized to view this page");
+		err.status = 403;
+		return next(err);
+	}
+	User.findById(req.session.userId)
+		.then((data) => {
+			res.json(data);
+		})
+		.catch((err) => {
+			console.log(err);
+			res.status(500).send(err.message ? err.message : 'Internal server blowup');
+		});
+
+	});
+
 
 
 

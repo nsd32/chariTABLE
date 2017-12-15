@@ -4,13 +4,15 @@ const bcrypt = require('bcrypt');
 let Schema = mongoose.Schema;
 
 let UserSchema = new Schema({
-	firstName: {
+
+	username: {
 		type: String,
-		trim: true,
-		required: true
+		required: true,
+		unique: true,
+		trim: true
 	},
 
-	lastName: {
+	companyName: {
 		type: String,
 		trim: true,
 		required: true
@@ -19,7 +21,6 @@ let UserSchema = new Schema({
 	email: {
 		type: String,
 		required: true,
-		unique: true,
 		trim: true
 	},
 
@@ -28,11 +29,80 @@ let UserSchema = new Schema({
 		required: true
 	},
 
-	passwordConfirm: {
+
+	addressLine1: {
+		type: String,
+		trim: true,
+
+	},
+
+	addressLine2: {
+			type: String,
+			trim: true,
+
+		},
+	city: {
+		type: String,
+		trim: true
+	},
+
+	state: {
 		type:String,
-		required: true
-	}
+		trim: true
+	},
+
+	zipCode: {
+		type:Number,
+		trim: true
+	},
+
+	phoneNumber: {
+		type: String,
+		trim: true
+	},
+
+	website: {
+		type:String,
+		trim: true
+	},
+
+	events: [
+		{
+	  	event: {
+				type: Schema.Types.ObjectId,
+	  		ref: "Event"
+			}
+		}
+	]
+
+
+
+
+
+
 });
+
+// authenticate imput against database documents
+UserSchema.statics.authenticate = (username, password, callback) => {
+	User.findOne({ username:username })
+		.exec(function (error, user) {
+			if(error) {
+				return callback(error);
+			} else if (!user) {
+				var err = new Error('Company not found!!');
+				err.status = 401
+				return callback(err);
+			}
+
+			bcrypt.compare(password, user.password, (error, result) => {
+				if(result  === true) {
+					return callback(null, user);
+				} else {
+					return  callback();
+				}
+			})
+		});
+	}
 
 // hash password before saving to database
 UserSchema.pre('save', function(next) {
@@ -44,6 +114,8 @@ UserSchema.pre('save', function(next) {
         user.password = hash;
         next();
     });
+
+
 });
 
 let User = mongoose.model('User', UserSchema);
