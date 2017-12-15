@@ -10,18 +10,31 @@ Col {
   background-color: beige;
   border: 5px groove #303f9f ;
   border-radius:10px;
-  height:400px;
+  height:430px;
   margin: 100px 20px;
   box-shadow: 10px 10px 20px;
 }
 
 .loginTitle {
   padding:5px 20px 5px 20px;
-
+  font-family: 'Playfair Display', serif;
   background-color: #303f9f;
   color: #ffffff;
+  text-align: center;
+}
+
+.loginTitle h3{
+  margin: 0px;
+  font-size: 5rem;
+}
+
+.loginTitle p{
+  margin: 0px;
+  font-size: 2rem;
+  margin: 0px, 0px, 10px, 0px;
 }
 
 .loginForm {
   padding:20px;
+
 }

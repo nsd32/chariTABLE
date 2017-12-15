@@ -4,7 +4,7 @@ import { Col, Row, Input, Icon, Button } from 'react-materialize';
 import '../styles/Login.css';
 
 
-const LoginContainer =(props) => {
+const LoginContainer = (props) => {
 
     return(
       <div>
@@ -15,7 +15,8 @@ const LoginContainer =(props) => {
           <Col className="loginColumn" s={12} m={8}>
             <div className="loginBox">
               <div className="loginTitle">
-                <h3>Login</h3>
+                <h3><b>Hello</b></h3><br/>
+                <p>my UserNAME is:</p>
               </div>
               <div className="loginForm">
                 <form>
@@ -53,7 +54,7 @@ const LoginContainer =(props) => {
             </div>
           </Col>
           <Col className="rightSide" s={12} m={2}>
-            
+
           </Col>
         </Row>
       </div>
