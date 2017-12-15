@@ -68,17 +68,10 @@ let UserSchema = new Schema({
 
 	events: [
 		{
-	  	event: {
-				type: Schema.Types.ObjectId,
-	  		ref: "Event"
-			}
+			type: Schema.Types.ObjectId,
+	  	ref: "Event"
 		}
 	]
-
-
-
-
-
 
 });
 

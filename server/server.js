@@ -2,10 +2,10 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const mongoose = require('mongoose');
 const User = require('./models/User');
-
 const Event = require('./models/Event');
 const TableHost = require('./models/TableHost');
-
+const Sponsor = require('./models/Sponsor');
+const Guest = require('./models/Guest');
 const session = require('express-session');
 
 
@@ -126,8 +126,8 @@ app.post('/events', (req, res) => {
 });
 
 // Route for saving/updating an Events associated TableHosts
-app.post("/event/:id", function(req, res) {
-	console.log(req.params.id);
+app.post("/event/tablehosts/:eventId", function(req, res) {
+	console.log(req.params.eventId);
 	let tableHosts = req.body;
 	console.log(tableHosts);
 
@@ -140,8 +140,9 @@ app.post("/event/:id", function(req, res) {
 		TableHost
   	.create(tableHostArray[i])
     .then(function(tableHost) {
+   
+      return Event.findOneAndUpdate({ _id: req.params.eventId }, { $push: { tableHosts: tableHost._id }}, { new: true });
 
-      return Event.findOneAndUpdate({ _id: req.params.id }, { $push: { tableHosts: tableHost._id }}, { new: true });
 
     })
     .then(function(event) {
@@ -154,6 +155,85 @@ app.post("/event/:id", function(req, res) {
 	res.send('hello')
 
 });
+
+// Route for saving/updating an Events associated Sponsors
+app.post("/event/sponsors/:eventId", function(req, res) {
+	console.log(req.params.eventId);
+	let sponsors = req.body;
+	console.log(sponsors);
+
+	let sponsorArray = [];
+	for (sponsor in sponsors) {
+		sponsorArray.push(sponsors[sponsor])
+	}
+	console.log(sponsorArray);
+	for (let i = 0; i < sponsorArray.length; i++) {
+		Sponsor
+  	.create(sponsorArray[i])
+    .then(function(sponsor) {
+   
+      return Event.findOneAndUpdate({ _id: req.params.eventId }, { $push: { sponsors: sponsor._id }}, { new: true });
+
+    })
+    .then(function(event) {
+      
+    })
+    .catch(function(err) {
+      
+    });
+	}
+	res.send('hello')
+  
+});
+
+// Route for saving/updating a TableHost associated Guests
+app.post("/event/guest/:tableHostId", function(req, res) {
+	console.log(req.params.tableHostId);
+	let guest = req.body;
+	console.log(guest);
+
+	Guest
+	.create(guest)
+  .then(function(guest) {
+ 
+    return TableHost.findOneAndUpdate({ _id: req.params.tableHostId }, { $push: { guests: guest._id }}, { new: true });
+
+  })
+  .then(function(event) {
+    
+  })
+  .catch(function(err) {
+    
+  });
+	
+	res.send('hello')
+  
+});
+
+app.get('/GuestRegistration/:eventId/:tableHostId', (req, res) => {
+	console.log(req.params.eventId);
+	console.log(req.params.tableHostId);
+	eventDetails = {
+		searchedEvent: '',
+		tableHost: ''
+	}
+	
+	Event.findOne({ _id: req.params.eventId })
+		.then(function(event) {
+			eventDetails.searchedEvent = event;
+			TableHost.findOne({ _id: req.params.tableHostId })
+				.then(function(host) {
+					eventDetails.tableHost = host;
+					res.json(eventDetails);
+			})
+			.catch(function(err) {
+				console.log(err);
+			})
+		})
+		.catch(function(err) {
+			console.log(err);
+		})
+})
 
 // app.get('/login', req, res) => {
 //

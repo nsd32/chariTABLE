@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+
 import EventTitle from '../components/EventTitle'
 import EventList from '../components/EventList'
 import EventButton from '../components/buttons/EventButton'
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+
 
 class Events extends Component {
   constructor(props) {
@@ -42,6 +45,9 @@ class Events extends Component {
 				})}
 
         <EventButton />
+        <button><Link to={{
+		  pathname: '/addevent'
+		}}> Add Event </Link></button>
       </div>
     );
   }

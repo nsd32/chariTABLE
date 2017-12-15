@@ -26,7 +26,7 @@ class TableHost extends Component {
   nextButton = () => {
   	
   	// Put this.state into an object before sending???
-		axios.post('/event/' + this.props.location.state.eventObj._id, this.state)
+		axios.post('/event/tablehosts/' + this.props.location.state.eventObj._id, this.state)
 	  .then( (response) => {
 	    console.log(response);
 	    this.props.history.push({
@@ -64,6 +64,16 @@ class TableHost extends Component {
     });
     // console.log(this.state);
   }
+
+  // handleInputChange = (event) => {
+  //   this.setState({
+  //     [event.target.name]: {
+  //       name: event.target.value,
+  //       email: event.target.value
+  //     }
+  //   });
+  //   console.log(this.state);
+  // };
 
   render() {
   	console.log(this.state);
