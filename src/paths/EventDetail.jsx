@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Col, Row } from 'react-materialize';
 import EventDetailButton from '../components/buttons/EventDetailButton'
 // import BackButton from '../components/buttons/BackButton'
-import axios from 'axios';
+// import axios from 'axios';
 
 // import { Link } from 'react-router-dom';
 

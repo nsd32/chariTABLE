@@ -10,16 +10,15 @@ class TableHost extends Component {
 	  for (let i = 0; i < this.props.location.state.eventObj.numberOfTableHosts; i++) {
 	  	var tableHost = `tableHost${i}`;
 	  	console.log([tableHost]);
-	    // this.setState({
-	    // 	[tableHost]: {
-	    // 		name: '',
-	    // 		email: ''
-	    // 	}
-	  	this.state[tableHost] = {
-	  		name: '',
-	  		email: ''
-	  	}
-	  	console.log(this.state);
+	    this.setState({
+        [tableHost]: {
+          name: '',
+          email: ''
+        }
+      }, () => {
+        console.log(this.state)
+      })
+	  	
   	}
   }
 
@@ -89,13 +88,13 @@ class TableHost extends Component {
         rows.push(
         	<tr key={i}>
             <td>
-            	<div class="input-field col s6">
+            	<div className="input-field col s6">
           			<input name={'tableHost' + i} onChange={this.handleInputNameChange} type="text" class="validate" />
           			<label for="last_name">Name</label>
         			</div>
         		</td>
             <td>
-            	<div class="input-field col s6">
+            	<div className="input-field col s6">
           			<input name={'tableHost' + i} onChange={this.handleInputEmailChange} type="text" class="validate" />
           			<label for="last_name">Email</label>
         			</div>
