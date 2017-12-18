@@ -23,32 +23,39 @@ class TableHost extends Component {
   	}
   }
 
+	componentDidMount() {
+		console.log('Table Host Company ID: ', this.props.location.state.companyID)
+	}
+
   nextButton = () => {
-  	
+
   	// Put this.state into an object before sending???
 		axios.post('/event/tablehosts/' + this.props.location.state.eventObj._id, this.state)
 	  .then( (response) => {
 	    console.log(response);
 	    this.props.history.push({
 				pathname: "/sponsor",
-				state: { eventObj: this.props.location.state.eventObj }
+				state: {
+					eventObj: this.props.location.state.eventObj,
+					companyID: this.props.location.state.companyID
+				}
 			});
 	  })
 	  .catch( (error) => {
 	    console.log(error);
 	  });
-		
+
 	}
 
 
   handleInputNameChange = (event) => {
     this.setState({
-    	
-      [event.target.name]: { 
+
+      [event.target.name]: {
       	...this.state[event.target.name],
       	name: event.target.value
       }
-      				
+
     });
     // console.log(this.state);
   }
@@ -56,11 +63,11 @@ class TableHost extends Component {
   handleInputEmailChange = (event) => {
     this.setState({
 
-      [event.target.name]: { 
+      [event.target.name]: {
       	...this.state[event.target.name],
       	email: event.target.value
       }
-      				
+
     });
     // console.log(this.state);
   }
@@ -95,17 +102,17 @@ class TableHost extends Component {
         		</td>
           </tr>
         );
-    } 
+    }
     return(
     	<div>
 	    	<table>
 	        <thead>
-	          <tr>  
+	          <tr>
 	            <th>Enter Table Host Information</th>
 	          </tr>
 	        </thead>
 	        <tbody>{rows}</tbody>
-	      </table>	
+	      </table>
 	      <button onClick={this.nextButton}>Next</button>
       </div>
     );
