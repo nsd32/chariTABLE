@@ -12,26 +12,27 @@ class EventList extends Component {
 
   }
   componentDidMount() {
-    axios.get('/api/events')
-      .then((response) => {
-        console.log(response.data);
-        this.setState({ events: response.data });
-        console.log('New State: ', this.state);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    console.log('Event Props: ', this.props.companyEventData);
+    // axios.get('/api/events')
+    //   .then((response) => {
+    //     console.log(response.data);
+    //     this.setState({ events: response.data });
+    //     console.log('New  EventList State: ', this.state);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   }
 
   render() {
     return(
-      <table className="striped">
+      <table className="striped eventList">
         <thead>
           <tr>
               <th>Event Name</th>
               <th>Event Date</th>
               <th>Event Time</th>
-              <th>Actions</th>
+              <th style={ { "textAlign": "center" } }>Actions</th>
           </tr>
 
         </thead>

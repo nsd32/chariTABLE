@@ -7,6 +7,7 @@ import LoginContainer from '../components/LoginContainer';
 class Login extends Component {
 
   state = {
+    companyInfo:[],
     CompanyID: "",
     company: []
   }
@@ -24,17 +25,18 @@ class Login extends Component {
     })
       .then((response) => {
         console.log('Login Successful');
-        console.log('User Information: ', response.data);
-        this.setState( {companyInfo: response.data});
+        // console.log('User Information: ', response.data);
+        // this.setState( {companyInfo: response.data});
         this.setState( {companyID: response.data._id});
-        console.log('Current State: ', this.state);
-        console.log('Current Company ID: ', this.state.companyID);
+        let companyID = this.state.companyID;
+        // console.log('Current State: ', this.state);
+        // console.log('Current Company ID: ', this.state.companyID);
         this.props.history.push({
-          pathname: "/events",
+          pathname: "/profile/" + companyID,
           state: {
             companyInfo: response.data,
-            companyID: response.data._id,
-            companyTitle: response.data.companyName
+          //   companyID: response.data._id,
+          //   // companyTitle: response.data.companyName
           }
         });
       })

@@ -7,9 +7,10 @@ const TableHost = require('./models/TableHost');
 const Sponsor = require('./models/Sponsor');
 const Guest = require('./models/Guest');
 const session = require('express-session');
+const mid = require('./middleware')
 
 
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 const app = express();
 
 app.use(session({
@@ -17,6 +18,8 @@ app.use(session({
 	resave: true,
 	saveUninitialized: false
 }));
+
+app.use(express.static("client/build"));
 
 app.use(bodyParser.json());
 
@@ -33,10 +36,9 @@ app.post('/login', (req, res, next) => {
 				err.status = 401;
 				return next(err);
 			} else {
-				req.session.userId = user._id;
-				console.log(req.session.userId);
-				return res.redirect('/account');
-
+				let sessionID = req.session.userId = user._id;
+				console.log('Login Session ID: ', sessionID);
+				return res.redirect('/api/events/' + sessionID);
 			}
 		});
 
@@ -46,6 +48,22 @@ app.post('/login', (req, res, next) => {
 		return next (err);
 	}
 })
+
+// GET /logout
+app.get('/logout', function(req, res, next) {
+	console.log('Loggin Out......')
+  if (req.session) {
+    // delete session object
+    req.session.destroy(function(err) {
+      if(err) {
+        return next(err);
+      } else {
+        return res.redirect('/');
+				console.log('Logout Session Id:' ,req.session.userId);
+      }
+    });
+  }
+});
 
 app.get('/api', (req, res) => res.send('Hello backend world!'));
 
@@ -98,6 +116,42 @@ app.get('/api/events', (req, res) => {
 		});
 });
 
+app.get('/api/events/:id', mid.requiresLogin, (req, res) => {
+
+	// User
+  // .find({ events: * })
+	// .where('_id').equals(req.params.id)
+	// .exec()
+
+	User.findById({_id:req.params.id})
+		.populate('events')
+		.then((data) => {
+			res.json(data);
+			// console.log(data);
+		})
+		.catch((err) => {
+			console.log(err);
+			res.status(500).send(err.message ? err.message : 'Internal server blowup');
+		});
+});
+
+app.get('/api/eventDetails/:id', (req, res) => {
+	console.log('Event Details Company IDs :', req.params.id);
+
+	Event.findOne({_id: req.params.id})
+		.populate('tableHosts', 'guests')
+		.then((data) => {
+			res.json(data);
+			console.log(data);
+		})
+		.catch((err) => {
+			console.log(err);
+			res.status(500).send(err.message ? err.message : 'Internal server blowup');
+		});
+});
+
+
+
 
 app.get('/api/event/:eventId', (req, res) => {
 	Event.find({ _id: req.params.eventId })
@@ -126,7 +180,7 @@ app.post("/events/:companyID", function(req, res) {
   .catch(function(err) {
     console.log(err);
   });
-  
+
 });
 
 // Route for creating TableHosts and associating them with an Event
@@ -269,10 +323,17 @@ app.get('/account', (req, res, next) => {
 
 	});
 
+// 	app.get('/*', (req, res) => {
+// 	res.sendFile(path.join(__dirname,'../public/index.html'));
+// });
+
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, './build', 'index.html'));
+});
 
 
 
 
-mongoose.connect('mongodb://localhost/chariTABLE');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/chariTABLE');
 
 app.listen(PORT, () => console.log(`Example app listening on port ${PORT}`));
