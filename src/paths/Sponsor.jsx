@@ -3,38 +3,35 @@ import axios from 'axios';
 
 class Sponsor extends Component {
 
-	state = {
-		eventInfo: []
-	};
+	state = {};
 
 	componentWillMount() {
 
-	  for (let i = 0; i < this.state.eventInfo.numberOfSponsors; i++) {
+	  for (let i = 0; i < this.props.location.state.eventObj.numberOfTableHosts; i++) {
 	  	var sponsor = `sponsor${i}`;
 	  	console.log([sponsor]);
-	    // this.setState({
-	    // 	[tableHost]: {
-	    // 		name: '',
-	    // 		email: ''
-	    // 	}
-	  	this.state[sponsor] = {
-	  		name: '',
-	  		logo: ''
-	  	}
-	  	console.log(this.state);
+	    this.setState({
+        [sponsor]: {
+          name: '',
+          logo: ''
+        }
+      }, () => {
+        console.log(this.state)
+      })
+	  	
   	}
   }
 
-	componentDidMount() {
-		console.log(this.props.location.state.eventObj);
-		console.log(this.props.location.state.companyID);
-		this.setState( { eventInfo: this.props.location.state.eventObj } )
-	}
+	// componentDidMount() {
+	// 	console.log(this.props.location.state.eventObj);
+	// 	console.log(this.props.location.state.companyID);
+	// 	// this.setState( { eventInfo: this.props.location.state.eventObj } )
+	// }
 
   nextButton = () => {
 
   	// Put this.state into an object before sending???
-		axios.post('/event/sponsors/' + this.state.eventInfo._id, this.state)
+		axios.post('/event/sponsors/' + this.props.location.state.eventObj._id, this.state)
 	  .then( (response) => {
 	    console.log(response);
 	    this.props.history.push({
@@ -79,17 +76,17 @@ class Sponsor extends Component {
   	// console.log(this.state);
   	// console.log(this.props.location.state.eventObj.numberOfSponsors);
   	var rows = [];
-    for (var i = 0; i < this.state.eventInfo.numberOfSponsors; i++) {
+    for (var i = 0; i < this.props.location.state.eventObj.numberOfTableHosts; i++) {
         rows.push(
         	<tr key={i}>
             <td>
-            	<div class="input-field col s6">
+            	<div className="input-field col s6">
           			<input name={'sponsor' + i} onChange={this.handleInputNameChange} type="text" class="validate" />
           			<label for="name">Name</label>
         			</div>
         		</td>
             <td>
-            	<div class="input-field col s6">
+            	<div className="input-field col s6">
           			<input name={'sponsor' + i} onChange={this.handleInputLogoChange} type="text" class="validate" />
           			<label for="logo">Logo Link</label>
         			</div>
