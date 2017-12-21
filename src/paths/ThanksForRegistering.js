@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 
-class Profile extends Component {
+class ThanksForRegistering extends Component {
 	
 
   render() {
+    console.log(this.props.location.state.url)
     return(
       <div>
         
@@ -24,7 +25,7 @@ class Profile extends Component {
                   <h1 class="text-big">Thanks For Registering!</h1>
                   
                   
-                  <a href="index.html" class="btn btn-primary btn-raised">
+                  <a href={this.props.location.state.url} class="btn btn-primary btn-raised">
                     <i class="zmdi zmdi-home"></i> Go Back To Your Tablehost Page</a>
                 </div>
               </div>
@@ -39,4 +40,4 @@ class Profile extends Component {
   }
 }
 
-export default Profile;
+export default ThanksForRegistering;

@@ -11,6 +11,7 @@ import AddEvent from './paths/AddEvent'
 import TableHost from './paths/TableHost'
 import Sponsor from './paths/Sponsor'
 import GuestRegister from './paths/GuestRegister'
+import ThanksForRegistering from './paths/ThanksForRegistering'
 import './App.css';
 
 const App = () =>
@@ -26,6 +27,7 @@ const App = () =>
       <Route exact path="/addevent" component={AddEvent} />
       <Route exact path="/tablehost" component={TableHost} />
       <Route exact path="/sponsor" component={Sponsor} />
+      <Route exact path="/thanksforregistering" component={ThanksForRegistering} />
       <Route exact path="/GuestRegistration/:eventId/:tableHostId" component={GuestRegister} />
     </div>
   </Router>
