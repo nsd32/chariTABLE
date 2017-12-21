@@ -171,15 +171,15 @@ class GuestRegister extends Component {
                           <div class="input-group center-block">
                             <label class="control-label" for="ms-subscribe">
                               <i class="zmdi zmdi-email"></i> Full Name</label>
-                            <input type="email" id="ms-subscribe" class="form-control" /> </div>
+                            <input name="guestName" onChange={this.handleInputChange} type="text" id="ms-subscribe" class="form-control" /> </div>
                         </div>
                         <div class="form-group label-floating mt-2 mb-1">
                           <div class="input-group center-block">
                             <label class="control-label" for="ms-subscribe">
                               <i class="zmdi zmdi-email"></i> Email Address</label>
-                            <input type="email" id="ms-subscribe" class="form-control" /> </div>
+                            <input name="guestEmail" onChange={this.handleInputChange} type="email" id="ms-subscribe" class="form-control" /> </div>
                         </div>
-                        <button class="btn btn-raised btn-primary btn-block" type="button">Register</button>
+                        <button onClick={this.registerButton} class="btn btn-raised btn-primary btn-block" type="button">Register</button>
                         <h3>Can't make it?</h3>
                         <p>Enter your name above and click Donate now to help TABLEHOST NAME meet their goal.</p>
                         <button class="btn btn-raised btn-success btn-block" type="button">Donate</button>
