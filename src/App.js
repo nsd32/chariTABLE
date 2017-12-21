@@ -6,7 +6,7 @@ import Login from './paths/Login'
 import Events from './paths/Events'
 import EventDetail from './paths/EventDetail'
 import Account from './paths/Account'
-// import Profile from './paths/Profile'
+import Profile from './paths/Profile'
 import AddEvent from './paths/AddEvent'
 import TableHost from './paths/TableHost'
 import Sponsor from './paths/Sponsor'
@@ -22,7 +22,7 @@ const App = () =>
       <Route exact path="/profile/:companyId" component={Events} />
       <Route exact path="/event/:eventId" component={EventDetail} />
       <Route exact path="/account" component={Account} />
-      {/* <Route exact path="/profile" component={Profile} /> */}
+      <Route exact path="/profile" component={Profile} />
       <Route exact path="/addevent" component={AddEvent} />
       <Route exact path="/tablehost" component={TableHost} />
       <Route exact path="/sponsor" component={Sponsor} />

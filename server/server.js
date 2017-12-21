@@ -122,6 +122,7 @@ app.get('/api/events/:id', mid.requiresLogin, (req, res) => {
   // .find({ events: * })
 	// .where('_id').equals(req.params.id)
 	// .exec()
+	//
 
 	User.findById({_id:req.params.id})
 		.populate('events')
@@ -281,6 +282,7 @@ app.get('/GuestRegistration/:eventId/:tableHostId', (req, res) => {
 		.then(function(event) {
 			eventDetails.searchedEvent = event;
 			TableHost.findOne({ _id: req.params.tableHostId })
+				.populate('guests')
 				.then(function(host) {
 					eventDetails.tableHost = host;
 					res.json(eventDetails);
