@@ -108,7 +108,6 @@ class Events extends Component {
                   
                   <span className="ms-logo animated zoomInDown animation-delay-5">CH</span>
                   <h1 className="animated fadeInRight animation-delay-6">chariTABLE Host
-                    <span>Style</span>
                   </h1>
                 </a>
               </div>
@@ -188,8 +187,10 @@ class Events extends Component {
               <div className="col-lg-8">
                 <div className="card card-primary animated fadeInUp animation-delay-12">
                   <div className="card-header">
-                    <h3 className="card-title">
-                      <i className="zmdi zmdi-account-circle"></i> Events</h3>
+                    <h3 id="eventsCardTitle" className="card-title">
+                      <i className="zmdi zmdi-account-circle"></i> Events
+                    </h3>
+                    <a onClick={this.addEventButton} id="addEventButton" href="javascript:void(0)" class="btn btn-raised btn-default">Add Event</a>
                   </div>
                   <table className="table table-no-border table-striped">
                     <thead>

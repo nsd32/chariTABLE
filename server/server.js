@@ -279,6 +279,7 @@ app.get('/GuestRegistration/:eventId/:tableHostId', (req, res) => {
 	}
 
 	Event.findOne({ _id: req.params.eventId })
+		.populate('sponsors')
 		.then(function(event) {
 			eventDetails.searchedEvent = event;
 			TableHost.findOne({ _id: req.params.tableHostId })
