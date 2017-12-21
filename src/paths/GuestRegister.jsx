@@ -4,10 +4,6 @@ import axios from 'axios';
 class GuestRegister extends Component {
 
   state = {
-    eventId: '',
-    tableHostId: '',
-    eventName: '',
-    tableHostName: '',
     guestName: '',
     guestEmail: ''
   }
@@ -17,10 +13,7 @@ class GuestRegister extends Component {
       .then((response) => {
         console.log('Did Mount: ' ,response.data);
         this.setState({
-          eventName: response.data.searchedEvent.eventName,
-          tableHostName: response.data.tableHost.name,
-          eventId: response.data.searchedEvent._id,
-          tableHostId: response.data.tableHost._id
+          tableHostData: response.data
         })
         // this.setState({ companies: response.data });
       })
@@ -56,26 +49,153 @@ class GuestRegister extends Component {
   }
 
   render() {
+    if(!this.state.tableHostData) {
+      return (
+        <div id="ms-preload" class="ms-preload">
+          <div id="status">
+            <div class="spinner">
+              <div class="dot1"></div>
+              <div class="dot2"></div>
+            </div>
+          </div>
+        </div>
+      )
+    }
     return(
       <div>
-        <h1>Guest Registration</h1>
-        <h3>{this.state.eventName}</h3>
-        <h3>{this.state.tableHostName}</h3>
-        <button onClick={this.registerButton}>Register</button>
-        <tr>
-            <td>
-              <div class="input-field col s6">
-                <input name="guestName" onChange={this.handleInputChange} type="text" class="validate" />
-                <label for="last_name">Name</label>
+        
+        {/*<div id="ms-preload" class="ms-preload">
+          <div id="status">
+            <div class="spinner">
+              <div class="dot1"></div>
+              <div class="dot2"></div>
+            </div>
+          </div>
+        </div>*/}
+        <div class="bg-full-page ms-hero-img-coffee ms-hero-bg-primary ms-bg-fixed back-fixed">
+
+          <header class="ms-header ms-header-primary">
+            <div class="container container-full">
+              <div class="ms-title">
+                <a href="index.html">
+                  
+                  <span class="ms-logo animated zoomInDown animation-delay-5">CH</span>
+                  <h1 class="animated fadeInRight animation-delay-6">chariTABLE Host
+                  </h1>
+                </a>
               </div>
-            </td>
-            <td>
-              <div class="input-field col s6">
-                <input name="guestEmail" onChange={this.handleInputChange} type="text" class="validate" />
-                <label for="last_name">Email</label>
+              <div class="header-right">
+                <div class="share-menu">
+                  <ul class="share-menu-list">
+                    <li class="animated fadeInRight animation-delay-3">
+                      <a href="javascript:void(0)" class="btn-circle btn-google">
+                        <i class="zmdi zmdi-google"></i>
+                      </a>
+                    </li>
+                    <li class="animated fadeInRight animation-delay-2">
+                      <a href="javascript:void(0)" class="btn-circle btn-facebook">
+                        <i class="zmdi zmdi-facebook"></i>
+                      </a>
+                    </li>
+                    <li class="animated fadeInRight animation-delay-1">
+                      <a href="javascript:void(0)" class="btn-circle btn-twitter">
+                        <i class="zmdi zmdi-twitter"></i>
+                      </a>
+                    </li>
+                  </ul>
+                  <a href="javascript:void(0)" class="btn-circle btn-circle-primary animated zoomInDown animation-delay-7">
+                    <i class="zmdi zmdi-share"></i>
+                  </a>
+                </div>
+                <a href="javascript:void(0)" class="btn-circle btn-circle-primary no-focus animated zoomInDown animation-delay-8" data-toggle="modal" data-target="#ms-account-modal">
+                  <i class="zmdi zmdi-account"></i>
+                </a>
+                <form class="search-form animated zoomInDown animation-delay-9">
+                  <input id="search-box" type="text" class="search-input" placeholder="Search..." name="q" />
+                  <label for="search-box">
+                    <i class="zmdi zmdi-search"></i>
+                  </label>
+                </form>
               </div>
-            </td>
-          </tr>
+            </div>
+          </header>
+
+          <div class="absolute-center">
+            <div class="container">
+              <div class="row">
+                <div class="col-xl-6">
+                  <div class="card card-flat bg-transparent">
+                    <div class="card-block color-white">
+                      <header class="text-center mb-2">
+                        <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5"><span>{this.state.tableHostData.searchedEvent.eventName}</span>
+                        </h1>
+                        <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">Table Host: {this.state.tableHostData.tableHost.name}
+                        </h1>
+                      </header>
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <div class="text-center card-block animated zoomIn animation-delay-10">
+                            <h2 className="animated zoomInDown animation-delay-5">Guests</h2>
+                            <ul>
+                              {this.state.tableHostData.tableHost.guests.map((guest, idx) => {
+                                return (
+                                  <li className="animated zoomInDown animation-delay-5" key={idx}><h4>{guest.name}</h4></li> 
+                                );
+                              })}
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="col-sm-6">
+                          <div class="text-center card-block animated zoomIn animation-delay-10">
+                            <h2 className="animated zoomInDown animation-delay-5">Sponsors</h2>
+                            <ul>
+                              {this.state.tableHostData.searchedEvent.sponsors.map((sponsor, idx) => {
+                                return (
+                                  <li className="animated zoomInDown animation-delay-5" key={idx}><h4>{sponsor.name}</h4></li> 
+                                );
+                              })}
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-6">
+                  <div class="card index-1 animated zoomInRight animation-delay-7">
+                    <div class="card-block-big">
+                      <h1 class="color-primary">Register</h1>
+                      <hr style={{height:"10px", visibility:"hidden"}} />
+                      <form>
+                        <div class="form-group label-floating mt-2 mb-1">
+                          <div class="input-group center-block">
+                            <label class="control-label" for="ms-subscribe">
+                              <i class="zmdi zmdi-email"></i> Full Name</label>
+                            <input type="email" id="ms-subscribe" class="form-control" /> </div>
+                        </div>
+                        <div class="form-group label-floating mt-2 mb-1">
+                          <div class="input-group center-block">
+                            <label class="control-label" for="ms-subscribe">
+                              <i class="zmdi zmdi-email"></i> Email Address</label>
+                            <input type="email" id="ms-subscribe" class="form-control" /> </div>
+                        </div>
+                        <button class="btn btn-raised btn-primary btn-block" type="button">Register</button>
+                        <h3>Can't make it?</h3>
+                        <p>Enter your name above and click Donate now to help TABLEHOST NAME meet their goal.</p>
+                        <button class="btn btn-raised btn-success btn-block" type="button">Donate</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <p class="lead lead-sm text-center mt-4 color-medium animated fadeInUp animation-delay-16">Material Style &copy; Copyright 2016</p>
+            </div>
+          </div>
+        </div>
+        <script src="assets/js/plugins.min.js"></script>
+        <script src="assets/js/app.min.js"></script>
+        <script src="assets/js/coming.js"></script>
+        
       </div>
     );
   }

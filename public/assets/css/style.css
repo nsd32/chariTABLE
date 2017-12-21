@@ -10,3 +10,12 @@ label {
 	font-size: 1.5rem !important;
 }
 
+#addEventButton {
+	float: right;
+	margin: 0;
+}
+
+#eventsCardTitle {
+	display: inline-block;
+}
+

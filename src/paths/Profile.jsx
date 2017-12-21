@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
 class Profile extends Component {
 	
@@ -7,136 +6,138 @@ class Profile extends Component {
   render() {
     return(
       <div>
-
-      <header class="ms-header ms-header-primary">
-          <div class="container container-full">
-            <div class="ms-title">
-              <a href="index.html">
-                
-                <span class="ms-logo animated zoomInDown animation-delay-5">CH</span>
-                <h1 class="animated fadeInRight animation-delay-6">chariTABLE Host
-                </h1>
-              </a>
+        
+        {/*<div id="ms-preload" class="ms-preload">
+          <div id="status">
+            <div class="spinner">
+              <div class="dot1"></div>
+              <div class="dot2"></div>
             </div>
-            <div class="header-right">
-              <div class="share-menu">
-                <ul class="share-menu-list">
-                  <li class="animated fadeInRight animation-delay-3">
-                    <a href="javascript:void(0)" class="btn-circle btn-google">
-                      <i class="zmdi zmdi-google"></i>
-                    </a>
-                  </li>
-                  <li class="animated fadeInRight animation-delay-2">
-                    <a href="javascript:void(0)" class="btn-circle btn-facebook">
-                      <i class="zmdi zmdi-facebook"></i>
-                    </a>
-                  </li>
-                  <li class="animated fadeInRight animation-delay-1">
-                    <a href="javascript:void(0)" class="btn-circle btn-twitter">
-                      <i class="zmdi zmdi-twitter"></i>
-                    </a>
-                  </li>
-                </ul>
-                <a href="javascript:void(0)" class="btn-circle btn-circle-primary animated zoomInDown animation-delay-7">
-                  <i class="zmdi zmdi-share"></i>
+          </div>
+        </div>*/}
+        <div class="bg-full-page ms-hero-img-coffee ms-hero-bg-primary ms-bg-fixed back-fixed">
+
+          <header class="ms-header ms-header-primary">
+            <div class="container container-full">
+              <div class="ms-title">
+                <a href="index.html">
+                  
+                  <span class="ms-logo animated zoomInDown animation-delay-5">CH</span>
+                  <h1 class="animated fadeInRight animation-delay-6">chariTABLE Host
+                  </h1>
                 </a>
               </div>
-              <a href="javascript:void(0)" class="btn-circle btn-circle-primary no-focus animated zoomInDown animation-delay-8" data-toggle="modal" data-target="#ms-account-modal">
-                <i class="zmdi zmdi-account"></i>
-              </a>
-              <form class="search-form animated zoomInDown animation-delay-9">
-                <input id="search-box" type="text" class="search-input" placeholder="Search..." name="q" />
-                <label for="search-box">
-                  <i class="zmdi zmdi-search"></i>
-                </label>
-              </form>
+              <div class="header-right">
+                <div class="share-menu">
+                  <ul class="share-menu-list">
+                    <li class="animated fadeInRight animation-delay-3">
+                      <a href="javascript:void(0)" class="btn-circle btn-google">
+                        <i class="zmdi zmdi-google"></i>
+                      </a>
+                    </li>
+                    <li class="animated fadeInRight animation-delay-2">
+                      <a href="javascript:void(0)" class="btn-circle btn-facebook">
+                        <i class="zmdi zmdi-facebook"></i>
+                      </a>
+                    </li>
+                    <li class="animated fadeInRight animation-delay-1">
+                      <a href="javascript:void(0)" class="btn-circle btn-twitter">
+                        <i class="zmdi zmdi-twitter"></i>
+                      </a>
+                    </li>
+                  </ul>
+                  <a href="javascript:void(0)" class="btn-circle btn-circle-primary animated zoomInDown animation-delay-7">
+                    <i class="zmdi zmdi-share"></i>
+                  </a>
+                </div>
+                <a href="javascript:void(0)" class="btn-circle btn-circle-primary no-focus animated zoomInDown animation-delay-8" data-toggle="modal" data-target="#ms-account-modal">
+                  <i class="zmdi zmdi-account"></i>
+                </a>
+                <form class="search-form animated zoomInDown animation-delay-9">
+                  <input id="search-box" type="text" class="search-input" placeholder="Search..." name="q" />
+                  <label for="search-box">
+                    <i class="zmdi zmdi-search"></i>
+                  </label>
+                </form>
+              </div>
+            </div>
+          </header>
+
+          <div class="absolute-center">
+            <div class="container">
+              <div class="row">
+                <div class="col-xl-6">
+                  <div class="card card-flat bg-transparent">
+                    <div class="card-block color-white">
+                      <header class="text-center mb-2">
+                        <span class="ms-logo ms-logo-lg ms-logo-white center-block mb-2 animated zoomInDown animation-delay-5">M</span>
+                        <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">Material
+                          <span>Style</span>
+                        </h1>
+                        <p class="lead lead-xl mt-2 animated fadeInUp animation-delay-7">Odio temporibus officiis, mollitia fuga velit vel dolor, perferendis, accusantium error asperiores quam id cupiditate.</p>
+                      </header>
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <div class="text-center card-block animated zoomIn animation-delay-10">
+                            <span class="btn-circle btn-circle-raised btn-circle-white btn-circle-xlg color-warning">
+                              <i class="zmdi zmdi-cloud-outline"></i>
+                            </span>
+                            <h4 class="color-white">Cloud Service</h4>
+                            <p class="">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                            <a href="javascript:void(0)" class="btn btn-white color-warning btn-raised">
+                              <i class="zmdi zmdi-download"></i> Get Now</a>
+                          </div>
+                        </div>
+                        <div class="col-sm-6">
+                          <div class="text-center card-block animated zoomIn animation-delay-10">
+                            <span class="btn-circle btn-circle-raised btn-circle-white btn-circle-xlg color-info">
+                              <i class="zmdi zmdi-card"></i>
+                            </span>
+                            <h4 class="color-white">Secure Payment</h4>
+                            <p class="">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                            <a href="javascript:void(0)" class="btn btn-white color-info btn-raised">
+                              <i class="zmdi zmdi-info"></i> More info</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-6">
+                  <div class="card index-1 animated zoomInRight animation-delay-7">
+                    <div class="card-block-big">
+                      <h1 class="color-primary">Register</h1>
+                      <hr style={{height:"10px", visibility:"hidden"}} />
+                      <form>
+                        <div class="form-group label-floating mt-2 mb-1">
+                          <div class="input-group center-block">
+                            <label class="control-label" for="ms-subscribe">
+                              <i class="zmdi zmdi-email"></i> Full Name</label>
+                            <input type="email" id="ms-subscribe" class="form-control" /> </div>
+                        </div>
+                        <div class="form-group label-floating mt-2 mb-1">
+                          <div class="input-group center-block">
+                            <label class="control-label" for="ms-subscribe">
+                              <i class="zmdi zmdi-email"></i> Email Adress</label>
+                            <input type="email" id="ms-subscribe" class="form-control" /> </div>
+                        </div>
+                        <button class="btn btn-raised btn-primary btn-block" type="button">Register</button>
+                        <h3>Can't make it?</h3>
+                        <p>Enter your name above and click Donate now to help TABLEHOST NAME meet their goal.</p>
+                        <button class="btn btn-raised btn-success btn-block" type="button">Donate</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <p class="lead lead-sm text-center mt-4 color-medium animated fadeInUp animation-delay-16">Material Style &copy; Copyright 2016</p>
             </div>
           </div>
-        </header>
-
-      <div class="ms-hero-page-override ms-hero-img-airplane ms-bg-fixed ms-hero-bg-dark-light">
-        <div class="container">
-          <div class="text-center">
-            <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">Add Event Details</h1>
-            {/*<p class="lead lead-lg color-light text-center center-block mt-2 mw-800 text-uppercase fw-300 animated fadeInUp animation-delay-7">Do not wait more register now! Access our great community and benefit from
-              <span class="color-info">exclusive membership</span> conditions.</p>*/}
-          </div>
         </div>
-      </div>
-      <div class="container">
-        <div class="card card-primary card-hero animated fadeInUp animation-delay-7">
-          <div class="card-block">
-            <form class="form-horizontal">
-              <fieldset>
-                <div class="row form-group">
-                  <label for="inputUser" class="col-md-2 control-label">Event Name</label>
-                  <div class="col-md-9">
-                    <input type="text" class="form-control" id="eventName" placeholder="Event Name" /> </div>
-                </div>
-                <div class="row form-group">
-                  <label for="inputEmail" class="col-md-2 control-label">Event Location</label>
-                  <div class="col-md-9">
-                    <input type="email" class="form-control" id="eventLocation" placeholder="Event Location" /> </div>
-                </div>
-                <div class="row form-group">
-                  <label for="inputDate" class="col-md-2 control-label">Event Date</label>
-                  <div class="col-md-9">
-                    <input id="eventDate" type="text" class="form-control" placeholder="mm/dd/yy" /> </div>
-                </div>
-                <div class="row form-group">
-                  <label for="eventTime" class="col-md-2 control-label">Event Time</label>
-                  <div class="col-md-9">
-                    <input type="text" class="form-control" id="eventTime" placeholder="Event Time" /> </div>
-                </div>
-                <div class="row form-group">
-                  <label for="inputName" class="col-md-2 control-label">Contact Name</label>
-                  <div class="col-md-9">
-                    <input type="text" class="form-control" id="inputName" placeholder="Contact Name" /> </div>
-                </div>
-                <div class="row form-group">
-                  <label for="inputLast" class="col-md-2 control-label">Contact Phone</label>
-                  <div class="col-md-9">
-                    <input type="text" class="form-control" id="inputLast" placeholder="Contact Phone" /> </div>
-                </div>
-                <div class="row form-group">
-                  <label for="inputEmail" class="col-md-2 control-label">Contact Email</label>
-                  <div class="col-md-9">
-                    <input type="text" class="form-control" id="inputEmail" placeholder="Contact Email" /> </div>
-                </div>
-                <div class="row form-group">
-                  <label for="numberOfTables" class="col-md-2 control-label">Number of Tables</label>
-                  <div class="col-md-9">
-                    <input type="Number" class="form-control" id="numberOfTables" placeholder="Number of Tables" /> </div>
-                </div>
-                <div class="row form-group">
-                  <label for="numberOfTableHosts" class="col-md-2 control-label">Number of Table Hosts</label>
-                  <div class="col-md-9">
-                    <input type="Number" class="form-control" id="numberOfTableHosts" placeholder="Number of Table Hosts" /> </div>
-                </div>
-                <div class="row form-group">
-                  <label for="numberOfGuestsPerTable" class="col-md-2 control-label">Number of Guests Per Table</label>
-                  <div class="col-md-9">
-                    <input type="Number" class="form-control" id="numberOfGuestsPerTable" placeholder="Number of Guests Per Table" /> </div>
-                </div>
-                <div class="row form-group">
-                  <label for="numberOfSponsors" class="col-md-2 control-label">Number of Sponsors</label>
-                  <div class="col-md-9">
-                    <input type="Number" class="form-control" id="numberOfSponsors" placeholder="Number of Sponsors" /> </div>
-                </div>
-                
-                <div class="row mt-2">
-                  <div class="offset-lg-2 col-lg-6">
-
-                  </div>
-                  <div class="col-lg-3">
-                    <button class="btn btn-raised btn-primary btn-block">Next</button>
-                  </div>
-                </div>
-              </fieldset>
-            </form>
-          </div>
-        </div>
-      </div>
+        <script src="assets/js/plugins.min.js"></script>
+        <script src="assets/js/app.min.js"></script>
+        <script src="assets/js/coming.js"></script>
+        
       </div>
     );
   }

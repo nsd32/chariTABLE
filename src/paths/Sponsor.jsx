@@ -97,7 +97,7 @@ class Sponsor extends Component {
             <div class="ms-title">
               <a href="index.html">
                 
-                <span class="ms-logo animated zoomInDown animation-delay-5">CT</span>
+                <span class="ms-logo animated zoomInDown animation-delay-5">CH</span>
                 <h1 class="animated fadeInRight animation-delay-6">chariTABLE Host
                 </h1>
               </a>
