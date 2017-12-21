@@ -38,10 +38,10 @@ class GuestRegister extends Component {
     axios.post(`/event/guest/${this.props.match.params.tableHostId}`, guest)
     .then( (response) => {
       console.log(response);
-      // this.props.history.push({
-      //   pathname: "/sponsor",
-      //   state: { eventObj: this.props.location.state.eventObj }
-      // });
+      this.props.history.push({
+        pathname: "/thanksforregistering",
+        state: { url: `/GuestRegistration/${this.props.match.params.eventId}/${this.props.match.params.tableHostId}` }
+      });
     })
     .catch( (error) => {
       console.log(error);
