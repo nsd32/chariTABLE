@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Col, Row } from 'react-materialize';
 // import EventTitle from '../components/EventTitle'
 // import EventRow from '../components/EventRow'
 import EventButton from '../components/buttons/EventButton'
@@ -18,7 +17,7 @@ class Events extends Component {
   }
 
 
-  componentDidMount() {
+  componentWillMount() {
     let url = this.props.location.pathname;
     let splitUrl = url.split('/');
     console.log('Split URL: ', splitUrl);
@@ -29,12 +28,12 @@ class Events extends Component {
     axios.get(`/api/events/${companyID}`)
       .then((response) => {
         console.log('All Response Data: ', response);
-        console.log('Events: ', response.data.events);
+        console.log('Events: ', response.data);
         this.setState({ companyID: companyID});
-        this.setState({ events: response.data.events });
+        this.setState({ events: response.data });
         // eventIDs = {events:this.state.events};
         // console.log('State of Events: ', eventIDs);
-        console.log(this.state);
+        
       })
       .catch((error) => {
         console.log(error);
@@ -69,31 +68,143 @@ class Events extends Component {
   }
 
   render() {
+    if(!this.state.events.events) {
+      return (
+        <div id="ms-preload" class="ms-preload">
+          <div id="status">
+            <div class="spinner">
+              <div class="dot1"></div>
+              <div class="dot2"></div>
+            </div>
+          </div>
+        </div>
+      )
+    }
+    console.log('State: ', this.state.events)
+    var rows = [];
+    for (var i = 0; i < this.state.events.events.length; i++) {
+        rows.push(
+          <tr key={i}>
+            <td>
+              {this.state.events.events[i].eventName}
+            </td>
+            <td>
+              {this.state.events.events[i].eventDate}
+            </td>
+            <td>
+              <a onClick={this.handleDetailClick} id={this.state.events.events[i]._id} href="javascript:void(0)" class="btn btn-raised btn-primary">Details</a>
+            </td>
+          </tr>
+        );
+    }
     return(
       <div>
-        <div className="eventTitleContainer">
-          <h3 className="eventTitle">{this.state.companID}</h3>
+        <div className="ms-site-container">
+          <header className="ms-header ms-header-primary">
+            
+            <div className="container container-full">
+              <div className="ms-title">
+                <a href="index.html">
+                  
+                  <span className="ms-logo animated zoomInDown animation-delay-5">CH</span>
+                  <h1 className="animated fadeInRight animation-delay-6">chariTABLE Host
+                    <span>Style</span>
+                  </h1>
+                </a>
+              </div>
+              <div className="header-right">
+                <div className="share-menu">
+                  <ul className="share-menu-list">
+                    <li className="animated fadeInRight animation-delay-3">
+                      <a href="javascript:void(0)" className="btn-circle btn-google">
+                        <i className="zmdi zmdi-google"></i>
+                      </a>
+                    </li>
+                    <li className="animated fadeInRight animation-delay-2">
+                      <a href="javascript:void(0)" className="btn-circle btn-facebook">
+                        <i className="zmdi zmdi-facebook"></i>
+                      </a>
+                    </li>
+                    <li className="animated fadeInRight animation-delay-1">
+                      <a href="javascript:void(0)" className="btn-circle btn-twitter">
+                        <i className="zmdi zmdi-twitter"></i>
+                      </a>
+                    </li>
+                  </ul>
+                  <a href="javascript:void(0)" className="btn-circle btn-circle-primary animated zoomInDown animation-delay-7">
+                    <i className="zmdi zmdi-share"></i>
+                  </a>
+                </div>
+                <a href="javascript:void(0)" className="btn-circle btn-circle-primary no-focus animated zoomInDown animation-delay-8" data-toggle="modal" data-target="#ms-account-modal">
+                  <i className="zmdi zmdi-account"></i>
+                </a>
+                <form className="search-form animated zoomInDown animation-delay-9">
+                  <input id="search-box" type="text" className="search-input" placeholder="Search..." name="q" />
+                  <label htmlFor="search-box">
+                    <i className="zmdi zmdi-search"></i>
+                  </label>
+                </form>
+                <a href="javascript:void(0)" className="btn-ms-menu btn-circle btn-circle-primary ms-toggle-left animated zoomInDown animation-delay-10">
+                  <i className="zmdi zmdi-menu"></i>
+                </a>
+              </div>
+            </div>
+          </header>
 
-        </div>
-        <Row>
-          <Col className="" m={1} s={12}></Col>
-          <Col className="" m={10} s={12}>
-            <div className="Event">
-              <table className="striped eventList">
-                <thead>
-                  <tr>
-                      <th>Event Name</th>
-                      <th>Event Date</th>
-                      <th>Event Time</th>
-                      <th style={ { "textAlign": "center" } }>Actions</th>
-                  </tr>
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-4">
+                <div className="row">
+                  <div className="col-lg-12 col-md-6 order-md-1">
+                    <div className="card animated fadeInUp animation-delay-7">
+                      <div className="ms-hero-bg-primary ms-hero-img-coffee">
+                        <h3 className="color-white index-1 text-center no-m pt-4">{this.state.events.companyName}</h3>
+                        <div className="color-medium index-1 text-center np-m">{this.state.events.email}</div>
+                        <img src="assets/img/demo/avatar1.jpg" alt="..." className="img-avatar-circle" /> </div>
+                      <div className="card-block pt-4 text-center">
+                        <h3 className="color-primary">Address</h3>
+                        <p>{this.state.events.addressLine1}</p>
+                        <p>{this.state.events.city}</p>
+                        <a href="javascript:void(0)" className="btn-circle btn-circle-raised btn-circle-xs mt-1 mr-1 no-mr-md btn-facebook">
+                          <i className="zmdi zmdi-facebook"></i>
+                        </a>
+                        <a href="javascript:void(0)" className="btn-circle btn-circle-raised btn-circle-xs mt-1 mr-1 no-mr-md btn-twitter">
+                          <i className="zmdi zmdi-twitter"></i>
+                        </a>
+                        <a href="javascript:void(0)" className="btn-circle btn-circle-raised btn-circle-xs mt-1 mr-1 no-mr-md btn-instagram">
+                          <i className="zmdi zmdi-instagram"></i>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-lg-12 col-md-12 order-md-3 order-lg-2">
+                    <a href="javascript:void(0)" className="btn btn-warning btn-raised btn-block animated fadeInUp animation-delay-12">
+                      <i className="zmdi zmdi-edit"></i> Edit Profile</a>
+                    <a href="javascript:void(0)" className="btn btn-danger btn-raised btn-block animated fadeInUp animation-delay-12">
+                      <i className="zmdi zmdi-delete"></i> Delete User</a>
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-8">
+                <div className="card card-primary animated fadeInUp animation-delay-12">
+                  <div className="card-header">
+                    <h3 className="card-title">
+                      <i className="zmdi zmdi-account-circle"></i> Events</h3>
+                  </div>
+                  <table className="table table-no-border table-striped">
+                    <thead>
+                      <tr>
+                        <th>Event Name</th>
+                        <th>Event Date</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
 
-                </thead>
+                      {rows}
 
-                <tbody>
-
-                  {this.state.events.map((event) => {
-          					return (
+                    {/*{this.state.events.events.map((event) => {
+                    return (
                       <tr key={event._id}>
                         <td>{event.eventName}</td>
                         <td>{event.eventDate}</td>
@@ -115,16 +226,17 @@ class Events extends Component {
                             </a>
                           </td>
                       </tr>
-          					);
-          				})}
-                </tbody>
-              </table>
+                    );
+                  })}*/}
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
-          </Col>
-          <Col className="" m={1} s={12}></Col>
-        </Row>
-        <button onClick={this.addEventButton}>Add Event</button>
-        <EventButton />
+          </div>
+
+        </div>
       </div>
 
     );
