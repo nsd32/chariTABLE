@@ -181,7 +181,7 @@ class GuestRegister extends Component {
                         </div>
                         <button onClick={this.registerButton} class="btn btn-raised btn-primary btn-block" type="button">Register</button>
                         <h3>Can't make it?</h3>
-                        <p>Enter your name above and click Donate now to help TABLEHOST NAME meet their goal.</p>
+                        <p>Enter your name above and click Donate to help TABLEHOST NAME meet their goal.</p>
                         <button class="btn btn-raised btn-success btn-block" type="button">Donate</button>
                       </form>
                     </div>

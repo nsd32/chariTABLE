@@ -159,7 +159,7 @@ class Events extends Component {
                       <div className="ms-hero-bg-primary ms-hero-img-coffee">
                         <h3 className="color-white index-1 text-center no-m pt-4">{this.state.events.companyName}</h3>
                         <div className="color-medium index-1 text-center np-m">{this.state.events.email}</div>
-                        <img src="assets/img/demo/avatar1.jpg" alt="..." className="img-avatar-circle" /> </div>
+                        <img src="https://yt3.ggpht.com/-VJ74LAidPZ8/AAAAAAAAAAI/AAAAAAAAAAA/FJrUFq0qLbU/s900-c-k-no-mo-rj-c0xffffff/photo.jpg" alt="..." className="img-avatar-circle" /> </div>
                       <div className="card-block pt-4 text-center">
                         <h3 className="color-primary">Address</h3>
                         <p>{this.state.events.addressLine1}</p>
