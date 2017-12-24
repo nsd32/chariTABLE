@@ -133,19 +133,19 @@ class GuestRegister extends Component {
                         </h1>
                       </header>
                       <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-12">
                           <div class="text-center card-block animated zoomIn animation-delay-10">
                             <h2 className="animated zoomInDown animation-delay-5">Guests</h2>
                             <ul>
                               {this.state.tableHostData.tableHost.guests.map((guest, idx) => {
                                 return (
-                                  <li className="animated zoomInDown animation-delay-5" key={idx}><h4>{guest.name}</h4></li> 
+                                  <li className="animated zoomInDown animation-delay-5" key={idx}><h4>{idx + 1}. {guest.name}</h4></li> 
                                 );
                               })}
                             </ul>
                           </div>
                         </div>
-                        <div class="col-sm-6">
+                        {/*<div class="col-sm-6">
                           <div class="text-center card-block animated zoomIn animation-delay-10">
                             <h2 className="animated zoomInDown animation-delay-5">Sponsors</h2>
                             <ul>
@@ -156,7 +156,7 @@ class GuestRegister extends Component {
                               })}
                             </ul>
                           </div>
-                        </div>
+                        </div>*/}
                       </div>
                     </div>
                   </div>
@@ -181,7 +181,7 @@ class GuestRegister extends Component {
                         </div>
                         <button onClick={this.registerButton} class="btn btn-raised btn-primary btn-block" type="button">Register</button>
                         <h3>Can't make it?</h3>
-                        <p>Enter your name above and click Donate to help TABLEHOST NAME meet their goal.</p>
+                        <p>Enter your name above and click Donate to help {this.state.tableHostData.tableHost.name} meet their goal.</p>
                         <button class="btn btn-raised btn-success btn-block" type="button">Donate</button>
                       </form>
                     </div>
