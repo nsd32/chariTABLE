@@ -7,7 +7,10 @@ let EventRow = (props) => {
         <td>{props.eventData[i].eventName}</td>
         <td>{props.eventData[i].eventDate}</td>
         <td>{props.eventData[i].eventTime}</td>
-        <td style={ { "textAlign": "center" } }><a className="waves-effect waves-light btn"><i className="material-icons left">details</i>Details</a></td>
+        <td style={ { "textAlign": "center" } }>
+          <a className="waves-effect waves-light btn"><i className="material-icons left">details</i>Details</a>
+          <a className="waves-effect waves-light btn"><i className="material-icons">trash/i></a>
+        </td>
       </tr>
     );
   };

@@ -8,6 +8,7 @@ const Sponsor = require('./models/Sponsor');
 const Guest = require('./models/Guest');
 const session = require('express-session');
 const mid = require('./middleware')
+const path = require('path');
 
 
 const PORT = process.env.PORT || 8080;
@@ -19,7 +20,7 @@ app.use(session({
 	saveUninitialized: false
 }));
 
-app.use(express.static("client/build"));
+// app.use(express.static("client/build"));
 
 app.use(bodyParser.json());
 
@@ -94,9 +95,12 @@ app.post('/register', (req, res) => {
 			newUser.password = req.body.password;
 			newUser.save()
 		.then((user) => {
-					req.session.userId = user._id;
-					res.json(user);
+					// req.session.userId = user._id;
+					// res.json(user);
 					// return res.redirect('/login');
+					let sessionID = req.session.userId = user._id;
+					console.log('Login Session ID: ', sessionID);
+					return res.redirect('/api/events/' + sessionID);
 		})
 		.catch((err) => {
 			console.log(err);
@@ -117,12 +121,6 @@ app.get('/api/events', (req, res) => {
 });
 
 app.get('/api/events/:id', mid.requiresLogin, (req, res) => {
-
-	// User
-  // .find({ events: * })
-	// .where('_id').equals(req.params.id)
-	// .exec()
-	//
 
 	User.findById({_id:req.params.id})
 		.populate('events')
@@ -330,9 +328,9 @@ app.get('/account', (req, res, next) => {
 // 	res.sendFile(path.join(__dirname,'../public/index.html'));
 // });
 
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, './build', 'index.html'));
-});
+// app.get('/*', (req, res) => {
+//   res.sendFile(path.join(__dirname, './build', 'index.html'));
+// });
 
 
 

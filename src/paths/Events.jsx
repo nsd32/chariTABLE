@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../styles/Event.css'
 // import EventTitle from '../components/EventTitle'
 // import EventRow from '../components/EventRow'
 import EventButton from '../components/buttons/EventButton'
@@ -33,7 +34,7 @@ class Events extends Component {
         this.setState({ events: response.data });
         // eventIDs = {events:this.state.events};
         // console.log('State of Events: ', eventIDs);
-        
+
       })
       .catch((error) => {
         console.log(error);
@@ -70,11 +71,11 @@ class Events extends Component {
   render() {
     if(!this.state.events.events) {
       return (
-        <div id="ms-preload" class="ms-preload">
+        <div id="ms-preload" className="ms-preload">
           <div id="status">
-            <div class="spinner">
-              <div class="dot1"></div>
-              <div class="dot2"></div>
+            <div className="spinner">
+              <div className="dot1"></div>
+              <div className="dot2"></div>
             </div>
           </div>
         </div>
@@ -91,7 +92,7 @@ class Events extends Component {
             <td>
               {this.state.events.events[i].eventDate}
             </td>
-            <td>
+            <td class="text-center">
               <a onClick={this.handleDetailClick} id={this.state.events.events[i]._id} href="javascript:void(0)" class="btn btn-raised btn-primary">Details</a>
             </td>
           </tr>
@@ -101,11 +102,11 @@ class Events extends Component {
       <div>
         <div className="ms-site-container">
           <header className="ms-header ms-header-primary">
-            
+
             <div className="container container-full">
               <div className="ms-title">
                 <a href="index.html">
-                  
+
                   <span className="ms-logo animated zoomInDown animation-delay-5">CH</span>
                   <h1 className="animated fadeInRight animation-delay-6">chariTABLE Host
                   </h1>
@@ -197,7 +198,7 @@ class Events extends Component {
                       <tr>
                         <th>Event Name</th>
                         <th>Event Date</th>
-                        <th>Action</th>
+                        <th class="text-center">Action</th>
                       </tr>
                     </thead>
                     <tbody>

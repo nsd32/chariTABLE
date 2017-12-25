@@ -76,8 +76,8 @@ let UserSchema = new Schema({
 });
 
 // authenticate imput against database documents
-UserSchema.statics.authenticate = (username, password, callback) => {
-	User.findOne({ username:username })
+UserSchema.statics.authenticate = (loginUsername, loginPassword, callback) => {
+	User.findOne({ username:loginUsername })
 		.exec(function (error, user) {
 			if(error) {
 				return callback(error);
@@ -87,7 +87,7 @@ UserSchema.statics.authenticate = (username, password, callback) => {
 				return callback(err);
 			}
 
-			bcrypt.compare(password, user.password, (error, result) => {
+			bcrypt.compare(loginPassword, user.password, (error, result) => {
 				if(result  === true) {
 					return callback(null, user);
 				} else {
