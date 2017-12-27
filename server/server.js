@@ -79,6 +79,21 @@ app.get('/api/companies', (req, res) => {
 		});
 });
 
+app.get('/api/companies/:companyID', (req, res) => {
+	console.log('Edit Company ID: ', req.params.companyID);
+	User.find({_id:req.params.companyID})
+		.then((data) => {
+			console.log('Company Info: ', data);
+			res.json(data);
+		})
+		.catch((err) => {
+			console.log(err);
+			res.status(500).send(err.message ? err.message : 'Internal server blowup');
+		});
+});
+
+
+
 app.post('/register', (req, res) => {
 
 			let newUser = new User();
