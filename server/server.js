@@ -137,11 +137,17 @@ app.get('/api/events/:id', mid.requiresLogin, (req, res) => {
 app.get('/api/eventDetails/:id', (req, res) => {
 	console.log('Event Details Company IDs :', req.params.id);
 
+	const event = {
+		eventInfo: {},
+		guests: []
+	}
+
 	Event.findOne({_id: req.params.id})
-		.populate('tableHosts', 'guests')
+		.populate({ path: 'tableHosts',
+		populate: { path: 'guests' } })
 		.then((data) => {
 			res.json(data);
-			console.log(data);
+			console.log(JSON.stringify(data.tableHosts, null, 2));
 		})
 		.catch((err) => {
 			console.log(err);
