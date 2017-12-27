@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import '../styles/Event.css'
 // import EventTitle from '../components/EventTitle'
 // import EventRow from '../components/EventRow'
+import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 import EventButton from '../components/buttons/EventButton'
 import axios from 'axios';
 // import { Link } from 'react-router-dom';
@@ -60,6 +62,32 @@ class Events extends Component {
     })
   }
 
+  handleEditProfileClick = (event) => {
+    event.preventDefault();
+    console.log('Edit Profile Button clicked!!!');
+    let companyID = this.state.companyID;
+    console.log(companyID);
+
+    axios.get('/api/companies/' + companyID)
+    .then((companyInfo) => {
+      console.log(`Company Info for selected: `, companyInfo.data);
+      this.setState({ companyInfo: companyInfo.data });
+      console.log(this.state);
+      this.props.history.push({
+        pathname: "/account",
+        state: {
+          // companyID: this.state.companyID,
+          companyInfo: this.state.companyInfo
+         }
+      });
+    })
+  }
+
+  handleDeleteProfileClick = (event) => {
+    event.preventDefault();
+    console.log('Delete Profile Button clicked!!!');
+  }
+
   addEventButton = (event) => {
     event.preventDefault();
     this.props.history.push({
@@ -92,8 +120,8 @@ class Events extends Component {
             <td>
               {this.state.events.events[i].eventDate}
             </td>
-            <td class="text-center">
-              <a onClick={this.handleDetailClick} id={this.state.events.events[i]._id} href="javascript:void(0)" class="btn btn-raised btn-primary">Details</a>
+            <td className="text-center">
+              <a onClick={this.handleDetailClick} id={this.state.events.events[i]._id} href="javascript:void(0)" className="btn btn-raised btn-primary">Details</a>
             </td>
           </tr>
         );
@@ -101,55 +129,7 @@ class Events extends Component {
     return(
       <div>
         <div className="ms-site-container">
-          <header className="ms-header ms-header-primary">
-
-            <div className="container container-full">
-              <div className="ms-title">
-                <a href="index.html">
-
-                  <span className="ms-logo animated zoomInDown animation-delay-5">CH</span>
-                  <h1 className="animated fadeInRight animation-delay-6">chariTABLE Host
-                  </h1>
-                </a>
-              </div>
-              <div className="header-right">
-                <div className="share-menu">
-                  <ul className="share-menu-list">
-                    <li className="animated fadeInRight animation-delay-3">
-                      <a href="javascript:void(0)" className="btn-circle btn-google">
-                        <i className="zmdi zmdi-google"></i>
-                      </a>
-                    </li>
-                    <li className="animated fadeInRight animation-delay-2">
-                      <a href="javascript:void(0)" className="btn-circle btn-facebook">
-                        <i className="zmdi zmdi-facebook"></i>
-                      </a>
-                    </li>
-                    <li className="animated fadeInRight animation-delay-1">
-                      <a href="javascript:void(0)" className="btn-circle btn-twitter">
-                        <i className="zmdi zmdi-twitter"></i>
-                      </a>
-                    </li>
-                  </ul>
-                  <a href="javascript:void(0)" className="btn-circle btn-circle-primary animated zoomInDown animation-delay-7">
-                    <i className="zmdi zmdi-share"></i>
-                  </a>
-                </div>
-                <a href="javascript:void(0)" className="btn-circle btn-circle-primary no-focus animated zoomInDown animation-delay-8" data-toggle="modal" data-target="#ms-account-modal">
-                  <i className="zmdi zmdi-account"></i>
-                </a>
-                <form className="search-form animated zoomInDown animation-delay-9">
-                  <input id="search-box" type="text" className="search-input" placeholder="Search..." name="q" />
-                  <label htmlFor="search-box">
-                    <i className="zmdi zmdi-search"></i>
-                  </label>
-                </form>
-                <a href="javascript:void(0)" className="btn-ms-menu btn-circle btn-circle-primary ms-toggle-left animated zoomInDown animation-delay-10">
-                  <i className="zmdi zmdi-menu"></i>
-                </a>
-              </div>
-            </div>
-          </header>
+        <Navbar />
 
           <div className="container">
             <div className="row">
@@ -178,9 +158,15 @@ class Events extends Component {
                     </div>
                   </div>
                   <div className="col-lg-12 col-md-12 order-md-3 order-lg-2">
-                    <a href="javascript:void(0)" className="btn btn-warning btn-raised btn-block animated fadeInUp animation-delay-12">
+                    <a href="javascript:void(0)"
+                      className="btn btn-warning btn-raised btn-block animated fadeInUp animation-delay-12"
+                      onClick={this.handleEditProfileClick}
+                    >
                       <i className="zmdi zmdi-edit"></i> Edit Profile</a>
-                    <a href="javascript:void(0)" className="btn btn-danger btn-raised btn-block animated fadeInUp animation-delay-12">
+                    <a href="javascript:void(0)"
+                        className="btn btn-danger btn-raised btn-block animated fadeInUp animation-delay-12"
+                        onClick={this.handleDeleteProfileClick}
+                    >
                       <i className="zmdi zmdi-delete"></i> Delete User</a>
                   </div>
                 </div>
@@ -191,14 +177,14 @@ class Events extends Component {
                     <h3 id="eventsCardTitle" className="card-title">
                       <i className="zmdi zmdi-account-circle"></i> Events
                     </h3>
-                    <a onClick={this.addEventButton} id="addEventButton" href="javascript:void(0)" class="btn btn-raised btn-default">Add Event</a>
+                    <a onClick={this.addEventButton} id="addEventButton" href="javascript:void(0)" className="btn btn-raised btn-default">Add Event</a>
                   </div>
                   <table className="table table-no-border table-striped">
                     <thead>
                       <tr>
                         <th>Event Name</th>
                         <th>Event Date</th>
-                        <th class="text-center">Action</th>
+                        <th className="text-center">Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -239,6 +225,7 @@ class Events extends Component {
           </div>
 
         </div>
+        <Footer />
       </div>
 
     );

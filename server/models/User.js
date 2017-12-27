@@ -65,6 +65,10 @@ let UserSchema = new Schema({
 		type:String,
 		trim: true
 	},
+	createdOn: {
+		type: Date,
+		default: Date.now
+	},
 
 	events: [
 		{

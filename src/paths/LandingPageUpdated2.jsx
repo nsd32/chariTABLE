@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import LoginTab from '../components/LoginTab';
 import RegisterTab from '../components/RegisterTab';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 class LandingPageUpdated extends Component {
 
@@ -181,54 +183,7 @@ class LandingPageUpdated extends Component {
           </div>
         </div>
       </div>
-      <header className="ms-header ms-header-primary">
-        {/* <!--ms-header-primary--> */}
-        <div className="container container-full">
-          <div className="ms-title">
-            <a href="index.html">
-              {/* <!-- <img src="assets/img/demo/logo-header.png" alt="" /> --> */}
-              <span className="ms-logo animated zoomInDown animation-delay-5">CH</span>
-              <h1 className="animated fadeInRight animation-delay-6">chari<span>TABLE</span> Host</h1>
-            </a>
-          </div>
-          <div className="header-right">
-            <div className="share-menu">
-              <ul className="share-menu-list">
-                <li className="animated fadeInRight animation-delay-3">
-                  <a href="javascript:void(0)" className="btn-circle btn-google">
-                    <i className="zmdi zmdi-google"></i>
-                  </a>
-                </li>
-                <li className="animated fadeInRight animation-delay-2">
-                  <a href="javascript:void(0)" className="btn-circle btn-facebook">
-                    <i className="zmdi zmdi-facebook"></i>
-                  </a>
-                </li>
-                <li className="animated fadeInRight animation-delay-1">
-                  <a href="javascript:void(0)" className="btn-circle btn-twitter">
-                    <i className="zmdi zmdi-twitter"></i>
-                  </a>
-                </li>
-              </ul>
-              <a href="javascript:void(0)" className="btn-circle btn-circle-primary animated zoomInDown animation-delay-7">
-                <i className="zmdi zmdi-share"></i>
-              </a>
-            </div>
-            <a href="javascript:void(0)" className="btn-circle btn-circle-primary no-focus animated zoomInDown animation-delay-8" data-toggle="modal" data-target="#ms-account-modal">
-              <i className="zmdi zmdi-account"></i>
-            </a>
-            <form className="search-form animated zoomInDown animation-delay-9">
-              <input id="search-box" type="text" className="search-input" placeholder="Search..." name="q" />
-              <label for="search-box">
-                <i className="zmdi zmdi-search"></i>
-              </label>
-            </form>
-            <a href="javascript:void(0)" className="btn-ms-menu btn-circle btn-circle-primary ms-toggle-left animated zoomInDown animation-delay-10">
-              <i className="zmdi zmdi-menu"></i>
-            </a>
-          </div>
-        </div>
-      </header>
+      <Navbar />
 
       <div className="material-background"></div>
       <div className="container">
@@ -300,57 +255,7 @@ class LandingPageUpdated extends Component {
           </div>
         </div>
       </div>
-      {/* // <!-- container --> */}
-      <aside className="ms-footbar">
-        <div className="container">
-          <div className="row">
-
-            <div className="col-lg-5 col-md-7 ms-footer-col ms-footer-alt-color">
-              <div className="ms-footbar-block">
-                <div className="ms-footbar-title">
-                  <span className="ms-logo ms-logo-white ms-logo-sm mr-1">CH</span>
-                  <h3 className="no-m ms-site-title">chari<span>TABLE</span> Host</h3>
-                </div>
-                <address className="no-mb">
-                  <p>
-                    <i className="color-danger-light zmdi zmdi-pin mr-1"></i> 9665 Parramatta Place Suite 100</p>
-                  <p>
-                    <i className="color-warning-light zmdi zmdi-map mr-1"></i> Highlands Ranch, CO 80130</p>
-                  <p>
-                    <i className="color-info-light zmdi zmdi-email mr-1"></i>
-                    <a href="mailto:info@chariTABLEHost.com">info@chariTABLEHost.com</a>
-                  </p>
-                  <p>
-                    <i className="color-royal-light zmdi zmdi-phone mr-1"></i>
-                    <a href="tel:242748-2253">(242) 748-2253</a>
-                  </p>
-                </address>
-              </div>
-            </div>
-            <div className="col-lg-3 col-md-5 ms-footer-col ms-footer-text-right">
-              <div className="ms-footbar-block">
-                <h3 className="ms-footbar-title">Social Media</h3>
-                <div className="ms-footbar-social">
-                  <a href="javascript:void(0)" className="btn-circle btn-facebook">
-                    <i className="zmdi zmdi-facebook"></i>
-                  </a>
-                  <a href="javascript:void(0)" className="btn-circle btn-twitter">
-                    <i className="zmdi zmdi-twitter"></i>
-                  </a>
-                  <a href="javascript:void(0)" className="btn-circle btn-linkedin">
-                    <i className="zmdi zmdi-linkedin"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </aside>
-      <footer className="ms-footer">
-        <div className="container">
-          <p>Copyright &copy; Jubatus Software 2017</p>
-        </div>
-      </footer>
+      <Footer />
       <div className="btn-back-top">
         <a href="#" data-scroll id="back-top" className="btn-circle btn-circle-primary btn-circle-sm btn-circle-raised ">
           <i className="zmdi zmdi-long-arrow-up"></i>
