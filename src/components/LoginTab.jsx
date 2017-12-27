@@ -5,7 +5,7 @@ const LoginTab = (props) => {
     return(
 
       <div role="tabpanel" className="tab-pane fade active show" id="ms-login-tab">
-        <form>
+        <form autocomplete="on">
           <fieldset>
             <div className="form-group label-floating">
               <div className="input-group">
@@ -46,6 +46,7 @@ const LoginTab = (props) => {
                 <button
                   className="btn btn-raised btn-primary pull-right"
                   onClick={props.onSubmit}
+                  data-dismiss="modal"
                 >
                   Login
                 </button>
