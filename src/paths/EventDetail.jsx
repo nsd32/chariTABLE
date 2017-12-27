@@ -39,6 +39,19 @@ class Events extends Component {
 
   render() {
 
+    if(!this.state.eventInfo.tableHosts) {
+      return (
+        <div id="ms-preload" class="ms-preload">
+          <div id="status">
+            <div class="spinner">
+              <div class="dot1"></div>
+              <div class="dot2"></div>
+            </div>
+          </div>
+        </div>
+      )
+    }
+
     return(
       <Row>
         <Col s={12} m={6}>
@@ -203,6 +216,59 @@ class Events extends Component {
                   </form>
                 </div>
               </div>
+
+              <h3 className="animated fadeInUp animation-delay-10">Tablehosts</h3>
+              <div class="ms-collapse animated fadeInUp animation-delay-10" id="accordion2" role="tablist" aria-multiselectable="true">
+                {this.state.eventInfo.tableHosts.map((tableHost, idx) => {
+                  return (
+                    <div key={idx} class="mb-0 card card-primary">
+                      <div class="card-header" role="tab" id={"headingOne2" + idx}>
+                        <div class="card-title">
+                          <a class="collapsed withripple" role="button" data-toggle="collapse" data-parent="#accordion2" href={"#collapseOne2" + idx} aria-expanded="false" aria-controls={"#collapseOne2" + idx}>
+                            <i class="zmdi zmdi-pin"></i> {tableHost.name} </a>
+                        </div>
+                      </div>
+                      
+                      <div id={"collapseOne2" + idx} class="card-collapse collapse" role="tabpanel" aria-labelledby={"headingOne2" + idx}>
+                        <label for="tableHost" class="col-md-2 control-label">Tablehost</label>
+                        <div class="col-sm-12">
+                          <input name="guest" value={tableHost.name} type="text" class="form-control"  placeholder="Guest" /> 
+                        </div>
+
+                        <label for="url" class="col-md-2 control-label">Tablehost URL</label>
+                        <div class="col-sm-12">
+                          <h4 className="tablehost-url" name="tablehosturl"> {`localhost:3000/GuestRegistration/${this.state.eventInfo._id}/${tableHost._id}`}</h4> 
+                        </div>
+
+                        {tableHost.guests.map((guest, idx) => {
+                          console.log('Guest: ' + guest.name)
+                          return (
+                            <div key={idx}>
+                              <label for="guest" class="col-md-2 control-label">Guest {idx + 1}</label>
+                              <div class="col-sm-12">
+                                <input name="guest" value={guest.name} type="text" class="form-control"  placeholder="Guest" /> </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/*<EventDetailButton
+                companyID={this.state.companyID}
+              />
+              <button
+                id={this.state.companyID}
+                onClick={this.handleBackButtonClick}
+              >
+              Go Back
+              </button>
+              {/* <BackButton
+              companyData={this.state.companyInfo}
+              onClick={this.handleBackButtonClick}
+              /> */}
               
             </div>
             
@@ -218,24 +284,8 @@ class Events extends Component {
             </div>
           </div>
 
-
-          
           <script src="assets/js/plugins.min.js"></script>
           <script src="assets/js/app.min.js"></script>
-
-            <EventDetailButton
-              companyID={this.state.companyID}
-               />
-            <button
-              id={this.state.companyID}
-              onClick={this.handleBackButtonClick}
-            >
-              Go Back
-            </button>
-            {/* <BackButton
-              companyData={this.state.companyInfo}
-              onClick={this.handleBackButtonClick}
-            /> */}
           
         </Col>
       </Row>

@@ -136,7 +136,7 @@ class GuestRegister extends Component {
                         <div class="col-12">
                           <div class="text-center card-block animated zoomIn animation-delay-10">
                             <h2 className="animated zoomInDown animation-delay-5">Guests</h2>
-                            <ul>
+                            <ul id="guest-list">
                               {this.state.tableHostData.tableHost.guests.map((guest, idx) => {
                                 return (
                                   <li className="animated zoomInDown animation-delay-5" key={idx}><h4>{idx + 1}. {guest.name}</h4></li> 
