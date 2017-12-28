@@ -14,30 +14,8 @@ let Navbar = (props) => {
             </a>
           </div>
           <div className="header-right">
-            <div className="share-menu">
-              <ul className="share-menu-list">
-                <li className="animated fadeInRight animation-delay-3">
-                  <a href="javascript:void(0)" className="btn-circle btn-google">
-                    <i className="zmdi zmdi-google"></i>
-                  </a>
-                </li>
-                <li className="animated fadeInRight animation-delay-2">
-                  <a href="javascript:void(0)" className="btn-circle btn-facebook">
-                    <i className="zmdi zmdi-facebook"></i>
-                  </a>
-                </li>
-                <li className="animated fadeInRight animation-delay-1">
-                  <a href="javascript:void(0)" className="btn-circle btn-twitter">
-                    <i className="zmdi zmdi-twitter"></i>
-                  </a>
-                </li>
-              </ul>
-              <a href="javascript:void(0)" className="btn-circle btn-circle-primary animated zoomInDown animation-delay-7">
-                <i className="zmdi zmdi-share"></i>
-              </a>
-            </div>
             <a href="javascript:void(0)" className="btn-circle btn-circle-primary no-focus animated zoomInDown animation-delay-8" data-toggle="modal" data-target="#ms-account-modal">
-              <i className="zmdi zmdi-account"></i>
+              <i className="zmdi zmdi-sign-in"></i>
             </a>
             <form className="search-form animated zoomInDown animation-delay-9">
               <input id="search-box" type="text" className="search-input" placeholder="Search..." name="q" />

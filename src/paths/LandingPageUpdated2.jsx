@@ -194,7 +194,7 @@ class LandingPageUpdated extends Component {
               <strong>laborum dolores veniam nam</strong> mollitia culpa accusamus non voluptates corrupti? A inventore et veniam dignissimos, animi suscipit magnam nihil sed repellendus placeat eveniet vitae est impedit alias aliquid eius?</p>
             <p>Perferendis, blanditiis unde fugiat voluptas molestias velit asperiores rerum ipsam animi eum temporibus at numquam, nobis voluptates minus maxime cum obcaecati! Tenetur sit corporis laudantium inventore officia officiis odio repellat dolore
               quos
-              <a href="#">repudiandae voluptas ad facere</a>, amet placeat animi voluptatem distinctio beatae.</p>
+              <a href="">repudiandae voluptas ad facere</a>, amet placeat animi voluptatem distinctio beatae.</p>
           </div>
           <img src="assets/img/Table_2.jpg" alt="" className="img-fluid" />
           <div className="card-block-big">
@@ -257,7 +257,7 @@ class LandingPageUpdated extends Component {
       </div>
       <Footer />
       <div className="btn-back-top">
-        <a href="#" data-scroll id="back-top" className="btn-circle btn-circle-primary btn-circle-sm btn-circle-raised ">
+        <a href="" data-scroll id="back-top" className="btn-circle btn-circle-primary btn-circle-sm btn-circle-raised ">
           <i className="zmdi zmdi-long-arrow-up"></i>
         </a>
       </div>
@@ -267,9 +267,9 @@ class LandingPageUpdated extends Component {
       <div className="sb-slidebar-container">
         <header className="ms-slidebar-header">
           <div className="ms-slidebar-login">
-            <a href="javascript:void(0)" className="withripple">
+            <a href="" className="withripple">
               <i className="zmdi zmdi-account"></i> Login</a>
-            <a href="javascript:void(0)" className="withripple">
+            <a href="" className="withripple">
               <i className="zmdi zmdi-account-add"></i> Register</a>
           </div>
           <div className="ms-slidebar-title">

@@ -6,12 +6,36 @@ import axios from 'axios';
 
 class Account extends Component {
   state={
-    companyInfo: this.props.location.state.companyInfo
+
   }
 
-  componentDidMount() {
-    console.log('From Event Page (Company Info): ', this.state);
-    console.log('Company Name: ', this.state.companyInfo[0].companyName);
+  componentWillMount() {
+    this.setState({
+      companyName: this.props.location.state.companyInfo[0].companyName,
+      username: this.props.location.state.companyInfo[0].username,
+      addressLine1: this.props.location.state.companyInfo[0].addressLine1,
+      addressLine2: this.props.location.state.companyInfo[0].addressLine2,
+      city: this.props.location.state.companyInfo[0].city,
+      state: this.props.location.state.companyInfo[0].state,
+      zipCode: this.props.location.state.companyInfo[0].zipCode,
+      phoneNumber: this.props.location.state.companyInfo[0].phoneNumber,
+      website: this.props.location.state.companyInfo[0].website,
+      email: this.props.location.state.companyInfo[0].email,
+      createdOn: this.props.location.state.companyInfo[0].createdOn,
+      companyID: this.props.location.state.companyInfo[0]._id
+
+    });
+    console.log(this.state);
+
+    // let companyID =  this.state.companyInfo._id;
+    // console.log('Account Company ID: ', companyID);
+    // axios.get(`/api/account/${companyID}`)
+    //   .then((response) => {
+    //
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   }
 
   handleInputChange = (event) => {
@@ -19,6 +43,33 @@ class Account extends Component {
       [event.target.name]: event.target.value
     });
     console.log(this.state);
+  }
+
+  handleAccountUpdateChanges = (event) => {
+    event.preventDefault();
+    console.log('Account Update Changes clilcked');
+    console.log('Company Info to be updated: ', this.state);
+    let companyID =  this.state.companyID;
+    console.log('Account Company ID: ', companyID);
+    axios.post(`/api/companies/${companyID}`, {
+      companyName: this.state.companyName,
+      addressLine1: this.state.addressLine1,
+      addressLine2: this.state.addressLine2,
+      city: this.state.city,
+      state: this.state.state,
+      zipCode: this.state.zipCode,
+      phoneNumber: this.state.phoneNumber,
+      website: this.state.website,
+      username: this.state.username,
+      email: this.state.email
+    })
+      .then((response) => {
+        console.log('Updated from Server: ', response.data);
+
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
 
@@ -41,8 +92,7 @@ class Account extends Component {
         <div className="container">
           <div className="text-center mt-2">
             {/* <img src="assets/img/demo/avatar1.jpg" alt="..." className="ms-avatar-hero animated zoomIn animation-delay-7" /> */}
-            <h1 className="color-white mt-4 animated fadeInUp animation-delay-10">{this.state.companyInfo[0].companyName}</h1>
-            <h3 className="color-medium no-mb animated fadeInUp animation-delay-10"></h3>
+            <h1 className="color-white mt-4 animated fadeInUp animation-delay-10">{this.state.companyName}</h1>
           </div>
         </div>
       </div>
@@ -50,84 +100,83 @@ class Account extends Component {
         <div className="card card-hero card-primary animated fadeInUp animation-delay-7">
           <div className="card-header-100 bg-primary-dark">
             <div className="row justify-content-center">
-              <div className="col col-md-2">
+              <div className="col col-md-4">
                 <div className="text-center">
                   <h3>
-                    <strong>142</strong>
-                  </h3> Events </div>
-              </div>
-              <div className="col col-md-2">
-                <div className="text-center">
-                  <h3>
-                    <strong>75</strong>
-                  </h3> TableHosts </div>
-              </div>
-              <div className="col col-md-2">
-                <div className="text-center">
-                  <h3>
-                    <strong>96</strong>
-                  </h3> Guests </div>
+                    <strong><i>Company Information</i></strong>
+                  </h3>
+                 </div>
               </div>
             </div>
           </div>
-          <div class="card-block">
-            <form class="form-horizontal">
+          <div className="card-block">
+            <form className="form-horizontal">
               <fieldset>
-                <div class="row form-group">
-                  <label for="username" class="col-md-4 control-label text-left"><i className="zmdi zmdi-account mr-1 color-royal"></i> Username</label>
-                  <div class="col-md-8">
-                    <input name="username" onChange={this.handleInputChange} value={this.state.companyInfo[0].username} type="text" class="form-control" /> </div>
+                <div className="row form-group">
+                  <label htmlFor="username" className="col-md-4 control-label text-left"><i className="zmdi zmdi-account mr-1 color-royal"></i> Username</label>
+                  <div className="col-md-8">
+                    <input name="username" onChange={this.handleInputChange} defaultValue={this.state.username} type="text" className="form-control" /> </div>
                 </div>
-                <div class="row form-group">
-                  <label for="companyName" class="col-md-4 control-label text-left"><i className="zmdi zmdi-store mr-1 color-warning"></i> Company Name</label>
-                  <div class="col-md-8">
-                    <input name="username" onChange={this.handleInputChange} value={this.state.companyInfo[0].companyName} type="text" class="form-control" /> </div>
+                <div className="row form-group">
+                  <label htmlFor="companyName" className="col-md-4 control-label text-left"><i className="zmdi zmdi-store mr-1 color-warning"></i> Company Name</label>
+                  <div className="col-md-8">
+                    <input name="username" onChange={this.handleInputChange} defaultValue={this.state.companyName} type="text" className="form-control" /> </div>
                 </div>
-                <div class="row form-group">
-                  <label for="email" class="col-md-4 control-label text-left"><i className="zmdi zmdi-email mr-1 color-primary"></i> Email Address</label>
-                  <div class="col-md-8">
-                    <input name="email" onChange={this.handleInputChange} value={this.state.companyInfo[0].email} type="email" class="form-control" /> </div>
+                <div className="row form-group">
+                  <label htmlFor="email" className="col-md-4 control-label text-left"><i className="zmdi zmdi-email mr-1 color-primary"></i> Email Address</label>
+                  <div className="col-md-8">
+                    <input name="email" onChange={this.handleInputChange} defaultValue={this.state.email} type="email" className="form-control" /> </div>
                 </div>
-                <div class="row form-group">
-                  <label for="website" class="col-md-4 control-label text-left"><i className="zmdi zmdi-store mr-1 color-danger"></i> Website</label>
-                  <div class="col-md-8">
-                    <input name="website" onChange={this.handleInputChange} value={this.state.companyInfo[0].website} type="text" class="form-control" /> </div>
+                <div className="row form-group">
+                  <label htmlFor="website" className="col-md-4 control-label text-left"><i className="zmdi zmdi-store mr-1 color-danger"></i> Website</label>
+                  <div className="col-md-8">
+                    <input name="website" onChange={this.handleInputChange} defaultValue={this.state.website} type="text" className="form-control" /> </div>
                 </div>
-                <div class="row form-group">
-                  <label for="addressLine1" class="col-md-4 control-label text-left"><i className="zmdi zmdi-pin mr-1 color-warning"></i> Address Line 1</label>
-                  <div class="col-md-8">
-                    <input name="addressLine1" onChange={this.handleInputChange} value={this.state.companyInfo[0].addressLine1} type="text" class="form-control" /> </div>
+                <div className="row form-group">
+                  <label htmlFor="addressLine1" className="col-md-4 control-label text-left"><i className="zmdi zmdi-pin mr-1 color-warning"></i> Address Line 1</label>
+                  <div className="col-md-8">
+                    <input name="addressLine1" onChange={this.handleInputChange} defaultValue={this.state.addressLine1} type="text" className="form-control" /> </div>
                 </div>
-                <div class="row form-group">
-                  <label for="addressLine2" class="col-md-4 control-label text-left"><i className="zmdi zmdi-pin mr-1 color-warning"></i> Address Line 2</label>
-                  <div class="col-md-8">
-                    <input name="addressLine2" onChange={this.handleInputChange} value={this.state.companyInfo[0].addressLine2} type="text" class="form-control" /> </div>
+                <div className="row form-group">
+                  <label htmlFor="addressLine2" className="col-md-4 control-label text-left"><i className="zmdi zmdi-pin mr-1 color-warning"></i> Address Line 2</label>
+                  <div className="col-md-8">
+                    <input name="addressLine2" onChange={this.handleInputChange} defaultValue={this.state.addressLine2} type="text" className="form-control" /> </div>
                 </div>
-                <div class="row form-group">
-                  <label for="city" class="col-md-4 control-label text-left"><i className="zmdi zmdi-map mr-1 color-warning"></i> City</label>
-                  <div class="col-md-8">
-                    <input name="city" onChange={this.handleInputChange} value={this.state.companyInfo[0].city} type="text" class="form-control" /> </div>
+                <div className="row form-group">
+                  <label htmlFor="city" className="col-md-4 control-label text-left"><i className="zmdi zmdi-map mr-1 color-warning"></i> City</label>
+                  <div className="col-md-8">
+                    <input name="city" onChange={this.handleInputChange} defaultValue={this.state.city} type="text" className="form-control" /> </div>
                 </div>
-                <div class="row form-group">
-                  <label for="state" class="col-md-4 control-label text-left"><i className="zmdi zmdi-map mr-1 color-warning"></i> State</label>
-                  <div class="col-md-8">
-                    <input name="state" onChange={this.handleInputChange} value={this.state.companyInfo[0].state} type="text" class="form-control" /> </div>
+                <div className="row form-group">
+                  <label htmlFor="state" className="col-md-4 control-label text-left"><i className="zmdi zmdi-map mr-1 color-warning"></i> State</label>
+                  <div className="col-md-8">
+                    <input name="state" onChange={this.handleInputChange} defaultValue={this.state.state} type="text" className="form-control" /> </div>
                 </div>
-                <div class="row form-group">
-                  <label for="zipCode" class="col-md-4 control-label text-left"><i className="zmdi zmdi-map mr-1 color-warning"></i> Zip Code</label>
-                  <div class="col-md-8">
-                    <input name="zipCode" onChange={this.handleInputChange} value={this.state.companyInfo[0].zipCode} type="text" class="form-control" /> </div>
+                <div className="row form-group">
+                  <label htmlFor="zipCode" className="col-md-4 control-label text-left"><i className="zmdi zmdi-map mr-1 color-warning"></i> Zip Code</label>
+                  <div className="col-md-8">
+                    <input name="zipCode" onChange={this.handleInputChange} defaultValue={this.state.zipCode} type="text" className="form-control" /> </div>
                 </div>
-                <div class="row form-group">
-                  <label for="phone" class="col-md-4 control-label text-left"><i className="zmdi zmdi-phone mr-1 color-royal-light"></i> Phone</label>
-                  <div class="col-md-8">
-                    <input name="phone" onChange={this.handleInputChange} value={this.state.companyInfo[0].phoneNumber} type="text" class="form-control" /> </div>
+                <div className="row form-group">
+                  <label htmlFor="phone" className="col-md-4 control-label text-left"><i className="zmdi zmdi-phone mr-1 color-royal-light"></i> Phone</label>
+                  <div className="col-md-8">
+                    <input name="phoneNumber" onChange={this.handleInputChange} defaultValue={this.state.phoneNumber} type="text" className="form-control" /> </div>
                 </div>
-                <div class="row form-group">
-                  <label for="createdOn" class="col-md-4 control-label text-left"><i className="zmdi zmdi-phone mr-1 color-primary"></i> Date Created</label>
-                  <div class="col-md-8">
-                    <input name="createdOn" onChange={this.handleInputChange} value={this.state.companyInfo[0].createdOn} type="text" class="form-control" /> </div>
+                <div className="row form-group">
+                  <label htmlFor="createdOn" className="col-md-4 control-label text-left"><i className="zmdi zmdi-calendar mr-1 color-primary"></i> Date Created</label>
+                  <div className="col-md-8">
+                    <input name="createdOn" onChange={this.handleInputChange} defaultValue={this.state.createdOn} type="text" className="form-control" disabled/> </div>
                 </div>
+
+                <div className="row mt-2">
+                  <div className="offset-lg-2 col-lg-6">
+
+                  </div>
+                  <div className="col-lg-3">
+                    <button className="btn btn-raised btn-primary btn-block" onClick={this.handleAccountUpdateChanges}>Save Changes</button>
+                  </div>
+                </div>
+
               </fieldset>
             </form>
           </div>
