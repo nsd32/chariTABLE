@@ -1,7 +1,7 @@
 import React from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 import LandingPage from './paths/LandingPage'
-import LandingPageUpdated from './paths/LandingPageUpdated'
+// import LandingPageUpdated from './paths/LandingPageUpdated'
 import LandingPageUpdated2 from './paths/LandingPageUpdated2'
 import TestRegistration from './paths/TestRegistration'
 // import Login from './paths/Login'

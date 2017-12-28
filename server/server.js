@@ -79,6 +79,10 @@ app.get('/api/companies', (req, res) => {
 		});
 });
 
+app.get('/api/account/:companyID'), (req, res) => {
+	console.log('Count Company ID', req.params.companyID);
+}
+
 app.get('/api/companies/:companyID', (req, res) => {
 	console.log('Edit Company ID: ', req.params.companyID);
 	User.find({_id:req.params.companyID})
@@ -92,6 +96,30 @@ app.get('/api/companies/:companyID', (req, res) => {
 		});
 });
 
+app.post('/api/companies/:companyID', (req, res) => {
+	console.log('Edit Company ID: ', req.params.companyID);
+	console.log('Edit Company Body: ', req.body);
+	User.findByIdAndUpdate(req.params.companyID, {
+		$set: {
+			companyName: req.body.companyName,
+			addressLine1: req.body.addressLine1,
+			addressLine2: req.body.addressLine2,
+			city: req.body.city,
+			state: req.body.state,
+			zipCode: req.body.zipCode,
+			phoneNumber: req.body.phoneNumber,
+			website: req.body.website,
+			email: req.body.email,
+			username: req.body.username
+		}
+	}, {
+		new: true },
+		function (err, user) {
+  if (err) return err;
+  res.send(user);
+});
+
+});
 
 
 app.post('/register', (req, res) => {
@@ -149,7 +177,7 @@ app.get('/api/events/:id', mid.requiresLogin, (req, res) => {
 		});
 });
 
-app.get('/api/eventDetails/:id', (req, res) => {
+app.get('/api/eventDetails/:id', mid.requiresLogin, (req, res) => {
 	console.log('Event Details Company IDs :', req.params.id);
 
 	const event = {
@@ -173,7 +201,7 @@ app.get('/api/eventDetails/:id', (req, res) => {
 
 
 
-app.get('/api/event/:eventId', (req, res) => {
+app.get('/api/event/:eventId', mid.requiresLogin, (req, res) => {
 	Event.find({ _id: req.params.eventId })
 		.then(function(event) {
 			res.json(event);
