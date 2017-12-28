@@ -14,6 +14,13 @@ class Account extends Component {
     console.log('Company Name: ', this.state.companyInfo[0].companyName);
   }
 
+  handleInputChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+    console.log(this.state);
+  }
+
 
   render() {
     return(
@@ -63,91 +70,66 @@ class Account extends Component {
               </div>
             </div>
           </div>
-          <div className="row">
-            <div className="col-12">
-              <div className="card-block">
-                <h2 className="color-primary no-mb">Personal Information</h2>
-              </div>
-              <table className="table table-no-border table-striped">
-                <tbody>
-                  <tr style={{width: "100%"}}>
-                    <th style={{width: "50%"}}>
-                      <i className="zmdi zmdi-account mr-1 color-royal"></i> User Name</th>
-                    <td>
-                      <input value={this.state.companyInfo[0].username} />
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>
-                      <i className="zmdi zmdi-store mr-1 color-warning"></i> Company Name</th>
-                    <td>
-                      <input value={this.state.companyInfo[0].companyName} />
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>
-                      <i className="zmdi zmdi-email mr-1 color-primary"></i> Email</th>
-                    <td>
-                      <input value={this.state.companyInfo[0].email} />
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>
-                      <i className="zmdi zmdi-link mr-1 color-danger"></i> Website</th>
-                    <td>
-                      <input value={this.state.companyInfo[0].website} />
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>
-                      <i className="zmdi zmdi-pin mr-1 color-danger"></i> Street Address Line 1</th>
-                    <td>
-                      <input value={this.state.companyInfo[0].addressLine1} />
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>
-                      <i className="zmdi zmdi-pin mr-1 color-danger"></i> Street Address Line 2</th>
-                    <td>
-                      <input value={this.state.companyInfo[0].addressLine2} />
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>
-                      <i className="zmdi zmdi-map mr-1 color-danger"></i> City</th>
-                    <td>
-                      <input value={this.state.companyInfo[0].city} />
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>
-                      <i className="zmdi zmdi-map mr-1 color-danger"></i> State</th>
-                    <td>
-                      <input value={this.state.companyInfo[0].state} />
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>
-                      <i className="zmdi zmdi-map mr-1 color-danger"></i> Zip Code</th>
-                    <td>
-                      <input value={this.state.companyInfo[0].zipCode} />
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>
-                      <i className="zmdi zmdi-phone mr-1 color-danger"></i> Phone Number</th>
-                    <td>
-                      <input value={this.state.companyInfo[0].phoneNumber} />
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>
-                      <i className="zmdi zmdi-calendar mr-1 color-info"></i> Member Since</th>
-                    <td>{this.state.companyInfo[0].createdOn}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+          <div class="card-block">
+            <form class="form-horizontal">
+              <fieldset>
+                <div class="row form-group">
+                  <label for="username" class="col-md-4 control-label text-left"><i className="zmdi zmdi-account mr-1 color-royal"></i> Username</label>
+                  <div class="col-md-8">
+                    <input name="username" onChange={this.handleInputChange} value={this.state.companyInfo[0].username} type="text" class="form-control" /> </div>
+                </div>
+                <div class="row form-group">
+                  <label for="companyName" class="col-md-4 control-label text-left"><i className="zmdi zmdi-store mr-1 color-warning"></i> Company Name</label>
+                  <div class="col-md-8">
+                    <input name="username" onChange={this.handleInputChange} value={this.state.companyInfo[0].companyName} type="text" class="form-control" /> </div>
+                </div>
+                <div class="row form-group">
+                  <label for="email" class="col-md-4 control-label text-left"><i className="zmdi zmdi-email mr-1 color-primary"></i> Email Address</label>
+                  <div class="col-md-8">
+                    <input name="email" onChange={this.handleInputChange} value={this.state.companyInfo[0].email} type="email" class="form-control" /> </div>
+                </div>
+                <div class="row form-group">
+                  <label for="website" class="col-md-4 control-label text-left"><i className="zmdi zmdi-store mr-1 color-danger"></i> Website</label>
+                  <div class="col-md-8">
+                    <input name="website" onChange={this.handleInputChange} value={this.state.companyInfo[0].website} type="text" class="form-control" /> </div>
+                </div>
+                <div class="row form-group">
+                  <label for="addressLine1" class="col-md-4 control-label text-left"><i className="zmdi zmdi-pin mr-1 color-warning"></i> Address Line 1</label>
+                  <div class="col-md-8">
+                    <input name="addressLine1" onChange={this.handleInputChange} value={this.state.companyInfo[0].addressLine1} type="text" class="form-control" /> </div>
+                </div>
+                <div class="row form-group">
+                  <label for="addressLine2" class="col-md-4 control-label text-left"><i className="zmdi zmdi-pin mr-1 color-warning"></i> Address Line 2</label>
+                  <div class="col-md-8">
+                    <input name="addressLine2" onChange={this.handleInputChange} value={this.state.companyInfo[0].addressLine2} type="text" class="form-control" /> </div>
+                </div>
+                <div class="row form-group">
+                  <label for="city" class="col-md-4 control-label text-left"><i className="zmdi zmdi-map mr-1 color-warning"></i> City</label>
+                  <div class="col-md-8">
+                    <input name="city" onChange={this.handleInputChange} value={this.state.companyInfo[0].city} type="text" class="form-control" /> </div>
+                </div>
+                <div class="row form-group">
+                  <label for="state" class="col-md-4 control-label text-left"><i className="zmdi zmdi-map mr-1 color-warning"></i> State</label>
+                  <div class="col-md-8">
+                    <input name="state" onChange={this.handleInputChange} value={this.state.companyInfo[0].state} type="text" class="form-control" /> </div>
+                </div>
+                <div class="row form-group">
+                  <label for="zipCode" class="col-md-4 control-label text-left"><i className="zmdi zmdi-map mr-1 color-warning"></i> Zip Code</label>
+                  <div class="col-md-8">
+                    <input name="zipCode" onChange={this.handleInputChange} value={this.state.companyInfo[0].zipCode} type="text" class="form-control" /> </div>
+                </div>
+                <div class="row form-group">
+                  <label for="phone" class="col-md-4 control-label text-left"><i className="zmdi zmdi-phone mr-1 color-royal-light"></i> Phone</label>
+                  <div class="col-md-8">
+                    <input name="phone" onChange={this.handleInputChange} value={this.state.companyInfo[0].phoneNumber} type="text" class="form-control" /> </div>
+                </div>
+                <div class="row form-group">
+                  <label for="createdOn" class="col-md-4 control-label text-left"><i className="zmdi zmdi-phone mr-1 color-primary"></i> Date Created</label>
+                  <div class="col-md-8">
+                    <input name="createdOn" onChange={this.handleInputChange} value={this.state.companyInfo[0].createdOn} type="text" class="form-control" /> </div>
+                </div>
+              </fieldset>
+            </form>
           </div>
         </div>
       </div>
