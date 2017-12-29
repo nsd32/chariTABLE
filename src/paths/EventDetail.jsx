@@ -8,14 +8,87 @@ class Events extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      companyID: ""
+      companyID: "",
+      tablehosts: []
     }
   }
 
   componentWillMount() {
+    this.setState({companyID: this.props.location.state.companyID})
+
     console.log('Event State: ', this.props.location.state.eventInfo);
+
+    let eventID = this.props.location.state.eventInfo._id
+
+    axios.get('/api/eventDetails/' + eventID)
+    .then((eventInfo) => {
+      console.log(`Event Details for selected: `, eventInfo.data);
+
+      this.setState({
+        eventId: eventInfo.data._id,
+        eventName: eventInfo.data.eventName,
+        eventLocation: eventInfo.data.eventLocation,
+        eventDate: eventInfo.data.eventDate,
+        eventTime: eventInfo.data.eventTime,
+        contactName: eventInfo.data.contactName,
+        contactPhone: eventInfo.data.contactPhone,
+        contactEmail: eventInfo.data.contactEmail,
+        numberOfTables: eventInfo.data.numberOfTables,
+        numberOfTableHosts: eventInfo.data.numberOfTableHosts,
+        numberOfGuestsPerTable: eventInfo.data.numberOfGuestsPerTable,
+        numberOfSponsors: eventInfo.data.numberOfSponsors
+      })
+
+      for (let i = 0; i < eventInfo.data.tableHosts.length; i++) {
+
+        let tablehost = eventInfo.data.tableHosts[i]._id;
+        let tablehostProperty = eventInfo.data.tableHosts[i];
+
+        this.setState({
+          tablehosts: [...this.state.tablehosts, eventInfo.data.tableHosts[i]]
+        })
+
+        this.setState({
+           
+          [tablehost]: {
+            name: tablehostProperty.name,
+            email: tablehostProperty.email,
+          }
+
+        }, () => {
+
+          // console.log('Tablehosts: ', this.state)
+          
+        });
+
+        // Setting state for each guest
+        for (let j = 0; j < eventInfo.data.tableHosts[i].guests.length; j++) {
+
+          let guest = eventInfo.data.tableHosts[i].guests[j]._id;
+          let guestProperty = eventInfo.data.tableHosts[i].guests[j];
+
+          this.setState({
+           
+            [guest]: {
+              name: guestProperty.name,
+              email: guestProperty.email,
+            }
+
+          }, () => {
+
+            // console.log('Guest: ', this.state)
+            
+          });
+
+        }
+
+    }
+
+
+      
+    })
     
-    this.setState({
+    {/*this.setState({
       eventId: this.props.location.state.eventInfo._id,
       eventName: this.props.location.state.eventInfo.eventName,
       eventLocation: this.props.location.state.eventInfo.eventLocation,
@@ -28,49 +101,8 @@ class Events extends Component {
       numberOfTableHosts: this.props.location.state.eventInfo.numberOfTableHosts,
       numberOfGuestsPerTable: this.props.location.state.eventInfo.numberOfGuestsPerTable,
       numberOfSponsors: this.props.location.state.eventInfo.numberOfSponsors
-    })
+    })*/}
     
-    this.setState({companyID: this.props.location.state.companyID})
-    
-    for (let i = 0; i < this.props.location.state.eventInfo.tableHosts.length; i++) {
-
-      let tablehost = this.props.location.state.eventInfo.tableHosts[i]._id;
-      let tablehostProperty = this.props.location.state.eventInfo.tableHosts[i];
-      this.setState({
-         
-        [tablehost]: {
-          name: tablehostProperty.name,
-          email: tablehostProperty.email,
-        }
-
-      }, () => {
-
-        // console.log('Tablehosts: ', this.state)
-        
-      });
-
-      // Setting state for each guest
-      for (let j = 0; j < this.props.location.state.eventInfo.tableHosts[i].guests.length; j++) {
-
-        let guest = this.props.location.state.eventInfo.tableHosts[i].guests[j]._id;
-        let guestProperty = this.props.location.state.eventInfo.tableHosts[i].guests[j];
-
-        this.setState({
-         
-          [guest]: {
-            name: guestProperty.name,
-            email: guestProperty.email,
-          }
-
-        }, () => {
-
-          // console.log('Guest: ', this.state)
-          
-        });
-
-      }
-
-    }
     
   }
 
@@ -264,8 +296,8 @@ class Events extends Component {
   // }
 
   render() {
-    console.log('State with guests: ', this.state);
-    if(!this.props.location.state.eventInfo) {
+    console.log('Event State ', this.state);
+    if(!this.state.eventId) {
       return (
         <div id="ms-preload" class="ms-preload">
           <div id="status">
@@ -434,7 +466,8 @@ class Events extends Component {
 
               <h3 className="animated fadeInUp animation-delay-10">Tablehosts</h3>
               <div class="ms-collapse animated fadeInUp animation-delay-10" id="accordion2" role="tablist" aria-multiselectable="true">
-                {this.props.location.state.eventInfo.tableHosts.map((tableHost, idx) => {
+                {this.state.tablehosts.map((tableHost, idx) => {
+                
                   return (
                     <div key={idx} class="mb-0 card card-primary">
                       <div class="card-header" role="tab" id={"headingOne2" + idx}>
