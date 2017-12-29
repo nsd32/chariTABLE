@@ -373,6 +373,100 @@ app.get('/account', (req, res, next) => {
 
 	});
 
+// Updating Event Information
+
+app.put('/api/events/:eventId', (req, res) => {
+    console.log('EventId: ', req.params.eventId);
+    console.log('EventBody: ', req.body);
+    Event.findByIdAndUpdate(req.params.eventId, {
+        $set: {
+            eventName: req.body.eventName,
+            eventLocation: req.body.eventLocation,
+            eventDate: req.body.eventDate,
+            eventTime: req.body.eventTime,
+            contactName: req.body.contactName,
+            contactPhone: req.body.contactPhone,
+            contactEmail: req.body.contactEmail,
+            numberOfTables: req.body.numberOfTables,
+            numberOfTablehosts: req.body.numberOfTableHosts,
+            numberOfGuestsPerTable: req.body.numberOfGuestsPerTable,
+            numberOfSponsors: req.body.numberOfSponsors
+        }
+    }, 
+    {
+        new: true 
+    },
+        
+    function (err, event) {
+  		if (err) return err;
+  		res.send(event);
+	});
+});
+
+// Updating Tablehost Information
+app.put('/api/tablehosts/:tablehostId', (req, res) => {
+    console.log('TablehostId: ', req.params.tablehostId);
+    console.log('TablehostBody: ', req.body);
+    TableHost.findByIdAndUpdate(req.params.tablehostId, {
+        $set: {
+            name: req.body.name,
+            email: req.body.email
+        }
+    }, 
+    {
+        new: true 
+    },
+        
+    function (err, tablehost) {
+  		if (err) return err;
+  		res.send(tablehost);
+	});
+});
+
+// Updating Guest Information
+app.put('/api/guests/:guestId', (req, res) => {
+    console.log('GuestId: ', req.params.guestId);
+    console.log('GuestBody: ', req.body);
+    Guest.findByIdAndUpdate(req.params.guestId, {
+        $set: {
+            name: req.body.name,
+            email: req.body.email
+        }
+    }, 
+    {
+        new: true 
+    },
+        
+    function (err, guest) {
+  		if (err) return err;
+  		res.send(guest);
+	});
+});
+
+// Event Delete
+app.delete('/api/events/:eventId', (req, res) => {
+	Event.findByIdAndRemove(req.params.eventId, (err, event) => {
+		if (err) return err;
+		res.send(event);
+	})
+});
+
+// Tablehost Delete
+app.delete('/api/tablehosts/:tablehostId', (req, res) => {
+	TableHost.findByIdAndRemove(req.params.tablehostId, (err, tablehost) => {
+		if (err) return err;
+		res.send(tablehost);
+	})
+});
+
+// Guest Delete
+app.delete('/api/guests/:guestId', (req, res) => {
+	Guest.findByIdAndRemove(req.params.guestId, (err, guest) => {
+		if (err) return err;
+		res.send(guest);
+	})
+});
+
 // 	app.get('/*', (req, res) => {
 // 	res.sendFile(path.join(__dirname,'../public/index.html'));
 // });

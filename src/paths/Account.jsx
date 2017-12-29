@@ -76,8 +76,7 @@ class Account extends Component {
   render() {
 
     return(
-  <div>
-
+  <div
     <div className="ms-site-container">
 
     <Navbar />

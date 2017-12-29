@@ -8,7 +8,7 @@ class GuestRegister extends Component {
     guestEmail: ''
   }
 	
-  componentDidMount() {
+  componentWillMount() {
     axios.get(`/GuestRegistration/${this.props.match.params.eventId}/${this.props.match.params.tableHostId}`)
       .then((response) => {
         console.log('Did Mount: ' ,response.data);

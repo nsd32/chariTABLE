@@ -1,29 +1,77 @@
 import React, { Component } from 'react';
 import { Col, Row } from 'react-materialize';
-import EventDetailButton from '../components/buttons/EventDetailButton'
-// import BackButton from '../components/buttons/BackButton'
-// import axios from 'axios';
-
-// import { Link } from 'react-router-dom';
-
+import EventDetailButton from '../components/buttons/EventDetailButton';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 class Events extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      eventInfo: [],
       companyID: ""
     }
   }
 
-  componentDidMount() {
+  componentWillMount() {
     console.log('Event State: ', this.props.location.state.eventInfo);
-    console.log('Event CompanyID: ', this.props.location.state.companyID);
-    this.setState({eventInfo: this.props.location.state.eventInfo})
-    console.log('EventDetails Company State: ', this.props.location.state.companyInfo);
+    
+    this.setState({
+      eventId: this.props.location.state.eventInfo._id,
+      eventName: this.props.location.state.eventInfo.eventName,
+      eventLocation: this.props.location.state.eventInfo.eventLocation,
+      eventDate: this.props.location.state.eventInfo.eventDate,
+      eventTime: this.props.location.state.eventInfo.eventTime,
+      contactName: this.props.location.state.eventInfo.contactName,
+      contactPhone: this.props.location.state.eventInfo.contactPhone,
+      contactEmail: this.props.location.state.eventInfo.contactEmail,
+      numberOfTables: this.props.location.state.eventInfo.numberOfTables,
+      numberOfTableHosts: this.props.location.state.eventInfo.numberOfTableHosts,
+      numberOfGuestsPerTable: this.props.location.state.eventInfo.numberOfGuestsPerTable,
+      numberOfSponsors: this.props.location.state.eventInfo.numberOfSponsors
+    })
+    
     this.setState({companyID: this.props.location.state.companyID})
-    console.log(this.state.companyID);
+    
+    for (let i = 0; i < this.props.location.state.eventInfo.tableHosts.length; i++) {
 
+      let tablehost = this.props.location.state.eventInfo.tableHosts[i]._id;
+      let tablehostProperty = this.props.location.state.eventInfo.tableHosts[i];
+      this.setState({
+         
+        [tablehost]: {
+          name: tablehostProperty.name,
+          email: tablehostProperty.email,
+        }
+
+      }, () => {
+
+        // console.log('Tablehosts: ', this.state)
+        
+      });
+
+      // Setting state for each guest
+      for (let j = 0; j < this.props.location.state.eventInfo.tableHosts[i].guests.length; j++) {
+
+        let guest = this.props.location.state.eventInfo.tableHosts[i].guests[j]._id;
+        let guestProperty = this.props.location.state.eventInfo.tableHosts[i].guests[j];
+
+        this.setState({
+         
+          [guest]: {
+            name: guestProperty.name,
+            email: guestProperty.email,
+          }
+
+        }, () => {
+
+          // console.log('Guest: ', this.state)
+          
+        });
+
+      }
+
+    }
+    
   }
 
   handleBackButtonClick = (event) => {
@@ -36,10 +84,188 @@ class Events extends Component {
     });
   }
 
+  handleEventInputChange = (event) => {
+    this.setState({
+
+      [event.target.name]: event.target.value
+
+    }, () => {
+      // console.log('Tablehosts: ', this.state)
+    });
+  }
+
+  handleTablehostNameChange = (event) => {
+    this.setState({
+
+      [event.target.name]: {
+        ...this.state[event.target.name],
+        name: event.target.value
+      }
+
+    }, () => {
+      // console.log('Tablehosts: ', this.state)
+    });
+  }
+
+  handleTablehostEmailChange = (event) => {
+    this.setState({
+
+      [event.target.name]: {
+        ...this.state[event.target.name],
+        email: event.target.value
+      }
+
+    }, () => {
+      // console.log('Tablehosts: ', this.state)
+    });
+  }
+
+  handleGuestNameChange = (event) => {
+    this.setState({
+
+      [event.target.name]: {
+        ...this.state[event.target.name],
+        name: event.target.value
+      }
+
+    }, () => {
+      // console.log('GuestName: ', this.state)
+    });
+  }
+
+  handleGuestEmailChange = (event) => {
+    this.setState({
+
+      [event.target.name]: {
+        ...this.state[event.target.name],
+        email: event.target.value
+      }
+
+    }, () => {
+      // console.log('GuestEmail: ', this.state)
+    });
+  }
+
+  eventSaveButton = () => {
+
+    let eventInfo = {
+      eventName: this.state.eventName,
+      eventLocation: this.state.eventLocation,
+      eventDate: this.state.eventDate,
+      eventTime: this.state.eventTime,
+      contactName: this.state.contactName,
+      contactPhone: this.state.contactPhone,
+      contactEmail: this.state.contactEmail,
+      numberOfTables: this.state.numberOfTables,
+      numberOfTableHosts: this.state.numberOfTableHosts,
+      numberOfGuestsPerTable: this.state.numberOfGuestsPerTable,
+      numberOfSponsors: this.state.numberOfSponsors
+    }
+
+    axios.put(`/api/events/${this.state.eventId}`, eventInfo)
+    .then( (response) => {
+      console.log(response);
+    })
+    .catch( (error) => {
+      console.log(error);
+    });
+  }
+
+  tablehostSaveButton = (event) => {
+
+    let tablehostId = event.target.id;
+
+    let tablehostInfo = {
+      name: this.state[tablehostId].name,
+      email: this.state[tablehostId].email
+    }
+
+    axios.put(`/api/tablehosts/${tablehostId}`, tablehostInfo)
+    .then( (response) => {
+      console.log(response);
+    })
+    .catch( (error) => {
+      console.log(error);
+    });
+  }
+
+  guestSaveButton = (event) => {
+
+    let guestId = event.target.id;
+    console.log(guestId);
+
+    let guestInfo = {
+      name: this.state[guestId].name,
+      email: this.state[guestId].email
+    }
+
+    axios.put(`/api/guests/${guestId}`, guestInfo)
+    .then( (response) => {
+      console.log(response);
+    })
+    .catch( (error) => {
+      console.log(error);
+    });
+  }
+
+  eventDeleteButton = (event) => {
+
+    axios.delete(`/api/events/${this.state.eventId}`)
+    .then( (response) => {
+      console.log(response);
+    })
+    .catch( (error) => {
+      console.log(error);
+    });
+  }
+
+  tablehostDeleteButton = (event) => {
+
+    let tablehostId = event.target.id;
+
+    axios.delete(`/api/tablehosts/${tablehostId}`)
+    .then( (response) => {
+      console.log(response);
+    })
+    .catch( (error) => {
+      console.log(error);
+    });
+  }
+
+  guestDeleteButton = (event) => {
+    let guestId = event.target.id;
+
+    axios.delete(`/api/guests/${guestId}`)
+    .then( (response) => {
+      console.log(response);
+    })
+    .catch( (error) => {
+      console.log(error);
+    });
+  }
+
+  
+  // handleGuestEmailChange = (event) => {
+  //   console.log('Hello: ', this.state[event.target.name].guests.length)
+  //   var index = 0;
+
+  //   for (let i = 0; i < this.state[event.target.name].guests.length; i++) {
+  //     if (event.target.id === this.state[event.target.name].guests[i]._id) {
+  //       index = i;
+  //     }
+  //   }
+
+  //   this.setState({
+  //     [event.target.name]: update(this.state, { [event.target.name]: { guests:  
+  //       { [index]: { email: { $set: [event.target.value] } } } } })
+  //   }, () => {
+  //     console.log('Please ', this.state)
+  //   });
+  // }
 
   render() {
-
-    if(!this.state.eventInfo.tableHosts) {
+    console.log('State with guests: ', this.state);
+    if(!this.props.location.state.eventInfo) {
       return (
         <div id="ms-preload" class="ms-preload">
           <div id="status">
@@ -56,16 +282,6 @@ class Events extends Component {
       <Row>
         <Col s={12} m={6}>
           <div>
-            {/*<p>Event Name: {this.state.eventInfo.eventName}</p>
-            <p>Event Date: {this.state.eventInfo.eventDate}</p>
-            <p>Event Time: {this.state.eventInfo.eventTime}</p>
-            <p>Event Location: {this.state.eventInfo.eventLocation}</p>
-            <p>Event Contact:{this.state.eventInfo.contactName}</p>
-            <p>Conatact Email: {this.state.eventInfo.contactEmail}</p>
-            <p>Contact Phone: {this.state.eventInfo.contactPhone}</p>
-            <p>Number of Tables: {this.state.eventInfo.numberOfTables}</p>
-            <p>Number of Guest per Table: {this.state.eventInfo.numberOfGuestsPerTable}</p>
-            <p>Number of Table Hosts: {this.state.eventInfo.numberOfTableHosts}</p>*/}
 
           {/*<div id="ms-preload" class="ms-preload">
             <div id="status">
@@ -84,10 +300,8 @@ class Events extends Component {
                 <div class="ms-title">
                   <a href="index.html">
                     <img src="assets/img/demo/logo-header.png" alt="" /> 
-                    <span class="ms-logo animated zoomInDown animation-delay-5">M</span>
-                    <h1 class="animated fadeInRight animation-delay-6">Material
-                      <span>Style</span>
-                    </h1>
+                    <span class="ms-logo animated zoomInDown animation-delay-5">CH</span>
+                    <h1 class="animated fadeInRight animation-delay-6">chariTABLE Host</h1>
                   </a>
                 </div>
                 <div class="header-right">
@@ -151,57 +365,57 @@ class Events extends Component {
                       <div class="row form-group">
                         <label for="inputUser" class="col-md-2 control-label">Event Name</label>
                         <div class="col-md-9">
-                          <input name="eventName" onChange={this.handleInputChange} value={this.state.eventInfo.eventName} type="text" class="form-control" id="eventName" placeholder="Event Name" /> </div>
+                          <input name="eventName" onChange={this.handleEventInputChange} defaultValue={this.state.eventName} type="text" class="form-control" id="eventName" placeholder="Event Name" /> </div>
                       </div>
                       <div class="row form-group">
                         <label for="inputEmail" class="col-md-2 control-label">Event Location</label>
                         <div class="col-md-9">
-                          <input name="eventLocation" onChange={this.handleInputChange} value={this.state.eventInfo.eventLocation} type="email" class="form-control" id="eventLocation" placeholder="Event Location" /> </div>
+                          <input name="eventLocation" onChange={this.handleEventInputChange} defaultValue={this.state.eventLocation} type="email" class="form-control" id="eventLocation" placeholder="Event Location" /> </div>
                       </div>
                       <div class="row form-group">
                         <label for="inputDate" class="col-md-2 control-label">Event Date</label>
                         <div class="col-md-9">
-                          <input name="eventDate" onChange={this.handleInputChange} value={this.state.eventInfo.eventDate} id="eventDate" type="text" class="form-control" placeholder="mm/dd/yy" /> </div>
+                          <input name="eventDate" onChange={this.handleEventInputChange} defaultValue={this.state.eventDate} id="eventDate" type="text" class="form-control" placeholder="mm/dd/yy" /> </div>
                       </div>
                       <div class="row form-group">
                         <label for="eventTime" class="col-md-2 control-label">Event Time</label>
                         <div class="col-md-9">
-                          <input name="eventTime" onChange={this.handleInputChange} value={this.state.eventInfo.eventTime} type="text" class="form-control" id="eventTime" placeholder="Event Time" /> </div>
+                          <input name="eventTime" onChange={this.handleEventInputChange} defaultValue={this.state.eventTime} type="text" class="form-control" id="eventTime" placeholder="Event Time" /> </div>
                       </div>
                       <div class="row form-group">
                         <label for="inputName" class="col-md-2 control-label">Contact Name</label>
                         <div class="col-md-9">
-                          <input name="contactName" onChange={this.handleInputChange} value={this.state.eventInfo.contactName} type="text" class="form-control" id="contactName" placeholder="Contact Name" /> </div>
+                          <input name="contactName" onChange={this.handleEventInputChange} defaultValue={this.state.contactName} type="text" class="form-control" id="contactName" placeholder="Contact Name" /> </div>
                       </div>
                       <div class="row form-group">
                         <label for="inputLast" class="col-md-2 control-label">Contact Phone</label>
                         <div class="col-md-9">
-                          <input name="contactPhone" onChange={this.handleInputChange} value={this.state.eventInfo.contactPhone} type="text" class="form-control" id="contactPhone" placeholder="Contact Phone" /> </div>
+                          <input name="contactPhone" onChange={this.handleEventInputChange} defaultValue={this.state.contactPhone} type="text" class="form-control" id="contactPhone" placeholder="Contact Phone" /> </div>
                       </div>
                       <div class="row form-group">
                         <label for="inputEmail" class="col-md-2 control-label">Contact Email</label>
                         <div class="col-md-9">
-                          <input name="contactEmail" onChange={this.handleInputChange} value={this.state.eventInfo.contactEmail} type="text" class="form-control" id="contactEmail" placeholder="Contact Email" /> </div>
+                          <input name="contactEmail" onChange={this.handleEventInputChange} defaultValue={this.state.contactEmail} type="text" class="form-control" id="contactEmail" placeholder="Contact Email" /> </div>
                       </div>
                       <div class="row form-group">
                         <label for="numberOfTables" class="col-md-2 control-label">Number of Tables</label>
                         <div class="col-md-9">
-                          <input name="numberOfTables" onChange={this.handleInputChange} value={this.state.eventInfo.numberOfTables} type="Number" class="form-control" id="numberOfTables" placeholder="Number of Tables" /> </div>
+                          <input name="numberOfTables" onChange={this.handleEventInputChange} defaultValue={this.state.numberOfTables} type="Number" class="form-control" id="numberOfTables" placeholder="Number of Tables" /> </div>
                       </div>
                       <div class="row form-group">
                         <label for="numberOfTableHosts" class="col-md-2 control-label">Number of Table Hosts</label>
                         <div class="col-md-9">
-                          <input name="numberOfTableHosts" onChange={this.handleInputChange} value={this.state.eventInfo.numberOfTableHosts} type="Number" class="form-control" id="numberOfTableHosts" placeholder="Number of Table Hosts" /> </div>
+                          <input name="numberOfTableHosts" onChange={this.handleEventInputChange} defaultValue={this.state.numberOfTableHosts} type="Number" class="form-control" id="numberOfTableHosts" placeholder="Number of Table Hosts" /> </div>
                       </div>
                       <div class="row form-group">
                         <label for="numberOfGuestsPerTable" class="col-md-2 control-label">Number of Guests Per Table</label>
                         <div class="col-md-9">
-                          <input name="numberOfGuestsPerTable" onChange={this.handleInputChange} value={this.state.eventInfo.numberOfGuestsPerTable} type="Number" class="form-control" id="numberOfGuestsPerTable" placeholder="Number of Guests Per Table" /> </div>
+                          <input name="numberOfGuestsPerTable" onChange={this.handleEventInputChange} defaultValue={this.state.numberOfGuestsPerTable} type="Number" class="form-control" id="numberOfGuestsPerTable" placeholder="Number of Guests Per Table" /> </div>
                       </div>
                       <div class="row form-group">
                         <label for="numberOfSponsors" class="col-md-2 control-label">Number of Sponsors</label>
                         <div class="col-md-9">
-                          <input name="numberOfSponsors" onChange={this.handleInputChange} value={this.state.eventInfo.numberOfSponsors} type="Number" class="form-control" id="numberOfSponsors" placeholder="Number of Sponsors" /> </div>
+                          <input name="numberOfSponsors" onChange={this.handleEventInputChange} defaultValue={this.state.numberOfSponsors} type="Number" class="form-control" id="numberOfSponsors" placeholder="Number of Sponsors" /> </div>
                       </div>
                       
                       <div class="row mt-2">
@@ -209,7 +423,8 @@ class Events extends Component {
 
                         </div>
                         <div class="col-lg-3">
-                          <button class="btn btn-raised btn-primary btn-block" onClick={this.nextButton}>Save Changes</button>
+                          <button class="btn btn-raised btn-primary btn-block save-button" onClick={this.eventSaveButton}>Save Changes</button>
+                          <button class="btn btn-raised btn-danger btn-block" onClick={this.eventDeleteButton}>Delete Event</button>
                         </div>
                       </div>
                     </fieldset>
@@ -219,7 +434,7 @@ class Events extends Component {
 
               <h3 className="animated fadeInUp animation-delay-10">Tablehosts</h3>
               <div class="ms-collapse animated fadeInUp animation-delay-10" id="accordion2" role="tablist" aria-multiselectable="true">
-                {this.state.eventInfo.tableHosts.map((tableHost, idx) => {
+                {this.props.location.state.eventInfo.tableHosts.map((tableHost, idx) => {
                   return (
                     <div key={idx} class="mb-0 card card-primary">
                       <div class="card-header" role="tab" id={"headingOne2" + idx}>
@@ -230,23 +445,45 @@ class Events extends Component {
                       </div>
                       
                       <div id={"collapseOne2" + idx} class="card-collapse collapse" role="tabpanel" aria-labelledby={"headingOne2" + idx}>
-                        <label for="tableHost" class="col-md-2 control-label">Tablehost</label>
-                        <div class="col-sm-12">
-                          <input name="guest" value={tableHost.name} type="text" class="form-control"  placeholder="Guest" /> 
+                        <div class="col-sm-5" style={{float: 'left'}}>
+                        <label for="tableHostName" class="col-md-5 control-label tablehost-label">Tablehost</label>
+                          <input name={tableHost._id} defaultValue={tableHost.name} onChange={this.handleTablehostNameChange} type="text" class="form-control"  placeholder="Tablehost" readonly /> 
                         </div>
 
-                        <label for="url" class="col-md-2 control-label">Tablehost URL</label>
-                        <div class="col-sm-12">
-                          <h4 className="tablehost-url" name="tablehosturl"> {`localhost:3000/GuestRegistration/${this.state.eventInfo._id}/${tableHost._id}`}</h4> 
+                        <div class="col-sm-5 email-input" style={{float: 'left'}}>
+                        <label for="tableHostEmail" class="col-md-5 control-label tablehost-label">Tablehost Email</label>
+                          <input name={tableHost._id} defaultValue={tableHost.email} onChange={this.handleTablehostEmailChange} type="text" class="form-control"  placeholder="Tablehost Email" /> 
                         </div>
+                        
+                        <a href="javascript:void(0)" style={{float: 'left'}}  id={tableHost._id} onClick={this.tablehostSaveButton} class="btn btn-raised btn-danger btn-sm save-button">Save</a>                        
+                        <a href="javascript:void(0)" style={{float: 'left'}}  id={tableHost._id} onClick={this.tablehostDeleteButton} class="btn btn-raised btn-danger btn-sm">Delete</a>
 
+
+                        <div class="col-sm-12" style={{float: 'left'}}>
+                        <label for="url" class="col-md-2 control-label tablehost-label">Tablehost URL</label>
+                          
+                          <Link to={`localhost:3000/GuestRegistration/${this.props.location.state.eventInfo._id}/${tableHost._id}`} activeClassName="active" target="_blank"><h4>{`localhost:3000/GuestRegistration/${this.props.location.state.eventInfo._id}/${tableHost._id}`}</h4></Link>
+                        </div>
                         {tableHost.guests.map((guest, idx) => {
                           console.log('Guest: ' + guest.name)
                           return (
                             <div key={idx}>
-                              <label for="guest" class="col-md-2 control-label">Guest {idx + 1}</label>
-                              <div class="col-sm-12">
-                                <input name="guest" value={guest.name} type="text" class="form-control"  placeholder="Guest" /> </div>
+                              
+                              <div class="col-sm-5" style={{float: 'left'}}>
+                                <label for="guest" class="col-md-4 control-label tablehost-label">Guest {idx + 1}</label>
+                                <input name={guest._id} id={guest._id} defaultValue={guest.name} onChange={this.handleGuestNameChange} type="text" class="form-control"  placeholder="Guest" /> 
+                              </div>
+
+                              <div class="col-sm-5 email-input" style={{float: 'left'}}>
+                                <label for="guest" class="col-md-4 control-label tablehost-label">Guest Email</label>
+                                <input name={guest._id} defaultValue={guest.email} onChange={this.handleGuestEmailChange} type="text" class="form-control"  placeholder="Guest Email" /> 
+                              </div>
+
+                              
+                              <a href="javascript:void(0)" style={{float: 'left'}} onClick={this.guestSaveButton} id={guest._id} class="btn btn-raised btn-danger btn-sm save-button">Save</a>
+                              <a href="javascript:void(0)" style={{float: 'left'}} onClick={this.guestDeleteButton} id={guest._id} class="btn btn-raised btn-danger btn-sm">Delete</a>
+                              
+                              
                             </div>
                           );
                         })}
