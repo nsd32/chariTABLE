@@ -25,14 +25,14 @@ class Account extends Component {
   render() {
     return(
   <div>
-    <div id="ms-preload" className="ms-preload">
+    {/*<div id="ms-preload" className="ms-preload">
       <div id="status">
         <div className="spinner">
           <div className="dot1"></div>
           <div className="dot2"></div>
         </div>
       </div>
-    </div>
+    </div>*/}
     <div className="ms-site-container">
 
     <Navbar />

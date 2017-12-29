@@ -28,3 +28,24 @@ label {
 	color: black;
 	font-weight: normal;
 }
+
+.tablehost-label {
+	padding-left: 0;
+}
+
+.save-button {
+	background-color: #607d8b !important;
+}
+
+.ms-hero-img-team {
+	background-image: url('/assets/img/Table_2.jpg') !important;
+}
+
+.ms-hero-img-coffee {
+	background-image: url('/assets/img/Table_1.jpg') !important;
+}
+
+.email-input {
+	margin-right: 0 !important;
+	padding-right: 0 !important;
+}
