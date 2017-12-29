@@ -132,14 +132,7 @@ class LandingPageUpdated extends Component {
   render() {
     return(
     <div>
-      <div id="ms-preload" className="ms-preload">
-      <div id="status">
-        <div className="spinner">
-          <div className="dot1"></div>
-          <div className="dot2"></div>
-        </div>
-      </div>
-    </div>
+
     <div className="ms-site-container">
       {/* <!-- Modal --> */}
       <div className="modal modal-primary" id="ms-account-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -158,12 +151,12 @@ class LandingPageUpdated extends Component {
               <div className="modal-header-tabs">
                 <ul className="nav nav-tabs nav-tabs-full nav-tabs-2 nav-tabs-primary" role="tablist">
                   <li className="nav-item" role="presentation">
-                    <a href="#ms-login-tab" aria-controls="ms-login-tab" role="tab" data-toggle="tab" className="nav-link active withoutripple">
+                    <a href="#ms-login-tab" aria-controls="ms-login-tab" role="tab" data-toggle="tab" className="nav-link active withripple">
                       <i className="zmdi zmdi-account"></i> Login</a>
                   </li>
                   <li className="nav-item" role="presentation">
-                    <a href="#ms-register-tab" aria-controls="ms-register-tab" role="tab" data-toggle="tab" className="nav-link withoutripple">
-                      <i className="zmdi zmdi-account-add"></i> Register</a>
+                    <a href="#ms-register-tab" aria-controls="ms-register-tab" role="tab" data-toggle="tab" className="nav-link withripple">
+                      <i className="zmdi zmdi-account-add"></i> <span class="d-none d-sm-inline"> Register</span></a>
                   </li>
                 </ul>
               </div>
@@ -195,6 +188,7 @@ class LandingPageUpdated extends Component {
             <p>Perferendis, blanditiis unde fugiat voluptas molestias velit asperiores rerum ipsam animi eum temporibus at numquam, nobis voluptates minus maxime cum obcaecati! Tenetur sit corporis laudantium inventore officia officiis odio repellat dolore
               quos
               <a href="">repudiandae voluptas ad facere</a>, amet placeat animi voluptatem distinctio beatae.</p>
+              <a href="javascript:void(0)"><button className="btn btn-raised btn-primary pull-right" data-toggle="modal" data-target="#ms-account-modal">Register</button></a>
           </div>
           <img src="assets/img/Table_2.jpg" alt="" className="img-fluid" />
           <div className="card-block-big">
@@ -257,7 +251,7 @@ class LandingPageUpdated extends Component {
       </div>
       <Footer />
       <div className="btn-back-top">
-        <a href="" data-scroll id="back-top" className="btn-circle btn-circle-primary btn-circle-sm btn-circle-raised ">
+        <a href="#" data-scroll id="back-top" className="btn-circle btn-circle-primary btn-circle-sm btn-circle-raised ">
           <i className="zmdi zmdi-long-arrow-up"></i>
         </a>
       </div>
@@ -267,9 +261,9 @@ class LandingPageUpdated extends Component {
       <div className="sb-slidebar-container">
         <header className="ms-slidebar-header">
           <div className="ms-slidebar-login">
-            <a href="" className="withripple">
+            <a href="javascript:void(0)" className="withripple">
               <i className="zmdi zmdi-account"></i> Login</a>
-            <a href="" className="withripple">
+            <a href="javascript:void(0)" className="withripple">
               <i className="zmdi zmdi-account-add"></i> Register</a>
           </div>
           <div className="ms-slidebar-title">
