@@ -74,16 +74,9 @@ class Account extends Component {
 
 
   render() {
+
     return(
-  <div>
-    {/*<div id="ms-preload" className="ms-preload">
-      <div id="status">
-        <div className="spinner">
-          <div className="dot1"></div>
-          <div className="dot2"></div>
-        </div>
-      </div>
-    </div>*/}
+  <div
     <div className="ms-site-container">
 
     <Navbar />
@@ -115,7 +108,7 @@ class Account extends Component {
                 <div className="row form-group">
                   <label htmlFor="username" className="col-md-4 control-label text-left"><i className="zmdi zmdi-account mr-1 color-royal"></i> Username</label>
                   <div className="col-md-8">
-                    <input name="username" onChange={this.handleInputChange} defaultValue={this.state.username} type="text" className="form-control" /> </div>
+                    <input name="username" onChange={this.handleInputChange} defaultValue={this.state.username} type="text" className="form-control" disabled /> </div>
                 </div>
                 <div className="row form-group">
                   <label htmlFor="companyName" className="col-md-4 control-label text-left"><i className="zmdi zmdi-store mr-1 color-warning"></i> Company Name</label>
@@ -172,8 +165,9 @@ class Account extends Component {
                   <div className="offset-lg-2 col-lg-6">
 
                   </div>
-                  <div className="col-lg-3">
-                    <button className="btn btn-raised btn-primary btn-block" onClick={this.handleAccountUpdateChanges}>Save Changes</button>
+                  <div className="">
+                    <button className="btn btn-raised btn-primary" onClick={this.handleAccountUpdateChanges} style={ {margin: "5px"} }>Save Changes</button>
+                    <button className="btn btn-raised btn-danger" onClick={this.handleAccountUpdateChanges} style={ {margin: "5px"} }>Cancel</button>
                   </div>
                 </div>
 

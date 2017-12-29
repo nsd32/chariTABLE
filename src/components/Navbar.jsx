@@ -14,7 +14,8 @@ let Navbar = (props) => {
             </a>
           </div>
           <div className="header-right">
-            <a href="javascript:void(0)" className="btn-circle btn-circle-primary no-focus animated zoomInDown animation-delay-8" data-toggle="modal" data-target="#ms-account-modal">
+            <a href="javascript:void(0)" class="btn btn-raised color-primary btn-white no-focus animated zoomInDown animation-delay-8" data-toggle="modal" data-target="#ms-account-modal">Login</a>
+            {/* <a href="javascript:void(0)" className="btn-circle btn-circle-primary no-focus animated zoomInDown animation-delay-8" data-toggle="modal" data-target="#ms-account-modal">
               <i className="zmdi zmdi-sign-in"></i>
             </a>
             <form className="search-form animated zoomInDown animation-delay-9">
@@ -25,7 +26,7 @@ let Navbar = (props) => {
             </form>
             <a href="javascript:void(0)" className="btn-ms-menu btn-circle btn-circle-primary ms-toggle-left animated zoomInDown animation-delay-10">
               <i className="zmdi zmdi-menu"></i>
-            </a>
+            </a> */}
           </div>
         </div>
       </header>
