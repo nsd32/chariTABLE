@@ -397,7 +397,7 @@ app.put('/api/events/:eventId', (req, res) => {
             contactPhone: req.body.contactPhone,
             contactEmail: req.body.contactEmail,
             numberOfTables: req.body.numberOfTables,
-            numberOfTablehosts: req.body.numberOfTableHosts,
+            numberOfTableHosts: req.body.numberOfTableHosts,
             numberOfGuestsPerTable: req.body.numberOfGuestsPerTable,
             numberOfSponsors: req.body.numberOfSponsors
         }
