@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Footer from '../components/Footer';
 
 class AddEvent extends Component {
 
@@ -188,6 +189,7 @@ class AddEvent extends Component {
           </div>
         </div>
       </div>
+      <Footer />
      </div>
     );
   }

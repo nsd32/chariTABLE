@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Footer from '../components/Footer';
 
 class Sponsor extends Component {
 
@@ -74,19 +75,18 @@ class Sponsor extends Component {
     for (var i = 0; i < this.props.location.state.eventObj.numberOfTableHosts; i++) {
         rows.push(
         	<tr key={i}>
-            <td>{`Sponsor ${i + 1}`}</td>
-            <td>
-            	<div className="input-field">
-          			<input name={'sponsor' + i} onChange={this.handleInputNameChange} type="text" class="validate" />
-          			<label for="name">Name</label>
-        			</div>
-        		</td>
-            <td>
-            	<div className="input-field">
-          			<input name={'sponsor' + i} onChange={this.handleInputLogoChange} type="text" class="validate" />
-          			<label for="logo">Logo Link</label>
-        			</div>
-        		</td>
+            <td className="addEventInput">
+              <div className="input-field">
+                <input name={'sponsor' + i} onChange={this.handleInputNameChange} type="text" className="form-control" />
+                <label for="name">{`Name (Sponsor ${i + 1})`}</label>
+              </div>
+            </td>
+            <td className="addEventInput">
+              <div className="input-field">
+                <input name={'sponsor' + i} onChange={this.handleInputLogoChange} type="text" className="form-control" />
+                <label for="logo">{`Logo Link (Sponsor ${i + 1})`}</label>
+              </div>
+            </td>
           </tr>
         );
     }
@@ -169,8 +169,9 @@ class Sponsor extends Component {
               </div>
             </div>
           </div> 
-          <a onClick={this.nextButton} href="javascript:void(0)" class="btn btn-raised btn-primary">Submit</a>
+          <a onClick={this.nextButton} href="javascript:void(0)" class="btn btn-raised btn-primary animated fadeInUp animation-delay-7">Submit</a>
         </div>
+        <Footer />
       </div>
     );
   }

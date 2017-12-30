@@ -245,6 +245,9 @@ class Events extends Component {
     axios.delete(`/api/events/${this.state.eventId}`)
     .then( (response) => {
       console.log(response);
+      this.props.history.push({
+        pathname: `/profile/${this.state.companyID}`
+      });
     })
     .catch( (error) => {
       console.log(error);
@@ -472,15 +475,15 @@ class Events extends Component {
                     <div key={idx} class="mb-0 card card-primary">
                       <div class="card-header" role="tab" id={"headingOne2" + idx}>
                         <div class="card-title">
-                          <a class="collapsed withripple" role="button" data-toggle="collapse" data-parent="#accordion2" href={"#collapseOne2" + idx} aria-expanded="false" aria-controls={"#collapseOne2" + idx}>
+                          <a class="collapsed withripple" role="button" data-toggle="collapse" data-parent="#accordion2" href={`#tablehost${idx}`} aria-expanded="false" aria-controls={"#collapseOne2" + idx}>
                             <i class="zmdi zmdi-pin"></i> {tableHost.name} </a>
                         </div>
                       </div>
                       
-                      <div id={"collapseOne2" + idx} class="card-collapse collapse" role="tabpanel" aria-labelledby={"headingOne2" + idx}>
+                      <div id={`tablehost${idx}`} class="card-collapse collapse" role="tabpanel" aria-labelledby={"headingOne2" + idx}>
                         <div class="col-sm-5" style={{float: 'left'}}>
                         <label for="tableHostName" class="col-md-5 control-label tablehost-label">Tablehost</label>
-                          <input name={tableHost._id} defaultValue={tableHost.name} onChange={this.handleTablehostNameChange} type="text" class="form-control"  placeholder="Tablehost" readonly /> 
+                          <input name={tableHost._id} defaultValue={tableHost.name} onChange={this.handleTablehostNameChange} type="text" class="form-control"  placeholder="Tablehost" /> 
                         </div>
 
                         <div class="col-sm-5 email-input" style={{float: 'left'}}>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Footer from '../components/Footer';
 
 class TableHost extends Component {
 
@@ -87,17 +88,16 @@ class TableHost extends Component {
     for (var i = 0; i < this.props.location.state.eventObj.numberOfTableHosts; i++) {
         rows.push(
         	<tr key={i}>
-            <td>{`Table Host ${i + 1}`}</td>
-            <td>
+            <td className="addEventInput">
             	<div className="input-field">
-          			<input name={'tableHost' + i} onChange={this.handleInputNameChange} type="text" class="validate" />
-          			<label for="last_name">Name</label>
+          			<input name={'tableHost' + i} onChange={this.handleInputNameChange} type="text" className="form-control" />
+          			<label for="last_name">{`Name (Tablehost ${i + 1})`}</label>
         			</div>
         		</td>
-            <td>
+            <td className="addEventInput">
             	<div className="input-field">
-          			<input name={'tableHost' + i} onChange={this.handleInputEmailChange} type="text" class="validate" />
-          			<label for="last_name">Email</label>
+          			<input name={'tableHost' + i} onChange={this.handleInputEmailChange} type="text" className="form-control" />
+          			<label for="last_name">{`Email (Tablehost ${i + 1})`}</label>
         			</div>
         		</td>
           </tr>
@@ -183,8 +183,9 @@ class TableHost extends Component {
             </div>
           </div> 
           {/*<button onClick={this.nextButton}>Next</button>*/}
-          <a onClick={this.nextButton} href="javascript:void(0)" class="btn btn-raised btn-primary">Next</a>
+          <a onClick={this.nextButton} href="javascript:void(0)" class="btn btn-raised btn-primary animated fadeInUp animation-delay-7">Next</a>
         </div>
+        <Footer />
       </div>
     );
   }
