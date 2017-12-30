@@ -9,11 +9,13 @@ const Guest = require('./models/Guest');
 const session = require('express-session');
 const mid = require('./middleware')
 const path = require('path');
+const staticFiles = express.static(path.join(__dirname, '../../client/build'))
 
 
 const PORT = process.env.PORT || 8080;
 const app = express();
 
+app.use(staticFiles);
 app.use(session({
 	secret: 'chariTABLE Host',
 	resave: true,
