@@ -20,6 +20,15 @@ app.use(session({
 	saveUninitialized: false
 }));
 
+// Database connection
+mongoose.Promise = Promise;
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/chariTABLE';
+mongoose.connect(MONGODB_URI);
+const db = mongoose.connection;
+
+db.on('error', (err) => console.log('Mongoose Error: ', err));
+db.once('open', () => console.log('Mogoose Connection Successful'));
+
 // app.use(express.static("client/build"));
 
 app.use(bodyParser.json());
