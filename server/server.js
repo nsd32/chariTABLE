@@ -478,7 +478,7 @@ app.delete('/api/guests/:guestId', (req, res) => {
 	})
 });
 
-// 	app.get('/*', (req, res) => {
+// app.get('/*', (req, res) => {
 // 	res.sendFile(path.join(__dirname,'../public/index.html'));
 // });
 
@@ -489,6 +489,6 @@ app.delete('/api/guests/:guestId', (req, res) => {
 
 
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/chariTABLE');
+// mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/chariTABLE');
 
 app.listen(PORT, () => console.log(`Example app listening on port ${PORT}`));
