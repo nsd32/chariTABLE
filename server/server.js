@@ -406,8 +406,8 @@ app.put('/api/events/:eventId', (req, res) => {
         new: true 
     },
         
-    function (err, event) {
-  		if (err) return err;
+    function (error, event) {
+  		if (error) return error;
   		res.send(event);
 	});
 });
