@@ -29,6 +29,5 @@
     "start:prod": "cd server && yarn start:prod"
   },
   "repository": "https://github.com/Estreff/chariTABLE.git",
-  "author": "Lea Abeyta <lea.abeyta@gmail.com>",
-  "license": "MIT"
+  "author": "Lea Abeyta <lea.abeyta@gmail.com>"
 }
