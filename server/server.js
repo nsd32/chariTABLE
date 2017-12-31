@@ -244,12 +244,12 @@ app.post("/events/:companyID", function(req, res) {
 
 // Route for creating TableHosts and associating them with an Event
 app.post("/event/tablehosts/:eventId", function(req, res) {
-	console.log(req.params.eventId);
+	console.log('eventId: ', req.params.eventId);
 	let tableHosts = req.body;
 	console.log(tableHosts);
 	// Converting Object containing Objects to Array containing Objects
 	let tableHostArray = [];
-	for (tableHost in tableHosts) {
+	for (var tableHost in tableHosts) {
 		tableHostArray.push(tableHosts[tableHost])
 	}
 	console.log(tableHostArray);
@@ -280,7 +280,7 @@ app.post("/event/sponsors/:eventId", function(req, res) {
 	console.log(sponsors);
 
 	let sponsorArray = [];
-	for (sponsor in sponsors) {
+	for (var sponsor in sponsors) {
 		sponsorArray.push(sponsors[sponsor])
 	}
 	console.log(sponsorArray);
@@ -331,7 +331,7 @@ app.post("/event/guest/:tableHostId", function(req, res) {
 app.get('/GuestRegistration/:eventId/:tableHostId', (req, res) => {
 	console.log(req.params.eventId);
 	console.log(req.params.tableHostId);
-	eventDetails = {
+	let eventDetails = {
 		searchedEvent: '',
 		tableHost: ''
 	}

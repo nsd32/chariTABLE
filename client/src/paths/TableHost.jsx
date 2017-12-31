@@ -25,6 +25,7 @@ class TableHost extends Component {
 
 	componentDidMount() {
 		console.log('Table Host Company ID: ', this.props.location.state.companyID)
+    console.log('EventObj: ', this.props.location.state.eventObj._id)
 	}
 
   nextButton = () => {
