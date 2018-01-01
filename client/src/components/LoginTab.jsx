@@ -5,7 +5,7 @@ const LoginTab = (props) => {
     return(
 
       <div role="tabpanel" className="tab-pane fade active show" id="ms-login-tab">
-        <form autocomplete="on">
+        <form autoComplete="on">
           <fieldset>
             <div className="form-group label-floating">
               <div className="input-group">

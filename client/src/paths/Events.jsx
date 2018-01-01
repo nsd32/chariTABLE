@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../styles/Event.css'
 // import EventTitle from '../components/EventTitle'
 // import EventRow from '../components/EventRow'
-import Navbar from '../components/Navbar'
+import NavbarLogOut from '../components/NavbarLogOut'
 import Footer from '../components/Footer'
 import EventButton from '../components/buttons/EventButton'
 import axios from 'axios';
@@ -86,6 +86,17 @@ class Events extends Component {
   handleDeleteProfileClick = (event) => {
     event.preventDefault();
     console.log('Delete Profile Button clicked!!!');
+    axios.delete(`/api/companies/${this.state.companyID}`)
+    .then( (response) => {
+      console.log(response);
+      this.props.history.push({
+        pathname: "/"
+      });
+    })
+    .catch( (error) => {
+      console.log(error);
+    });
+
   }
 
   addEventButton = (event) => {
@@ -129,7 +140,7 @@ class Events extends Component {
     return(
       <div>
         <div className="ms-site-container">
-        <Navbar />
+        <NavbarLogOut />
 
           <div className="container">
             <div className="row">

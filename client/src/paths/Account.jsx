@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../styles/Registration.css';
-import Navbar from '../components/Navbar';
+import NavbarLogOut from '../components/NavbarLogOut';
 import Footer from '../components/Footer';
 import axios from 'axios';
 
@@ -50,7 +50,7 @@ class Account extends Component {
     console.log('Account Update Changes clilcked');
     console.log('Company Info to be updated: ', this.state);
     let companyID =  this.state.companyID;
-    console.log('Account Company ID: ', companyID);
+    // console.log('Account Company ID: ', companyID);
     axios.post(`/api/companies/${companyID}`, {
       companyName: this.state.companyName,
       addressLine1: this.state.addressLine1,
@@ -61,10 +61,14 @@ class Account extends Component {
       phoneNumber: this.state.phoneNumber,
       website: this.state.website,
       username: this.state.username,
-      email: this.state.email
+      email: this.state.email,
+      createdOn: this.state.createdOn
     })
       .then((response) => {
         console.log('Updated from Server: ', response.data);
+        this.props.history.push({
+          pathname: `/profile/${this.state.companyID}`
+        });
 
       })
       .catch((error) => {
@@ -76,11 +80,11 @@ class Account extends Component {
   render() {
 
     return(
-  
+
   <div>
     <div className="ms-site-container">
 
-    <Navbar />
+    <NavbarLogOut />
 
       <div className="ms-hero-page-override ms-hero-img-coffee ms-bg-fixed ms-hero-bg-primary">
         <div className="container">
@@ -114,7 +118,7 @@ class Account extends Component {
                 <div className="row form-group">
                   <label htmlFor="companyName" className="col-md-4 control-label text-left"><i className="zmdi zmdi-store mr-1 color-warning"></i> Company Name</label>
                   <div className="col-md-8">
-                    <input name="username" onChange={this.handleInputChange} defaultValue={this.state.companyName} type="text" className="form-control" /> </div>
+                    <input name="companyName" onChange={this.handleInputChange} defaultValue={this.state.companyName} type="text" className="form-control" /> </div>
                 </div>
                 <div className="row form-group">
                   <label htmlFor="email" className="col-md-4 control-label text-left"><i className="zmdi zmdi-email mr-1 color-primary"></i> Email Address</label>
