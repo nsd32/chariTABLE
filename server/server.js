@@ -121,16 +121,19 @@ app.post('/api/companies/:companyID', (req, res) => {
 			phoneNumber: req.body.phoneNumber,
 			website: req.body.website,
 			email: req.body.email,
-			username: req.body.username
+			username: req.body.username,
+			createdOn: req.body.createdOn
 		}
 	}, {
 		new: true },
 		function (err, user) {
   if (err) return err;
   res.send(user);
-});
+	});
 
 });
+
+
 
 
 app.post('/register', (req, res) => {
@@ -355,20 +358,9 @@ app.get('/GuestRegistration/:eventId/:tableHostId', (req, res) => {
 		})
 })
 
-// app.get('/login', req, res) => {
-//
-// 	Company.find({username: })
-// 		.then((data) => {
-// 			res.json(data);
-// 		})
-// 		.catch((err) => {
-// 			console.log(err);
-// 			res.status(500).send(err.message ? err.message : 'Internal server blowup');
-// 		});
-// }
 
 app.get('/account', (req, res, next) => {
-	if(! req.session.userId ) {
+	if(!req.session.userId ) {
 		var err = new Error("You are not authorized to view this page");
 		err.status = 403;
 		return next(err);
@@ -403,11 +395,11 @@ app.put('/api/events/:eventId', (req, res) => {
             numberOfGuestsPerTable: req.body.numberOfGuestsPerTable,
             numberOfSponsors: req.body.numberOfSponsors
         }
-    }, 
-    {
-        new: true 
     },
-        
+    {
+        new: true
+    },
+
     function (error, event) {
   		if (error) return error;
   		res.send(event);
@@ -423,11 +415,11 @@ app.put('/api/tablehosts/:tablehostId', (req, res) => {
             name: req.body.name,
             email: req.body.email
         }
-    }, 
-    {
-        new: true 
     },
-        
+    {
+        new: true
+    },
+
     function (err, tablehost) {
   		if (err) return err;
   		res.send(tablehost);
@@ -443,11 +435,11 @@ app.put('/api/guests/:guestId', (req, res) => {
             name: req.body.name,
             email: req.body.email
         }
-    }, 
-    {
-        new: true 
     },
-        
+    {
+        new: true
+    },
+
     function (err, guest) {
   		if (err) return err;
   		res.send(guest);
@@ -478,6 +470,88 @@ app.delete('/api/guests/:guestId', (req, res) => {
 	})
 });
 
+// Company Delete
+app.delete('/api/companies/:companyID', (req, res) => {
+	User.findByIdAndRemove(req.params.companyID, (err, company) => {
+		if (err) return err;
+		res.send(company);
+	})
+	// User.findById(req.params.companyID, function(err, company) {
+  //
+  //   if (err)
+  //       return next(new restify.InternalError(err));
+  //   else if (!company)
+  //       return next(new restify.ResourceNotFoundError('The resource you requested could not be found.'));
+  //
+  //   // find and remove all associated Events
+  //   Event.find({_id: company._id}).remove();
+  //
+  //   // find and remove all TableHosts
+  //   TableHost.find({_id: company._id}).remove();
+  //
+	// 	// find and remove all Guests
+	// 	Guest.find({_id: company._id}).remove();
+  //
+	// 	// find and remove all Sponsors
+	// 	Sponsor.find({_id: company._id}).remove();
+  //
+  //   User.remove();
+  //
+  //   res.send({id: req.params.companyId});
+
+// });
+});
+
+// Landing Page Counts
+
+// Company Count
+	app.get('/companies/count', (req, res) => {
+		User.count({})
+			.then(function(companyCount) {
+				res.json(companyCount);
+				console.log( "Number of Users:", companyCount );
+			})
+			.catch(function(err) {
+				console.log(err);
+			})
+	});
+
+	// Event Counts
+	app.get('/events/count', (req, res) => {
+		Event.count({})
+			.then(function(eventCount) {
+				res.json(eventCount);
+				console.log( "Number of Events:", eventCount );
+			})
+			.catch(function(err) {
+				console.log(err);
+			})
+	});
+
+	// TableHost Counts
+	app.get('/tableHosts/count', (req, res) => {
+		TableHost.count({})
+			.then(function(TableHostCount) {
+				res.json(TableHostCount)
+				console.log( "Number of TableHosts:", TableHostCount );
+			})
+			.catch(function(err) {
+				console.log(err);
+			})
+	});
+
+	// Guest Counts
+	app.get('/guests/count', (req, res) => {
+		Guest.count({})
+			.then(function(guestCount) {
+				res.json(guestCount);
+				console.log( "Number of Guests:", guestCount );
+			})
+			.catch(function(err) {
+				console.log(err);
+			})
+	});
+
 app.get('/*', (req, res) => {
 	res.sendFile(path.join(__dirname,'../public/index.html'));
 });
@@ -485,9 +559,6 @@ app.get('/*', (req, res) => {
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, './build', 'index.html'));
 });
-
-
-
 
 // mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/chariTABLE');
 

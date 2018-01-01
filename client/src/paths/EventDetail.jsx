@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Col, Row } from 'react-materialize';
 import EventDetailButton from '../components/buttons/EventDetailButton';
+import NavbarLogOut from '../components/NavbarLogOut'
+import Footer from '../components/Footer'
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
@@ -49,7 +51,7 @@ class Events extends Component {
         })
 
         this.setState({
-           
+
           [tablehost]: {
             name: tablehostProperty.name,
             email: tablehostProperty.email,
@@ -58,7 +60,7 @@ class Events extends Component {
         }, () => {
 
           // console.log('Tablehosts: ', this.state)
-          
+
         });
 
         // Setting state for each guest
@@ -68,7 +70,7 @@ class Events extends Component {
           let guestProperty = eventInfo.data.tableHosts[i].guests[j];
 
           this.setState({
-           
+
             [guest]: {
               name: guestProperty.name,
               email: guestProperty.email,
@@ -77,7 +79,7 @@ class Events extends Component {
           }, () => {
 
             // console.log('Guest: ', this.state)
-            
+
           });
 
         }
@@ -85,9 +87,9 @@ class Events extends Component {
     }
 
 
-      
+
     })
-    
+
     {/*this.setState({
       eventId: this.props.location.state.eventInfo._id,
       eventName: this.props.location.state.eventInfo.eventName,
@@ -102,8 +104,8 @@ class Events extends Component {
       numberOfGuestsPerTable: this.props.location.state.eventInfo.numberOfGuestsPerTable,
       numberOfSponsors: this.props.location.state.eventInfo.numberOfSponsors
     })*/}
-    
-    
+
+
   }
 
   handleBackButtonClick = (event) => {
@@ -279,7 +281,7 @@ class Events extends Component {
     });
   }
 
-  
+
   // handleGuestEmailChange = (event) => {
   //   console.log('Hello: ', this.state[event.target.name].guests.length)
   //   var index = 0;
@@ -291,7 +293,7 @@ class Events extends Component {
   //   }
 
   //   this.setState({
-  //     [event.target.name]: update(this.state, { [event.target.name]: { guests:  
+  //     [event.target.name]: update(this.state, { [event.target.name]: { guests:
   //       { [index]: { email: { $set: [event.target.value] } } } } })
   //   }, () => {
   //     console.log('Please ', this.state)
@@ -327,57 +329,10 @@ class Events extends Component {
             </div>
           </div>
           <div class="ms-site-container">*/}
-            
-            
-            <header class="ms-header ms-header-primary">
-              
-              <div class="container container-full">
-                <div class="ms-title">
-                  <a href="index.html">
-                    <img src="assets/img/demo/logo-header.png" alt="" /> 
-                    <span class="ms-logo animated zoomInDown animation-delay-5">CH</span>
-                    <h1 class="animated fadeInRight animation-delay-6">chariTABLE Host</h1>
-                  </a>
-                </div>
-                <div class="header-right">
-                  <div class="share-menu">
-                    <ul class="share-menu-list">
-                      <li class="animated fadeInRight animation-delay-3">
-                        <a href="javascript:void(0)" class="btn-circle btn-google">
-                          <i class="zmdi zmdi-google"></i>
-                        </a>
-                      </li>
-                      <li class="animated fadeInRight animation-delay-2">
-                        <a href="javascript:void(0)" class="btn-circle btn-facebook">
-                          <i class="zmdi zmdi-facebook"></i>
-                        </a>
-                      </li>
-                      <li class="animated fadeInRight animation-delay-1">
-                        <a href="javascript:void(0)" class="btn-circle btn-twitter">
-                          <i class="zmdi zmdi-twitter"></i>
-                        </a>
-                      </li>
-                    </ul>
-                    <a href="javascript:void(0)" class="btn-circle btn-circle-primary animated zoomInDown animation-delay-7">
-                      <i class="zmdi zmdi-share"></i>
-                    </a>
-                  </div>
-                  <a href="javascript:void(0)" class="btn-circle btn-circle-primary no-focus animated zoomInDown animation-delay-8" data-toggle="modal" data-target="#ms-account-modal">
-                    <i class="zmdi zmdi-account"></i>
-                  </a>
-                  <form class="search-form animated zoomInDown animation-delay-9">
-                    <input id="search-box" type="text" class="search-input" placeholder="Search..." name="q" />
-                    <label for="search-box">
-                      <i class="zmdi zmdi-search"></i>
-                    </label>
-                  </form>
-                  <a href="javascript:void(0)" class="btn-ms-menu btn-circle btn-circle-primary ms-toggle-left animated zoomInDown animation-delay-10">
-                    <i class="zmdi zmdi-menu"></i>
-                  </a>
-                </div>
-              </div>
-            </header>
-            
+
+
+            <NavbarLogOut />
+
             <div class="ms-hero-page-override ms-hero-img-team ms-hero-bg-primary">
               <div class="container">
                 <div class="text-center">
@@ -452,7 +407,7 @@ class Events extends Component {
                         <div class="col-md-9">
                           <input name="numberOfSponsors" onChange={this.handleEventInputChange} defaultValue={this.state.numberOfSponsors} type="Number" class="form-control" id="numberOfSponsors" placeholder="Number of Sponsors" /> </div>
                       </div>
-                      
+
                       <div class="row mt-2">
                         <div class="offset-lg-2 col-lg-6">
 
@@ -470,7 +425,7 @@ class Events extends Component {
               <h3 className="animated fadeInUp animation-delay-10">Tablehosts</h3>
               <div class="ms-collapse animated fadeInUp animation-delay-10" id="accordion2" role="tablist" aria-multiselectable="true">
                 {this.state.tablehosts.map((tableHost, idx) => {
-                
+
                   return (
                     <div key={idx} class="mb-0 card card-primary">
                       <div class="card-header" role="tab" id={"headingOne2" + idx}>
@@ -479,47 +434,47 @@ class Events extends Component {
                             <i class="zmdi zmdi-pin"></i> {tableHost.name} </a>
                         </div>
                       </div>
-                      
+
                       <div id={`tablehost${idx}`} class="card-collapse collapse" role="tabpanel" aria-labelledby={"headingOne2" + idx}>
                         <div class="col-sm-5" style={{float: 'left'}}>
                         <label for="tableHostName" class="col-md-5 control-label tablehost-label">Tablehost</label>
-                          <input name={tableHost._id} defaultValue={tableHost.name} onChange={this.handleTablehostNameChange} type="text" class="form-control"  placeholder="Tablehost" /> 
+                          <input name={tableHost._id} defaultValue={tableHost.name} onChange={this.handleTablehostNameChange} type="text" class="form-control"  placeholder="Tablehost" />
                         </div>
 
                         <div class="col-sm-5 email-input" style={{float: 'left'}}>
                         <label for="tableHostEmail" class="col-md-5 control-label tablehost-label">Tablehost Email</label>
-                          <input name={tableHost._id} defaultValue={tableHost.email} onChange={this.handleTablehostEmailChange} type="text" class="form-control"  placeholder="Tablehost Email" /> 
+                          <input name={tableHost._id} defaultValue={tableHost.email} onChange={this.handleTablehostEmailChange} type="text" class="form-control"  placeholder="Tablehost Email" />
                         </div>
-                        
-                        <a href="javascript:void(0)" style={{float: 'left'}}  id={tableHost._id} onClick={this.tablehostSaveButton} class="btn btn-raised btn-danger btn-sm save-button">Save</a>                        
+
+                        <a href="javascript:void(0)" style={{float: 'left'}}  id={tableHost._id} onClick={this.tablehostSaveButton} class="btn btn-raised btn-danger btn-sm save-button">Save</a>
                         <a href="javascript:void(0)" style={{float: 'left'}}  id={tableHost._id} onClick={this.tablehostDeleteButton} class="btn btn-raised btn-danger btn-sm">Delete</a>
 
 
                         <div class="col-sm-12" style={{float: 'left'}}>
                         <label for="url" class="col-md-2 control-label tablehost-label">Tablehost URL</label>
-                          
+
                           <Link to={`/GuestRegistration/${this.state.eventId}/${tableHost._id}`} activeClassName="active" target="_blank"><h4>{`localhost:3000/GuestRegistration/${this.state.eventId}/${tableHost._id}`}</h4></Link>
                         </div>
                         {tableHost.guests.map((guest, idx) => {
                           console.log('Guest: ' + guest.name)
                           return (
                             <div key={idx}>
-                              
+
                               <div class="col-sm-5" style={{float: 'left'}}>
                                 <label for="guest" class="col-md-4 control-label tablehost-label">Guest {idx + 1}</label>
-                                <input name={guest._id} id={guest._id} defaultValue={guest.name} onChange={this.handleGuestNameChange} type="text" class="form-control"  placeholder="Guest" /> 
+                                <input name={guest._id} id={guest._id} defaultValue={guest.name} onChange={this.handleGuestNameChange} type="text" class="form-control"  placeholder="Guest" />
                               </div>
 
                               <div class="col-sm-5 email-input" style={{float: 'left'}}>
                                 <label for="guest" class="col-md-4 control-label tablehost-label">Guest Email</label>
-                                <input name={guest._id} defaultValue={guest.email} onChange={this.handleGuestEmailChange} type="text" class="form-control"  placeholder="Guest Email" /> 
+                                <input name={guest._id} defaultValue={guest.email} onChange={this.handleGuestEmailChange} type="text" class="form-control"  placeholder="Guest Email" />
                               </div>
 
-                              
+
                               <a href="javascript:void(0)" style={{float: 'left'}} onClick={this.guestSaveButton} id={guest._id} class="btn btn-raised btn-danger btn-sm save-button">Save</a>
                               <a href="javascript:void(0)" style={{float: 'left'}} onClick={this.guestDeleteButton} id={guest._id} class="btn btn-raised btn-danger btn-sm">Delete</a>
-                              
-                              
+
+
                             </div>
                           );
                         })}
@@ -542,14 +497,10 @@ class Events extends Component {
               companyData={this.state.companyInfo}
               onClick={this.handleBackButtonClick}
               /> */}
-              
+
             </div>
-            
-            <footer class="ms-footer">
-              <div class="container">
-                <p>Copyright &copy; Material Style 2017</p>
-              </div>
-            </footer>
+
+            <Footer />
             <div class="btn-back-top">
               <a href="#" data-scroll id="back-top" class="btn-circle btn-circle-primary btn-circle-sm btn-circle-raised ">
                 <i class="zmdi zmdi-long-arrow-up"></i>
@@ -559,7 +510,7 @@ class Events extends Component {
 
           <script src="assets/js/plugins.min.js"></script>
           <script src="assets/js/app.min.js"></script>
-          
+
         </Col>
       </Row>
 

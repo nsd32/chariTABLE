@@ -2,19 +2,46 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import LoginTab from '../components/LoginTab';
 import RegisterTab from '../components/RegisterTab';
-import Navbar from '../components/Navbar';
+import NavbarLogin from '../components/NavbarLogin';
 import Footer from '../components/Footer';
 
 class LandingPageUpdated extends Component {
 
   state = {
     companyInfo:[],
-    CompanyID: "",
-    company: []
+    companyID: "",
+    company: [],
+    companyCount: "",
+    eventCount: "",
+    tableHostCount: "",
+    guestCount: ""
   }
 
   componentDidMount() {
+    axios.get('/companies/count')
+    .then((companyCount) => {
+      console.log('Company Count: ', companyCount.data);
+      this.setState({companyCount: companyCount.data});
 
+    });
+
+    axios.get('/events/count')
+    .then((eventCount) => {
+      console.log('Event Count: ', eventCount.data);
+      this.setState({eventCount: eventCount.data});
+    });
+
+    axios.get('/tableHosts/count')
+    .then((tableHostCount) => {
+      console.log('Table Host Count: ', tableHostCount.data);
+      this.setState({tableHostCount: tableHostCount.data});
+    });
+
+    axios.get('/guests/count')
+    .then((guestCount) => {
+      console.log('Guest Count: ', guestCount.data);
+      this.setState({guestCount: guestCount.data});
+    });
   }
 
   handleRegisterSubmit = (event) => {
@@ -116,14 +143,14 @@ class LandingPageUpdated extends Component {
 
 
   handleRegisterInputChange = (event) => {
-    console.log('Register Info: ', this.state);
+    // console.log('Register Info: ', this.state);
     this.setState({
       [event.target.name]: event.target.value
     });
   };
 
   handleLoginInputChange = (event) => {
-    console.log('Login Info: ', this.state);
+    // console.log('Login Info: ', this.state);
     this.setState({
       [event.target.name]: event.target.value
     });
@@ -135,7 +162,7 @@ class LandingPageUpdated extends Component {
 
     <div className="ms-site-container">
       {/* <!-- Modal --> */}
-      <div className="modal modal-primary" id="ms-account-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div className="modal modal-primary" id="ms-account-modal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div className="modal-dialog animated zoomIn animated-3x" role="document">
           <div className="modal-content">
             <div className="modal-header d-block shadow-2dp no-pb">
@@ -156,7 +183,7 @@ class LandingPageUpdated extends Component {
                   </li>
                   <li className="nav-item" role="presentation">
                     <a href="#ms-register-tab" aria-controls="ms-register-tab" role="tab" data-toggle="tab" className="nav-link withripple">
-                      <i className="zmdi zmdi-account-add"></i> <span class="d-none d-sm-inline"> Register</span></a>
+                      <i className="zmdi zmdi-account-add"></i> <span className="d-none d-sm-inline"> Register</span></a>
                   </li>
                 </ul>
               </div>
@@ -176,7 +203,7 @@ class LandingPageUpdated extends Component {
           </div>
         </div>
       </div>
-      <Navbar />
+      <NavbarLogin />
 
       <div className="material-background"></div>
       <div className="container">
@@ -205,30 +232,30 @@ class LandingPageUpdated extends Component {
               <div className="row">
                 <div className="col-lg-3 col-md-6 col-sm-6">
                   <div className="card card-block text-center wow zoomInUp animation-delay-2">
-                    <h2 className="counter color-info">450</h2>
-                    <i className="fa fa-4x fa-coffee color-info"></i>
-                    <p className="mt-2 no-mb lead small-caps color-info">cups of coffee</p>
+                    <h2 className="counter color-info">{this.state.companyCount}</h2>
+                    <i className="fa fa-4x fa-building color-info"></i>
+                    <p className="mt-2 no-mb lead small-caps color-info">Companies</p>
                   </div>
                 </div>
                 <div className="col-lg-3 col-md-6 col-sm-6">
                   <div className="card card-block text-center wow zoomInUp animation-delay-5">
-                    <h2 className="counter color-info">64</h2>
-                    <i className="fa fa-4x fa-briefcase color-info"></i>
-                    <p className="mt-2 no-mb lead small-caps color-info">projects done</p>
+                    <h2 className="counter color-info">{this.state.eventCount}</h2>
+                    <i className="fa fa-4x fa-calendar color-info"></i>
+                    <p className="mt-2 no-mb lead small-caps color-info">Events created</p>
                   </div>
                 </div>
                 <div className="col-lg-3 col-md-6 col-sm-6">
                   <div className="card card-block text-center wow zoomInUp animation-delay-4">
-                    <h2 className="counter color-info">600</h2>
-                    <i className="fa fa-4x fa-comments-o color-info"></i>
-                    <p className="mt-2 no-mb lead small-caps color-info">comments</p>
+                    <h2 className="counter color-info">{this.state.tableHostCount}</h2>
+                    <i className="fa fa-4x fa-user color-info"></i>
+                    <p className="mt-2 no-mb lead small-caps color-info">Table Hosts</p>
                   </div>
                 </div>
                 <div className="col-lg-3 col-md-6 col-sm-6">
                   <div className="card card-block text-center wow zoomInUp animation-delay-3">
-                    <h2 className="counter color-info">3500</h2>
-                    <i className="fa fa-4x fa-group color-info"></i>
-                    <p className="mt-2 no-mb lead small-caps color-info">happy clients</p>
+                    <h2 className="counter color-info">{this.state.guestCount}</h2>
+                    <i className="fa fa-4x fa-users color-info"></i>
+                    <p className="mt-2 no-mb lead small-caps color-info">Guests</p>
                   </div>
                 </div>
               </div>
@@ -269,7 +296,7 @@ class LandingPageUpdated extends Component {
           <div className="ms-slidebar-title">
             <form className="search-form">
               <input id="search-box-slidebar" type="text" className="search-input" placeholder="Search..." name="q" />
-              <label for="search-box-slidebar">
+              <label htmlFor="search-box-slidebar">
                 <i className="zmdi zmdi-search"></i>
               </label>
             </form>

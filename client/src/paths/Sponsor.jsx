@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import NavbarLogOut from '../components/NavbarLogOut'
 import Footer from '../components/Footer';
 
 class Sponsor extends Component {
@@ -11,7 +12,7 @@ class Sponsor extends Component {
 	  for (let i = 0; i < this.props.location.state.eventObj.numberOfTableHosts; i++) {
 	  	var sponsor = `sponsor${i}`;
 	  	console.log([sponsor]);
-      
+
 	    this.setState({
         [sponsor]: {
           name: '',
@@ -20,7 +21,7 @@ class Sponsor extends Component {
       }, () => {
         console.log(this.state)
       })
-	  	
+
   	}
   }
 
@@ -92,51 +93,7 @@ class Sponsor extends Component {
     }
     return(
       <div>
-        <header class="ms-header ms-header-primary">
-          <div class="container container-full">
-            <div class="ms-title">
-              <a href="index.html">
-                
-                <span class="ms-logo animated zoomInDown animation-delay-5">CH</span>
-                <h1 class="animated fadeInRight animation-delay-6">chariTABLE Host
-                </h1>
-              </a>
-            </div>
-            <div class="header-right">
-              <div class="share-menu">
-                <ul class="share-menu-list">
-                  <li class="animated fadeInRight animation-delay-3">
-                    <a href="javascript:void(0)" class="btn-circle btn-google">
-                      <i class="zmdi zmdi-google"></i>
-                    </a>
-                  </li>
-                  <li class="animated fadeInRight animation-delay-2">
-                    <a href="javascript:void(0)" class="btn-circle btn-facebook">
-                      <i class="zmdi zmdi-facebook"></i>
-                    </a>
-                  </li>
-                  <li class="animated fadeInRight animation-delay-1">
-                    <a href="javascript:void(0)" class="btn-circle btn-twitter">
-                      <i class="zmdi zmdi-twitter"></i>
-                    </a>
-                  </li>
-                </ul>
-                <a href="javascript:void(0)" class="btn-circle btn-circle-primary animated zoomInDown animation-delay-7">
-                  <i class="zmdi zmdi-share"></i>
-                </a>
-              </div>
-              <a href="javascript:void(0)" class="btn-circle btn-circle-primary no-focus animated zoomInDown animation-delay-8" data-toggle="modal" data-target="#ms-account-modal">
-                <i class="zmdi zmdi-account"></i>
-              </a>
-              <form class="search-form animated zoomInDown animation-delay-9">
-                <input id="search-box" type="text" class="search-input" placeholder="Search..." name="q" />
-                <label for="search-box">
-                  <i class="zmdi zmdi-search"></i>
-                </label>
-              </form>
-            </div>
-          </div>
-        </header>
+        <NavbarLogOut />
 
         <div class="ms-hero-page-override ms-hero-img-airplane ms-bg-fixed ms-hero-bg-dark-light">
           <div class="container">
@@ -147,7 +104,7 @@ class Sponsor extends Component {
             </div>
           </div>
         </div>
-        
+
         <div class="container">
           <div class="card-hero animated fadeInUp animation-delay-7">
             <div class="row">
@@ -168,10 +125,15 @@ class Sponsor extends Component {
                 </div>
               </div>
             </div>
-          </div> 
+          </div>
           <a onClick={this.nextButton} href="javascript:void(0)" class="btn btn-raised btn-primary animated fadeInUp animation-delay-7">Submit</a>
         </div>
         <Footer />
+				<div className="btn-back-top">
+	        <a href="#" data-scroll id="back-top" className="btn-circle btn-circle-primary btn-circle-sm btn-circle-raised ">
+	          <i className="zmdi zmdi-long-arrow-up"></i>
+	        </a>
+	      </div>
       </div>
     );
   }
