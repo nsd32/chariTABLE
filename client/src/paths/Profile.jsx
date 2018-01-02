@@ -1,29 +1,29 @@
 import React, { Component } from 'react';
 
 class Profile extends Component {
-	
+
 
   render() {
     return(
       <div>
-        
-        <div id="ms-preload" class="ms-preload">
+
+        {/* <div id="ms-preload" class="ms-preload">
           <div id="status">
             <div class="spinner">
               <div class="dot1"></div>
               <div class="dot2"></div>
             </div>
           </div>
-        </div>
+        </div> */}
         <div class="ms-site-container">
-          
-          
+
+
           <header class="ms-header ms-header-primary">
-            
+
             <div class="container container-full">
               <div class="ms-title">
                 <a href="index.html">
-                  <img src="assets/img/demo/logo-header.png" alt="" /> 
+                  <img src="assets/img/demo/logo-header.png" alt="" />
                   <span class="ms-logo animated zoomInDown animation-delay-5">M</span>
                   <h1 class="animated fadeInRight animation-delay-6">Material
                     <span>Style</span>
@@ -68,7 +68,7 @@ class Profile extends Component {
               </div>
             </div>
           </header>
-          
+
           <div class="ms-hero-page-override ms-hero-img-team ms-hero-bg-primary">
             <div class="container">
               <div class="text-center">
@@ -143,7 +143,7 @@ class Profile extends Component {
                       <div class="col-md-9">
                         <input name="numberOfSponsors" onChange={this.handleInputChange} type="Number" class="form-control" id="numberOfSponsors" placeholder="Number of Sponsors" /> </div>
                     </div>
-                    
+
                     <div class="row mt-2">
                       <div class="offset-lg-2 col-lg-6">
 
@@ -156,9 +156,9 @@ class Profile extends Component {
                 </form>
               </div>
             </div>
-            
+
           </div>
-          
+
           <footer class="ms-footer">
             <div class="container">
               <p>Copyright &copy; Material Style 2017</p>
@@ -170,10 +170,10 @@ class Profile extends Component {
             </a>
           </div>
         </div>
-        
+
         <script src="assets/js/plugins.min.js"></script>
         <script src="assets/js/app.min.js"></script>
-        
+
       </div>
     );
   }

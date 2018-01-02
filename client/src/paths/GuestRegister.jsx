@@ -146,7 +146,7 @@ class GuestRegister extends Component {
                           <div class="input-group center-block">
                             <label class="control-label" for="ms-subscribe">
                               <i class="zmdi zmdi-email"></i> Email Address</label>
-                            <input name="guestEmail" onChange={this.handleInputChange} type="email" id="ms-subscribe" class="form-control" /> </div>
+                            <input name="guestEmail" onChange={this.handleInputChange} validate type="email" id="ms-subscribe" class="form-control" /> </div>
                         </div>
                         <button onClick={this.registerButton} class="btn btn-raised btn-primary btn-block" type="button">Register</button>
                         <h3>Can't make it?</h3>
@@ -157,7 +157,7 @@ class GuestRegister extends Component {
                   </div>
                 </div>
               </div>
-              <p class="lead lead-sm text-center mt-4 color-medium animated fadeInUp animation-delay-16">Material Style &copy; Copyright 2016</p>
+              <p class="lead lead-sm text-center mt-4 color-medium animated fadeInUp animation-delay-16">Jubatus Software &copy; Copyright 2017</p>
             </div>
           </div>
         </div>

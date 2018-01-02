@@ -9,7 +9,7 @@ class Account extends Component {
 
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.setState({
       companyName: this.props.location.state.companyInfo[0].companyName,
       username: this.props.location.state.companyInfo[0].username,
@@ -65,7 +65,7 @@ class Account extends Component {
       createdOn: this.state.createdOn
     })
       .then((response) => {
-        console.log('Updated from Server: ', response.data);
+        console.log('Updated from Server: ', response);
         this.props.history.push({
           pathname: `/profile/${this.state.companyID}`
         });
@@ -74,6 +74,16 @@ class Account extends Component {
       .catch((error) => {
         console.log(error);
       });
+  }
+
+  handleBackButtonClick = (event) => {
+    event.preventDefault();
+    console.log('Back to Company Events Button Clicked!!');
+    let companyID = this.state.companyID;
+    console.log('Back Button Company ID: ', companyID);
+    this.props.history.push({
+      pathname: "/profile/" + companyID
+    });
   }
 
 
@@ -172,7 +182,7 @@ class Account extends Component {
                   </div>
                   <div className="">
                     <button className="btn btn-raised btn-primary" onClick={this.handleAccountUpdateChanges} style={ {margin: "5px"} }>Save Changes</button>
-                    <button className="btn btn-raised btn-danger" onClick={this.handleAccountUpdateChanges} style={ {margin: "5px"} }>Cancel</button>
+                    <button className="btn btn-raised btn-danger" onClick={this.handleBackButtonClick} style={ {margin: "5px"} }>Back</button>
                   </div>
                 </div>
 

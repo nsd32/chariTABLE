@@ -7,7 +7,7 @@ let Navbar = (props) => {
   return(
       <header className="ms-header ms-header-primary">
         {/* <!--ms-header-primary--> */}
-        <div className="container container-full">
+        <div className="container">
           <div className="ms-title">
             <a href="/">
               {/* <!-- <img src="assets/img/demo/logo-header.png" alt="" /> --> */}
@@ -16,7 +16,14 @@ let Navbar = (props) => {
             </a>
           </div>
           <div className="header-right">
-                <a href="javascript:void(0)" className="btn btn-raised color-primary btn-white no-focus animated zoomInDown animation-delay-8" data-toggle="modal" data-target="#ms-account-modal">Login</a>
+            <div class="dropdown open pull-xs-right">
+              <button class="btn bmd-btn-icon dropdown-toggle" type="button" id="lr1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="material-icons" style={{ color: "#ffffff"}}>more_vert</i>
+              </button>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="lr1">
+                <a href="javascript:void(0)" className="btn btn-raised btn-primary no-focus" data-toggle="modal" data-target="#ms-account-modal" style={{margin: "10px"}}>Login</a>
+              </div>
+            </div>
           </div>
         </div>
       </header>
