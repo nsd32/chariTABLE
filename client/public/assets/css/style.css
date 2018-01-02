@@ -58,3 +58,29 @@ label {
 .addEventInput {
 	width: 20%;
 }
+
+.ms-tabs-indicator {
+	width: 50%;
+}
+
+
+@media (max-width: 767px) {
+
+.ms-header {
+    display: inline-block;
+		width: 100%
+}
+
+.ms-header .ms-title h1{
+	font-size: 30px;
+}
+
+.ms-title a{
+	font-size: 18px;
+}
+
+.ms-header i.material-icons {
+	margin: 0px;
+}
+
+}

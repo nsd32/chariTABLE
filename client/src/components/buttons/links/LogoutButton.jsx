@@ -20,8 +20,9 @@ class LogoutButton extends Component {
       <Link to="/">
         <button
           type="button"
-          className="btn btn-raised color-danger btn-white no-focus animated zoomInDown animation-delay-8"
+          className="btn btn-raised btn-danger"
           title="Logout"
+          style={{margin: "10px"}}
           onClick={this.handleLogoutClick}
           >
             Logout

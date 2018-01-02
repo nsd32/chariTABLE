@@ -125,7 +125,7 @@ app.post('/api/companies/:companyID', (req, res) => {
 			createdOn: req.body.createdOn
 		}
 	}, {
-		new: true },
+		new: false },
 		function (err, user) {
   if (err) return err;
   res.send(user);

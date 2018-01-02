@@ -180,7 +180,8 @@ class Events extends Component {
     });
   }
 
-  eventSaveButton = () => {
+  eventSaveButton = (event) => {
+    event.preventDefault();
 
     let eventInfo = {
       eventName: this.state.eventName,
@@ -360,17 +361,17 @@ class Events extends Component {
                       <div class="row form-group">
                         <label for="inputEmail" class="col-md-2 control-label">Event Location</label>
                         <div class="col-md-9">
-                          <input name="eventLocation" onChange={this.handleEventInputChange} defaultValue={this.state.eventLocation} type="email" class="form-control" id="eventLocation" placeholder="Event Location" /> </div>
+                          <input name="eventLocation" onChange={this.handleEventInputChange} defaultValue={this.state.eventLocation} type="text" class="form-control" id="eventLocation" placeholder="Event Location" /> </div>
                       </div>
                       <div class="row form-group">
                         <label for="inputDate" class="col-md-2 control-label">Event Date</label>
                         <div class="col-md-9">
-                          <input name="eventDate" onChange={this.handleEventInputChange} defaultValue={this.state.eventDate} id="eventDate" type="text" class="form-control" placeholder="mm/dd/yy" /> </div>
+                          <input name="eventDate" onChange={this.handleEventInputChange} defaultValue={this.state.eventDate} id="eventDate" type="date" class="form-control" placeholder="mm/dd/yy" validate /> </div>
                       </div>
                       <div class="row form-group">
                         <label for="eventTime" class="col-md-2 control-label">Event Time</label>
                         <div class="col-md-9">
-                          <input name="eventTime" onChange={this.handleEventInputChange} defaultValue={this.state.eventTime} type="text" class="form-control" id="eventTime" placeholder="Event Time" /> </div>
+                          <input name="eventTime" onChange={this.handleEventInputChange} defaultValue={this.state.eventTime} type="time" class="form-control" id="eventTime" placeholder="Event Time" validate /> </div>
                       </div>
                       <div class="row form-group">
                         <label for="inputName" class="col-md-2 control-label">Contact Name</label>
@@ -380,12 +381,12 @@ class Events extends Component {
                       <div class="row form-group">
                         <label for="inputLast" class="col-md-2 control-label">Contact Phone</label>
                         <div class="col-md-9">
-                          <input name="contactPhone" onChange={this.handleEventInputChange} defaultValue={this.state.contactPhone} type="text" class="form-control" id="contactPhone" placeholder="Contact Phone" /> </div>
+                          <input name="contactPhone" onChange={this.handleEventInputChange} defaultValue={this.state.contactPhone} type="tel" pattern="^\d{3}-\d{3}-\d{4}$" class="form-control" id="contactPhone" placeholder="ex: xxx-xxx-xxxx" /> </div>
                       </div>
                       <div class="row form-group">
                         <label for="inputEmail" class="col-md-2 control-label">Contact Email</label>
                         <div class="col-md-9">
-                          <input name="contactEmail" onChange={this.handleEventInputChange} defaultValue={this.state.contactEmail} type="text" class="form-control" id="contactEmail" placeholder="Contact Email" /> </div>
+                          <input name="contactEmail" onChange={this.handleEventInputChange} defaultValue={this.state.contactEmail} type="email" class="form-control" id="contactEmail" placeholder="Contact Email" validate /> </div>
                       </div>
                       <div class="row form-group">
                         <label for="numberOfTables" class="col-md-2 control-label">Number of Tables</label>

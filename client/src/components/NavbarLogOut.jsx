@@ -16,7 +16,14 @@ let NavbarLoggedOut = (props) => {
             </a>
           </div>
           <div className="header-right">
-              <LogoutButton />
+            <div class="dropdown open pull-xs-right">
+              <button class="btn bmd-btn-icon dropdown-toggle" type="button" id="lr1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="material-icons" style={{ color: "#ffffff"}}>more_vert</i>
+              </button>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="lr1">
+                <LogoutButton />
+              </div>
+            </div>
           </div>
         </div>
       </header>
