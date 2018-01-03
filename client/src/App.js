@@ -1,11 +1,7 @@
-import React from 'react';
+import React, {Component} from 'react';
+import axios from 'axios';
 import {BrowserRouter as Router, Route} from 'react-router-dom'
-import LandingPage from './paths/LandingPage'
-// import LandingPageUpdated from './paths/LandingPageUpdated'
 import LandingPageUpdated2 from './paths/LandingPageUpdated2'
-import TestRegistration from './paths/TestRegistration'
-// import Login from './paths/Login'
-import Login_Register from './paths/Login_Register'
 import Events from './paths/Events'
 import EventDetail from './paths/EventDetail'
 import Account from './paths/Account'
@@ -17,25 +13,46 @@ import GuestRegister from './paths/GuestRegister'
 import ThanksForRegistering from './paths/ThanksForRegistering'
 import './App.css';
 
-const App = () =>
-  <Router>
-    <div>
-      <Route exact path="/" component={LandingPageUpdated2} />
-      {/* <Route exact path="/" component={Login_Register} /> */}
-      <Route exact path="/register" component={TestRegistration} />
-      {/* <Route exact path="/login" component={Login} /> */}
-      <Route exact path="/login" component={Login_Register} />
-      <Route exact path="/profile/:companyId" component={Events} />
-      <Route exact path="/event/:eventId" component={EventDetail} />
-      <Route exact path="/account" component={Account} />
-      <Route exact path="/profile" component={Profile} />
-      <Route exact path="/addevent" component={AddEvent} />
-      <Route exact path="/tablehost" component={TableHost} />
-      <Route exact path="/sponsor" component={Sponsor} />
-      <Route exact path="/thanksforregistering" component={ThanksForRegistering} />
-      <Route exact path="/GuestRegistration/:eventId/:tableHostId" component={GuestRegister} />
-    </div>
-  </Router>
+class App extends Component {
+
+  state = {
+    companyId: ""
+  }
+
+  
+
+
+  componentWillMount() {
+    axios.get('/login')
+    .then((companyID) => {
+      console.log('CompanyID: ', companyID);
+      let companyId = companyID.data.companyID;
+      console.log('This is the companyID getting transferred: ', companyID);
+      this.setState({companyID: companyID});
+      console.log('App State: ', this.state)
+    });
+  }
+
+
+  render() {
+    return(
+      <Router>
+        <div>
+          <Route exact path="/" component={LandingPageUpdated2} companyID={this.state.companyId}/>
+          <Route exact path="/profile/:companyId" component={Events} companyID={this.state.companyId} />
+          <Route exact path="/event/:eventId" component={EventDetail} companyID={this.state.companyId} />
+          <Route exact path="/account" component={Account} companyID={this.state.companyId} />
+          <Route exact path="/profile" component={Profile} companyID={this.state.companyId} />
+          <Route exact path="/addevent" component={AddEvent} companyID={this.state.companyId} />
+          <Route exact path="/tablehost" component={TableHost} companyID={this.state.companyId} />
+          <Route exact path="/sponsor" component={Sponsor} companyID={this.state.companyId} />
+          <Route exact path="/thanksforregistering" component={ThanksForRegistering} companyID={this.state.companyId} />
+          <Route exact path="/GuestRegistration/:eventId/:tableHostId" component={GuestRegister} companyID={this.state.companyId} />
+        </div>
+      </Router>
+    );
+  }
+}
 
 
 export default App;

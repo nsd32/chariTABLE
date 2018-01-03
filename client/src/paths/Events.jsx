@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import '../styles/Event.css'
-// import EventTitle from '../components/EventTitle'
-// import EventRow from '../components/EventRow'
 import NavbarLogOut from '../components/NavbarLogOut'
 import Footer from '../components/Footer'
-import EventButton from '../components/buttons/EventButton'
 import axios from 'axios';
 // import { Link } from 'react-router-dom';
 
@@ -20,11 +17,14 @@ class Events extends Component {
   }
 
 
-  componentWillMount() {
+  componentDidMount() {
+        console.log('Props: ', this.props);
+
     let url = this.props.location.pathname;
     let splitUrl = url.split('/');
     console.log('Split URL: ', splitUrl);
     let companyID = splitUrl[2].trim();
+    // let companyID = this.props.match.params.companyId;
     console.log('URL Company ID: ', companyID);
     this.setState( {companyID: companyID} )
 

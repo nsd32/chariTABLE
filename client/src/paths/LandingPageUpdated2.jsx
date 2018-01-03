@@ -17,6 +17,7 @@ class LandingPageUpdated extends Component {
     guestCount: ""
   }
 
+
   componentDidMount() {
     axios.get('/companies/count')
     .then((companyCount) => {
@@ -44,6 +45,15 @@ class LandingPageUpdated extends Component {
     });
   }
 
+
+  handleModal() {
+
+      document.querySelector("body").classList.remove('modal-open');
+      // document.querySelector("div#ms-account-modal").toggle();
+      document.querySelector("div.modal-backdrop").remove();
+      document.querySelector("body").style.padding = "0px";
+  }
+
   handleRegisterSubmit = (event) => {
     event.preventDefault();
     console.log('Company Submit selected!!')
@@ -56,19 +66,20 @@ class LandingPageUpdated extends Component {
     ) {
       if(this.state.password !== this.state.confirmPassword) {
         console.log('Passwords don\'t Match');
+        this.setState({registerError: 'Passwords don\'t Match'})
         return;
       }
 
 
       axios.post('/register', {
         companyName: this.state.companyName,
-        addressLine1: this.state.addressLine1,
-        addressLine2: this.state.addressLine2,
-        city: this.state.city,
-        state: this.state.state,
-        zipCode: this.state.zipCode,
-        phoneNumber: this.state.phoneNumber,
-        website: this.state.website,
+        addressLine1: ' ',
+        addressLine2: ' ',
+        city: ' ',
+        state: ' ',
+        zipCode: ' ',
+        phoneNumber: ' ',
+        website: ' ',
         username: this.state.username,
         email: this.state.email,
         password: this.state.password,
@@ -92,6 +103,7 @@ class LandingPageUpdated extends Component {
                 //   // companyTitle: response.data.companyName
                 }
               });
+              this.handleModal();
             })
             .catch((error) => {
               console.log(error);
@@ -102,6 +114,9 @@ class LandingPageUpdated extends Component {
         });
       } else {
         console.log('Please fill out all required fields!!')
+        this.setState({registerError: 'Please fill out all required fields!!'})
+        let error = document.getElementById('registerError');
+        error.setAttribute("style",'display: block')
         // var err = new Error('All fields required.');
         // err.status = 400;
         // return next(err);
@@ -112,35 +127,81 @@ class LandingPageUpdated extends Component {
   handleLoginSubmit = (event) => {
     event.preventDefault();
     console.log('Login Submitted')
-    axios.post('/login', {
-      username: this.state.loginUsername,
-      password: this.state.loginPassword
-    })
-      .then((response) => {
-        console.log('Login Successful');
-        // console.log('User Information: ', response.data);
-        // this.setState( {companyInfo: response.data});
-        this.setState( {companyID: response.data._id});
-        let companyID = this.state.companyID;
-        // console.log('Current State: ', this.state);
-        // console.log('Current Company ID: ', this.state.companyID);
-        this.props.history.push({
-          pathname: "/profile/" + companyID,
-          state: {
-            companyInfo: response.data,
-          //   companyID: response.data._id,
-          //   // companyTitle: response.data.companyName
-          }
-        });
+    let loginError = document.getElementById('loginError');
+    loginError.setAttribute("style",'display: none');
+    console.log('Login Username: ', this.state.username);
+
+    if(
+      this.state.loginUsername &&
+      this.state.loginPassword
+    ) {
+      loginError.setAttribute("style",'display: none');
+      axios.post('/login', {
+        username: this.state.loginUsername,
+        password: this.state.loginPassword
       })
-      .catch((error) => {
-        console.log(error);
-      })
+        .then((response) => {
+          console.log('Login Successful');
+
+          // console.log('User Information: ', response.data);
+          // this.setState( {companyInfo: response.data});
+          this.setState( {companyID: response.data._id});
+          let companyID = this.state.companyID;
+          // console.log('Current State: ', this.state);
+          // console.log('Current Company ID: ', this.state.companyID);
+
+          this.props.history.push({
+            pathname: "/profile/" + companyID,
+            state: {
+              companyInfo: response.data,
+            //   companyID: response.data._id,
+            //   // companyTitle: response.data.companyName
+            }
+          });
+          this.handleModal();
+        })
+
+
+        .catch((error) => {
+          console.log(error);
+          console.log('User or Password Incorrect!!');
+          this.setState({loginError: 'User or Password Incorrect!!'});
+          loginError.setAttribute("style",'display: block');
+        })
+      } else {
+        console.log('Please fill out all required fields!!');
+        this.setState({loginError: 'Please fill out all required fields!!'});
+        loginError.setAttribute("style",'display: block');
+      }
   };
 
+  registerButtonClick = (event) => {
+    event.preventDefault();
+    let registerTabInfo = document.getElementById('ms-register-tab');
+    let registerTab = document.getElementById('registerTab');
+    let loginTabInfo = document.getElementById('ms-login-tab');
+    let loginTab = document.getElementById('loginTab');
+    loginTabInfo.classList.remove('active');
+    loginTabInfo.classList.remove('show');
+    registerTabInfo.classList.add('active');
+    registerTabInfo.classList.add('show');
+    loginTab.classList.remove('active');
+    registerTab.classList.add('active');
+  }
 
-
-
+  loginButtonClick = (event) => {
+    event.preventDefault();
+    let registerTabInfo = document.getElementById('ms-register-tab');
+    let registerTab = document.getElementById('registerTab');
+    let loginTabInfo = document.getElementById('ms-login-tab');
+    let loginTab = document.getElementById('loginTab');
+    loginTabInfo.classList.add('active');
+    loginTabInfo.classList.add('show');
+    loginTab.classList.add('active');
+    registerTabInfo.classList.remove('active');
+    registerTab.classList.remove('active');
+    registerTabInfo.classList.remove('show');
+  }
 
   handleRegisterInputChange = (event) => {
     // console.log('Register Info: ', this.state);
@@ -155,14 +216,13 @@ class LandingPageUpdated extends Component {
       [event.target.name]: event.target.value
     });
   };
-
   render() {
     return(
     <div>
 
     <div className="ms-site-container">
       {/* <!-- Modal --> */}
-      <div className="modal modal-primary" id="ms-account-modal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div className="modal modal-primary" id="ms-account-modal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel" >
         <div className="modal-dialog animated zoomIn animated-3x" role="document">
           <div className="modal-content">
             <div className="modal-header d-block shadow-2dp no-pb">
@@ -178,32 +238,184 @@ class LandingPageUpdated extends Component {
               <div className="modal-header-tabs">
                 <ul className="nav nav-tabs nav-tabs-full nav-tabs-2 nav-tabs-primary" role="tablist">
                   <li className="nav-item" role="presentation">
-                    <a href="#ms-login-tab" aria-controls="ms-login-tab" role="tab" data-toggle="tab" className="nav-link active withripple">
+                    <a id="loginTab" href="#ms-login-tab" aria-controls="ms-login-tab" role="tab" data-toggle="tab" className="nav-link active withripple">
                       <i className="zmdi zmdi-account"></i> Login</a>
                   </li>
                   <li className="nav-item" role="presentation">
-                    <a href="#ms-register-tab" aria-controls="ms-register-tab" role="tab" data-toggle="tab" className="nav-link withripple">
+                    <a id="registerTab" href="#ms-register-tab" aria-controls="ms-register-tab" role="tab" data-toggle="tab" className="nav-link withripple">
                       <i className="zmdi zmdi-account-add"></i> <span className="d-none d-sm-inline"> Register</span></a>
                   </li>
                 </ul>
               </div>
             </div>
+
             <div className="modal-body">
               <div className="tab-content">
-                <LoginTab
+                {/* <div className="alert alert-danger alert-light alert-dismissible" id="loginError" role="alert">
+                  {this.state.error}
+                </div> */}
+                {/* <LoginTab
                   onChange={this.handleLoginInputChange}
                   onSubmit={this.handleLoginSubmit}
-                />
-                <RegisterTab
+                /> */}
+                <div role="tabpanel" className="tab-pane fade active show" id="ms-login-tab">
+                  <div className="alert alert-danger alert-light alert-dismissible" id="loginError" role="alert" style={{ display: "none"}}>
+                    {this.state.loginError}
+                  </div>
+                  <form autoComplete="on">
+                    <fieldset>
+                      <div className="form-group label-floating">
+                        <div className="input-group">
+                          <span className="input-group-addon">
+                            <i className="zmdi zmdi-account"></i>
+                          </span>
+                          <label className="control-label" htmlFor="login-user">Username</label>
+                          <input
+                            name='loginUsername'
+                            type="text"
+                            id="login-user"
+                            className="form-control"
+                            onChange={this.handleLoginInputChange}
+                            required
+                           />
+                         </div>
+                      </div>
+                      <div className="form-group label-floating">
+                        <div className="input-group">
+                          <span className="input-group-addon">
+                            <i className="zmdi zmdi-lock"></i>
+                          </span>
+                          <label className="control-label" htmlFor="login-pass">Password</label>
+                          <input
+                            name="loginPassword"
+                            type="password"
+                            id="login-pass"
+                            className="form-control"
+                            onChange={this.handleLoginInputChange}
+                          />
+                        </div>
+                      </div>
+                      <div className="row mt-2">
+                        <div className="col-5">
+                          <div className="form-group mt-1">
+                          </div>
+                        </div>
+                        <div className="col-7">
+                          <button
+                            className="btn btn-raised btn-primary pull-right"
+                            onClick={this.handleLoginSubmit}
+                            // data-dismiss="modal"
+                          >
+                            Login
+                          </button>
+                        </div>
+                      </div>
+                    </fieldset>
+                  </form>
+                </div>
+                {/* <RegisterTab
                   onChange={this.handleRegisterInputChange}
                   onSubmit={this.handleRegisterSubmit}
-                />
+                /> */}
+                <div role="tabpanel" className="tab-pane fade" id="ms-register-tab">
+                  <div className="alert alert-danger alert-light alert-dismissible" id="registerError" role="alert" style={{ display: "none"}}>
+                    {this.state.registerError}
+                  </div>
+                  <form>
+                    <fieldset>
+                      <div className="form-group label-floating">
+                        <div className="input-group">
+                          <span className="input-group-addon">
+                            <i className="zmdi zmdi-account"></i>
+                          </span>
+                          <label className="control-label" htmlFor="ms-form-user">Username</label>
+                          <input
+                            name="username"
+                            type="text"
+                            id="register-user"
+                            className="form-control"
+                            onChange={this.handleRegisterInputChange}
+                          />
+                        </div>
+                      </div>
+                      <div className="form-group label-floating">
+                        <div className="input-group">
+                          <span className="input-group-addon">
+                            <i className="zmdi zmdi-store"></i>
+                          </span>
+                          <label className="control-label" htmlFor="ms-form-user">Company Name</label>
+                          <input
+                            name="companyName"
+                            type="text"
+                            id="register-company"
+                            className="form-control"
+                            onChange={this.handleRegisterInputChange}
+                          />
+                        </div>
+                      </div>
+                      <div className="form-group label-floating">
+                        <div className="input-group">
+                          <span className="input-group-addon">
+                            <i className="zmdi zmdi-email"></i>
+                          </span>
+                          <label className="control-label" htmlFor="ms-form-email">Email</label>
+                          <input
+                            name="email"
+                            type="email"
+                            id="register-email"
+                            className="form-control"
+                            onChange={this.handleRegisterInputChange}
+                          />
+                        </div>
+                      </div>
+                      <div className="form-group label-floating">
+                        <div className="input-group">
+                          <span className="input-group-addon">
+                            <i className="zmdi zmdi-lock"></i>
+                          </span>
+                          <label className="control-label" htmlFor="ms-form-pass">Password</label>
+                          <input
+                            name="password"
+                            type="password"
+                            id="register-pass"
+                            className="form-control"
+                            onChange={this.handleRegisterInputChange}
+                          />
+                        </div>
+                      </div>
+                      <div className="form-group label-floating">
+                        <div className="input-group">
+                          <span className="input-group-addon">
+                            <i className="zmdi zmdi-lock"></i>
+                          </span>
+                          <label className="control-label" htmlFor="ms-form-pass">Re-type Password</label>
+                          <input
+                            name="confirmPassword"
+                            type="password"
+                            id="register-confirmPass"
+                            className="form-control"
+                            onChange={this.handleRegisterInputChange}
+                          />
+                        </div>
+                      </div>
+                      <button
+                        className="btn btn-raised btn-block btn-primary"
+                        onClick={this.handleRegisterSubmit}
+                        // data-dismiss="modal"
+                      >
+                        Register Now
+                      </button>
+                    </fieldset>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <NavbarLogin />
+      <NavbarLogin
+        onClick={this.loginButtonClick}
+      />
 
       <div className="material-background"></div>
       <div className="container">
@@ -214,8 +426,8 @@ class LandingPageUpdated extends Component {
               <strong>laborum dolores veniam nam</strong> mollitia culpa accusamus non voluptates corrupti? A inventore et veniam dignissimos, animi suscipit magnam nihil sed repellendus placeat eveniet vitae est impedit alias aliquid eius?</p>
             <p>Perferendis, blanditiis unde fugiat voluptas molestias velit asperiores rerum ipsam animi eum temporibus at numquam, nobis voluptates minus maxime cum obcaecati! Tenetur sit corporis laudantium inventore officia officiis odio repellat dolore
               quos
-              <a href="">repudiandae voluptas ad facere</a>, amet placeat animi voluptatem distinctio beatae.</p>
-              <a href="javascript:void(0)"><button className="btn btn-raised btn-primary pull-right" data-toggle="modal" data-target="#ms-account-modal">Register</button></a>
+              <a href="javascript:void(0)">repudiandae voluptas ad facere</a>, amet placeat animi voluptatem distinctio beatae.</p>
+              <a href="javascript:void(0)"><button className="btn btn-raised btn-primary pull-right" data-toggle="modal" data-target="#ms-account-modal" onClick={this.registerButtonClick}>Register</button></a>
           </div>
           <img src="assets/img/Table_2.jpg" alt="" className="img-fluid" />
           <div className="card-block-big">
@@ -278,7 +490,7 @@ class LandingPageUpdated extends Component {
       </div>
       <Footer />
       <div className="btn-back-top">
-        <a href="#" data-scroll id="back-top" className="btn-circle btn-circle-primary btn-circle-sm btn-circle-raised ">
+        <a href="javascript:void(0)" data-scroll id="back-top" className="btn-circle btn-circle-primary btn-circle-sm btn-circle-raised ">
           <i className="zmdi zmdi-long-arrow-up"></i>
         </a>
       </div>

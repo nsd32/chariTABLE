@@ -1,6 +1,4 @@
 import React from 'react';
-import LogoutButton from '../components/buttons/links/LogoutButton';
-import LoginButton from '../components/buttons/links/LoginButton';
 
 let Navbar = (props) => {
 
@@ -16,12 +14,12 @@ let Navbar = (props) => {
             </a>
           </div>
           <div className="header-right">
-            <div class="dropdown open pull-xs-right">
-              <button class="btn bmd-btn-icon dropdown-toggle" type="button" id="lr1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="material-icons" style={{ color: "#ffffff"}}>more_vert</i>
+            <div className="dropdown open pull-xs-right">
+              <button className="btn bmd-btn-icon dropdown-toggle" type="button" id="lr1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i className="material-icons" style={{ color: "#ffffff"}}>more_vert</i>
               </button>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="lr1">
-                <a href="javascript:void(0)" className="btn btn-raised btn-primary no-focus" data-toggle="modal" data-target="#ms-account-modal" style={{margin: "10px"}}>Login</a>
+              <div className="dropdown-menu dropdown-menu-right" aria-labelledby="lr1">
+                <a href="javascript:void(0)" className="btn btn-raised btn-primary no-focus" data-toggle="modal" data-target="#ms-account-modal" style={{margin: "10px"}} onClick={props.onClick}>Login</a>
               </div>
             </div>
           </div>
