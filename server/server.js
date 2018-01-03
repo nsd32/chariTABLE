@@ -561,7 +561,7 @@ app.delete('/api/companies/:companyID', (req, res) => {
 // });
 
 app.get('/*', (req, res) => {
-  res.send('../client/public/index.html');
+  res.sendFile('../client/public/index.html');
 });
 
 
