@@ -9,7 +9,7 @@ class GuestRegister extends Component {
   }
 
   componentWillMount() {
-    axios.get(`/GuestRegistration/${this.props.match.params.eventId}/${this.props.match.params.tableHostId}`)
+    axios.get(`/api/guestregister/${this.props.match.params.eventId}/${this.props.match.params.tableHostId}`)
       .then((response) => {
         console.log('Did Mount: ' ,response.data);
         this.setState({
