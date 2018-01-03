@@ -560,6 +560,8 @@ app.delete('/api/companies/:companyID', (req, res) => {
 //   res.sendFile(path.join(__dirname, './build', 'index.html'));
 // });
 
+app.use('/*', staticFiles);
+
 // mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/chariTABLE');
 
 app.listen(PORT, () => console.log(`Example app listening on port ${PORT}`));
