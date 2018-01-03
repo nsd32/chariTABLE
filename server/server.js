@@ -560,10 +560,7 @@ app.delete('/api/companies/:companyID', (req, res) => {
 //   res.sendFile(path.join(__dirname,'../public/index.html'));
 // });
 
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname,'./client/public/index.html'));
-});
-
+app.use('/*', staticFiles);
 
 
 // mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/chariTABLE');
