@@ -9,7 +9,8 @@ class Account extends Component {
 
   }
 
-  componentDidMount() {
+  componentWillMount() {
+    console.log('Account Company Info from Events: ', this.props.location.state.companyInfo[0]);
     this.setState({
       companyName: this.props.location.state.companyInfo[0].companyName,
       username: this.props.location.state.companyInfo[0].username,
@@ -133,12 +134,12 @@ class Account extends Component {
                 <div className="row form-group">
                   <label htmlFor="email" className="col-md-4 control-label text-left"><i className="zmdi zmdi-email mr-1 color-primary"></i> Email Address</label>
                   <div className="col-md-8">
-                    <input name="email" onChange={this.handleInputChange} defaultValue={this.state.email} type="email" className="form-control" /> </div>
+                    <input name="email" onChange={this.handleInputChange} defaultValue={this.state.email} type="email" className="form-control" validate /> </div>
                 </div>
                 <div className="row form-group">
                   <label htmlFor="website" className="col-md-4 control-label text-left"><i className="zmdi zmdi-store mr-1 color-danger"></i> Website</label>
                   <div className="col-md-8">
-                    <input name="website" onChange={this.handleInputChange} defaultValue={this.state.website} type="text" className="form-control" /> </div>
+                    <input name="website" onChange={this.handleInputChange} defaultValue={this.state.website} type="text" className="form-control" validate /> </div>
                 </div>
                 <div className="row form-group">
                   <label htmlFor="addressLine1" className="col-md-4 control-label text-left"><i className="zmdi zmdi-pin mr-1 color-warning"></i> Address Line 1</label>
