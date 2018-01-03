@@ -35,9 +35,8 @@ db.once('open', () => console.log('Mogoose Connection Successful'));
 
 app.use(bodyParser.json());
 
-app.get('/login', (req, res, next) => {
+let sessionID;
 
-});
 
 // POST /login
 app.post('/login', (req, res, next) => {
@@ -49,6 +48,7 @@ app.post('/login', (req, res, next) => {
 				return next(err);
 			} else {
 				let sessionID = req.session.userId = user._id;
+				req.session.save();
 				console.log('Login Session ID: ', sessionID);
 				return res.redirect('/api/events/' + sessionID);
 			}
@@ -60,6 +60,12 @@ app.post('/login', (req, res, next) => {
 		return next (err);
 	}
 })
+
+app.get('/login', (req, res, next) => {
+	console.log('Signed In CompanyID: ', sessionID)
+	res.json({companyId: sessionID})
+
+});
 
 // GET /logout
 app.get('/logout', function(req, res, next) {
@@ -125,7 +131,7 @@ app.post('/api/companies/:companyID', (req, res) => {
 			createdOn: req.body.createdOn
 		}
 	}, {
-		new: false },
+		new: true },
 		function (err, user) {
   if (err) return err;
   res.send(user);
@@ -135,7 +141,7 @@ app.post('/api/companies/:companyID', (req, res) => {
 
 
 
-
+// Register New Company
 app.post('/register', (req, res) => {
 
 			let newUser = new User();

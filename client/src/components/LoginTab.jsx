@@ -19,6 +19,7 @@ const LoginTab = (props) => {
                   id="login-user"
                   className="form-control"
                   onChange={props.onChange}
+                  required
                  />
                </div>
             </div>
@@ -46,7 +47,7 @@ const LoginTab = (props) => {
                 <button
                   className="btn btn-raised btn-primary pull-right"
                   onClick={props.onSubmit}
-                  data-dismiss="modal"
+                  // data-dismiss="modal"
                 >
                   Login
                 </button>

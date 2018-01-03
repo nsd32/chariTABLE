@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Col, Row } from 'react-materialize';
-import EventDetailButton from '../components/buttons/EventDetailButton';
 import NavbarLogOut from '../components/NavbarLogOut'
 import Footer from '../components/Footer'
 import axios from 'axios';
@@ -454,7 +453,9 @@ class Events extends Component {
                         <div className="col-sm-12" style={{float: 'left'}}>
                         <label htmlFor="url" className="col-md-2 control-label tablehost-label">Tablehost URL</label>
 
+
                           <Link to={`/GuestRegistration/${this.state.eventId}/${tableHost._id}`} target="_blank"><h4>{`localhost:3000/GuestRegistration/${this.state.eventId}/${tableHost._id}`}</h4></Link>
+
                         </div>
                         {tableHost.guests.map((guest, idx) => {
                           

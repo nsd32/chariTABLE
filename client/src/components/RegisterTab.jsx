@@ -85,7 +85,7 @@ let RegisterTab = (props) => {
           <button
             className="btn btn-raised btn-block btn-primary"
             onClick={props.onSubmit}
-            data-dismiss="modal"
+            // data-dismiss="modal"
           >
             Register Now
           </button>

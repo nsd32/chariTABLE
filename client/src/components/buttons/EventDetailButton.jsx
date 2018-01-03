@@ -6,11 +6,6 @@ import LogoutLink from './links/LogoutLink'
 
 class EventButton extends Component {
 
-    constructor(props) {
-      super (props);
-
-    }
-
     componentDidMount() {
       console.log('Props: ', this.props);
 
