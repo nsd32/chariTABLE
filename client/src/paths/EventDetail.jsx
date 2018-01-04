@@ -10,11 +10,18 @@ class Events extends Component {
     super(props);
     this.state = {
       companyID: "",
-      tablehosts: []
+      tablehosts: [],
+      detailed: false
     }
+    this.toggle = this.toggle.bind(this)
   }
 
-  componentWillMount() {
+  toggle() {
+    console.log(this.state.detailed)
+    this.setState({detailed: !this.state.detailed})
+  }
+
+  componentDidMount() {
     this.setState({companyID: this.props.location.state.companyID})
 
     console.log('Event State: ', this.props.location.state.eventInfo);
@@ -109,11 +116,11 @@ class Events extends Component {
 
   handleBackButtonClick = (event) => {
     event.preventDefault();
-    console.log('Back to Company Events Button Clicked!!');
-    let companyID = event.target.id;
-    console.log('Back Button Company ID: ', companyID);
+    // console.log('Back to Company Events Button Clicked!!');
+    // let companyID = event.target.id;
+    // console.log('Back Button Company ID: ', companyID);
     this.props.history.push({
-      pathname: "/profile/" + companyID
+      pathname: `/profile/${this.state.companyID}`
     });
   }
 
@@ -408,14 +415,15 @@ class Events extends Component {
                           <input name="numberOfSponsors" onChange={this.handleEventInputChange} defaultValue={this.state.numberOfSponsors} type="Number" class="form-control" id="numberOfSponsors" placeholder="Number of Sponsors" /> </div>
                       </div>
 
-                      <div class="row mt-2">
-                        <div class="offset-lg-2 col-lg-6">
+                      <div class="row mt-2 pull-right">
+                        <div class="offset-lg-2 col-lg-10">
 
                         </div>
-                        <div class="col-lg-3">
-                          <button class="btn btn-raised btn-primary btn-block save-button" onClick={this.eventSaveButton}>Save Changes</button>
-                          <button class="btn btn-raised btn-danger btn-block" onClick={this.eventDeleteButton}>Delete Event</button>
-                        </div>
+
+                          <button className="btn btn-raised btn-warning" onClick={this.handleBackButtonClick} style={ {margin: "5px"} }>Back</button>
+                          <button class="btn btn-raised btn-primary save-button" onClick={this.eventSaveButton} style={ {margin: "5px"} }>Save Changes</button>
+                          <button class="btn btn-raised btn-danger" onClick={this.eventDeleteButton} style={ {margin: "5px"} }>Delete Event</button>
+
                       </div>
                     </fieldset>
                   </form>
@@ -423,7 +431,7 @@ class Events extends Component {
               </div>
 
               <h3 className="animated fadeInUp animation-delay-10">Tablehosts</h3>
-              <div class="ms-collapse animated fadeInUp animation-delay-10" id="accordion2" role="tablist" aria-multiselectable="true">
+              <div class="ms-collapse animated fadeInUp animation-delay-10" id="accordion2" role="tablist" aria-multiselectable="true" >
                 {this.state.tablehosts.map((tableHost, idx) => {
 
                   return (

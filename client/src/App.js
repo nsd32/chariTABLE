@@ -19,9 +19,6 @@ class App extends Component {
     companyId: ""
   }
 
-  
-
-
   componentWillMount() {
     axios.get('/login')
     .then((companyID) => {
@@ -38,16 +35,16 @@ class App extends Component {
     return(
       <Router>
         <div>
-          <Route exact path="/" component={LandingPageUpdated2} companyID={this.state.companyId}/>
-          <Route exact path="/profile/:companyId" component={Events} companyID={this.state.companyId} />
+          <Route exact path="/" component={LandingPageUpdated2} />
+          <Route exact path="/profile/:companyId" component={Events} />
           <Route exact path="/event/:eventId" component={EventDetail} companyID={this.state.companyId} />
-          <Route exact path="/account" component={Account} companyID={this.state.companyId} />
-          <Route exact path="/profile" component={Profile} companyID={this.state.companyId} />
-          <Route exact path="/addevent" component={AddEvent} companyID={this.state.companyId} />
-          <Route exact path="/tablehost" component={TableHost} companyID={this.state.companyId} />
-          <Route exact path="/sponsor" component={Sponsor} companyID={this.state.companyId} />
-          <Route exact path="/thanksforregistering" component={ThanksForRegistering} companyID={this.state.companyId} />
-          <Route exact path="/GuestRegistration/:eventId/:tableHostId" component={GuestRegister} companyID={this.state.companyId} />
+          <Route exact path="/account" component={Account} />
+          <Route exact path="/profile" component={Profile} />
+          <Route exact path="/addevent" component={AddEvent} />
+          <Route exact path="/tablehost" component={TableHost} />
+          <Route exact path="/sponsor" component={Sponsor} />
+          <Route exact path="/thanksforregistering" component={ThanksForRegistering} />
+          <Route exact path="/GuestRegistration/:eventId/:tableHostId" component={GuestRegister} />
         </div>
       </Router>
     );

@@ -49,7 +49,6 @@ class LandingPageUpdated extends Component {
   handleModal() {
 
       document.querySelector("body").classList.remove('modal-open');
-      // document.querySelector("div#ms-account-modal").toggle();
       document.querySelector("div.modal-backdrop").remove();
       document.querySelector("body").style.padding = "0px";
   }
