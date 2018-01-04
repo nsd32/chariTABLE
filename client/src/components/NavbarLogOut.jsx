@@ -5,14 +5,8 @@ class NavbarLogout extends Component {
 
     constructor(props) {
       super(props)
-      this.state = {detailed: false}
-      this.toggle = this.toggle.bind(this)
     }
 
-    toggle() {
-      console.log(this.state.detailed)
-      this.setState({detailed: !this.state.detailed})
-    }
 
     render() {
 
@@ -29,10 +23,10 @@ class NavbarLogout extends Component {
               </div>
               <div className="header-right">
                 <div className="dropdown open pull-xs-right">
-                  <button className="btn bmd-btn-icon dropdown-toggle" type="button" id="lr1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onClick={this.toggle}>
+                  <button className="btn bmd-btn-icon dropdown-toggle" type="button" id="lr1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i className="material-icons" style={{ color: "#ffffff" }}>more_vert</i>
                   </button>
-                  <div className="dropdown-menu dropdown-menu-right" aria-labelledby="lr1" in={this.state.detailed}>
+                  <div className="dropdown-menu dropdown-menu-right" aria-labelledby="lr1">
                     <LogoutButton/>
                   </div>
                 </div>

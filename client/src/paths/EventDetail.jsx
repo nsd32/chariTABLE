@@ -10,15 +10,8 @@ class Events extends Component {
     super(props);
     this.state = {
       companyID: "",
-      tablehosts: [],
-      detailed: false
+      tablehosts: []
     }
-    this.toggle = this.toggle.bind(this)
-  }
-
-  toggle() {
-    console.log(this.state.detailed)
-    this.setState({detailed: !this.state.detailed})
   }
 
   componentDidMount() {
