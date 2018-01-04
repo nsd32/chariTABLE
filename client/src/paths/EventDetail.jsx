@@ -14,16 +14,16 @@ class Events extends Component {
     }
   }
 
-  componentDidMount() {
-    this.setState({companyID: this.props.location.state.companyID})
 
-    console.log('Event State: ', this.props.location.state.eventInfo);
+  componentWillMount() {
+    
+    this.setState({companyID: this.props.location.state.companyID});
 
     let eventID = this.props.location.state.eventInfo._id
+    console.log("eventID: ", this.props.location.state.eventInfo._id)
 
     axios.get('/api/eventDetails/' + eventID)
     .then((eventInfo) => {
-      console.log(`Event Details for selected: `, eventInfo.data);
 
       this.setState({
         eventId: eventInfo.data._id,
@@ -47,7 +47,9 @@ class Events extends Component {
 
         this.setState({
           tablehosts: [...this.state.tablehosts, eventInfo.data.tableHosts[i]]
-        })
+        }, () => {
+        console.log("Tablehost array: ", this.state.tablehosts);
+      });
 
         this.setState({
 
@@ -301,14 +303,13 @@ class Events extends Component {
   // }
 
   render() {
-    console.log('Event State ', this.state);
     if(!this.state.eventId) {
       return (
-        <div id="ms-preload" class="ms-preload">
+        <div id="ms-preload" className="ms-preload">
           <div id="status">
-            <div class="spinner">
-              <div class="dot1"></div>
-              <div class="dot2"></div>
+            <div className="spinner">
+              <div className="dot1"></div>
+              <div className="dot2"></div>
             </div>
           </div>
         </div>
@@ -320,93 +321,94 @@ class Events extends Component {
         <Col s={12} m={6}>
           <div>
 
-          {/*<div id="ms-preload" class="ms-preload">
+          {/*<div id="ms-preload" className="ms-preload">
             <div id="status">
-              <div class="spinner">
-                <div class="dot1"></div>
-                <div class="dot2"></div>
+              <div className="spinner">
+                <div className="dot1"></div>
+                <div className="dot2"></div>
               </div>
             </div>
           </div>
-          <div class="ms-site-container">*/}
+          <div className="ms-site-container">*/}
 
 
             <NavbarLogOut />
 
-            <div class="ms-hero-page-override ms-hero-img-team ms-hero-bg-primary">
-              <div class="container">
-                <div class="text-center">
-                  <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">Event Details</h1>
-                  {/*<p class="lead lead-lg color-light text-center center-block mt-2 mw-800 text-uppercase fw-300 animated fadeInUp animation-delay-7">
+            <div className="ms-hero-page-override ms-hero-img-team ms-hero-bg-primary">
+              <div className="container">
+                <div className="text-center">
+                  <h1 className="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">Event Details</h1>
+                  {/*<p className="lead lead-lg color-light text-center center-block mt-2 mw-800 text-uppercase fw-300 animated fadeInUp animation-delay-7">
                     <br />Contact us we will help you to finish your dream.</p>*/}
                 </div>
               </div>
             </div>
-            <div class="container">
-              <div class="card card-primary card-hero animated fadeInUp animation-delay-7">
-                <div class="card-header">
-                  <h3 class="card-title">
-                    <i class="zmdi zmdi-graduation-cap"></i> Event Details
+            <div className="container">
+              <div className="card card-primary card-hero animated fadeInUp animation-delay-7">
+                <div className="card-header">
+                  <h3 className="card-title">
+                    <i className="zmdi zmdi-graduation-cap"></i> Event Details
                   </h3>
                 </div>
-                <div class="card-block">
-                  <form class="form-horizontal">
+                <div className="card-block">
+                  <form className="form-horizontal">
                     <fieldset>
-                      <div class="row form-group">
-                        <label for="inputUser" class="col-md-2 control-label">Event Name</label>
-                        <div class="col-md-9">
-                          <input name="eventName" onChange={this.handleEventInputChange} defaultValue={this.state.eventName} type="text" class="form-control" id="eventName" placeholder="Event Name" /> </div>
+                      <div className="row form-group">
+                        <label htmlFor="inputUser" className="col-md-2 control-label">Event Name</label>
+                        <div className="col-md-9">
+                          <input name="eventName" onChange={this.handleEventInputChange} defaultValue={this.state.eventName} type="text" className="form-control" id="eventName" placeholder="Event Name" /> </div>
                       </div>
-                      <div class="row form-group">
-                        <label for="inputEmail" class="col-md-2 control-label">Event Location</label>
-                        <div class="col-md-9">
-                          <input name="eventLocation" onChange={this.handleEventInputChange} defaultValue={this.state.eventLocation} type="text" class="form-control" id="eventLocation" placeholder="Event Location" /> </div>
+                      <div className="row form-group">
+                        <label htmlFor="inputEmail" className="col-md-2 control-label">Event Location</label>
+                        <div className="col-md-9">
+                          <input name="eventLocation" onChange={this.handleEventInputChange} defaultValue={this.state.eventLocation} type="text" className="form-control" id="eventLocation" placeholder="Event Location" /> </div>
                       </div>
-                      <div class="row form-group">
-                        <label for="inputDate" class="col-md-2 control-label">Event Date</label>
-                        <div class="col-md-9">
-                          <input name="eventDate" onChange={this.handleEventInputChange} defaultValue={this.state.eventDate} id="eventDate" type="date" class="form-control" placeholder="mm/dd/yy" validate /> </div>
+                      <div className="row form-group">
+                        <label htmlFor="inputDate" className="col-md-2 control-label">Event Date</label>
+                        <div className="col-md-9">
+                          <input name="eventDate" onChange={this.handleEventInputChange} defaultValue={this.state.eventDate} id="eventDate" type="date" className="form-control" placeholder="mm/dd/yy" /> </div>
                       </div>
-                      <div class="row form-group">
-                        <label for="eventTime" class="col-md-2 control-label">Event Time</label>
-                        <div class="col-md-9">
-                          <input name="eventTime" onChange={this.handleEventInputChange} defaultValue={this.state.eventTime} type="time" class="form-control" id="eventTime" placeholder="Event Time" validate /> </div>
+                      <div className="row form-group">
+                        <label htmlFor="eventTime" className="col-md-2 control-label">Event Time</label>
+                        <div className="col-md-9">
+                          <input name="eventTime" onChange={this.handleEventInputChange} defaultValue={this.state.eventTime} type="time" className="form-control" id="eventTime" placeholder="Event Time" /> </div>
                       </div>
-                      <div class="row form-group">
-                        <label for="inputName" class="col-md-2 control-label">Contact Name</label>
-                        <div class="col-md-9">
-                          <input name="contactName" onChange={this.handleEventInputChange} defaultValue={this.state.contactName} type="text" class="form-control" id="contactName" placeholder="Contact Name" /> </div>
+                      <div className="row form-group">
+                        <label htmlFor="inputName" className="col-md-2 control-label">Contact Name</label>
+                        <div className="col-md-9">
+                          <input name="contactName" onChange={this.handleEventInputChange} defaultValue={this.state.contactName} type="text" className="form-control" id="contactName" placeholder="Contact Name" /> </div>
                       </div>
-                      <div class="row form-group">
-                        <label for="inputLast" class="col-md-2 control-label">Contact Phone</label>
-                        <div class="col-md-9">
-                          <input name="contactPhone" onChange={this.handleEventInputChange} defaultValue={this.state.contactPhone} type="tel" pattern="^\d{3}-\d{3}-\d{4}$" class="form-control" id="contactPhone" placeholder="ex: xxx-xxx-xxxx" /> </div>
+                      <div className="row form-group">
+                        <label htmlFor="inputLast" className="col-md-2 control-label">Contact Phone</label>
+                        <div className="col-md-9">
+                          <input name="contactPhone" onChange={this.handleEventInputChange} defaultValue={this.state.contactPhone} type="tel" pattern="^\d{3}-\d{3}-\d{4}$" className="form-control" id="contactPhone" placeholder="ex: xxx-xxx-xxxx" /> </div>
                       </div>
-                      <div class="row form-group">
-                        <label for="inputEmail" class="col-md-2 control-label">Contact Email</label>
-                        <div class="col-md-9">
-                          <input name="contactEmail" onChange={this.handleEventInputChange} defaultValue={this.state.contactEmail} type="email" class="form-control" id="contactEmail" placeholder="Contact Email" validate /> </div>
+                      <div className="row form-group">
+                        <label htmlFor="inputEmail" className="col-md-2 control-label">Contact Email</label>
+                        <div className="col-md-9">
+                          <input name="contactEmail" onChange={this.handleEventInputChange} defaultValue={this.state.contactEmail} type="email" className="form-control" id="contactEmail" placeholder="Contact Email" /> </div>
                       </div>
-                      <div class="row form-group">
-                        <label for="numberOfTables" class="col-md-2 control-label">Number of Tables</label>
-                        <div class="col-md-9">
-                          <input name="numberOfTables" onChange={this.handleEventInputChange} defaultValue={this.state.numberOfTables} type="Number" class="form-control" id="numberOfTables" placeholder="Number of Tables" /> </div>
+                      <div className="row form-group">
+                        <label htmlFor="numberOfTables" className="col-md-2 control-label">Number of Tables</label>
+                        <div className="col-md-9">
+                          <input name="numberOfTables" onChange={this.handleEventInputChange} defaultValue={this.state.numberOfTables} type="Number" className="form-control" id="numberOfTables" placeholder="Number of Tables" /> </div>
                       </div>
-                      <div class="row form-group">
-                        <label for="numberOfTableHosts" class="col-md-2 control-label">Number of Table Hosts</label>
-                        <div class="col-md-9">
-                          <input name="numberOfTableHosts" onChange={this.handleEventInputChange} defaultValue={this.state.numberOfTableHosts} type="Number" class="form-control" id="numberOfTableHosts" placeholder="Number of Table Hosts" /> </div>
+                      <div className="row form-group">
+                        <label htmlFor="numberOfTableHosts" className="col-md-2 control-label">Number of Table Hosts</label>
+                        <div className="col-md-9">
+                          <input name="numberOfTableHosts" onChange={this.handleEventInputChange} defaultValue={this.state.numberOfTableHosts} type="Number" className="form-control" id="numberOfTableHosts" placeholder="Number of Table Hosts" /> </div>
                       </div>
-                      <div class="row form-group">
-                        <label for="numberOfGuestsPerTable" class="col-md-2 control-label">Number of Guests Per Table</label>
-                        <div class="col-md-9">
-                          <input name="numberOfGuestsPerTable" onChange={this.handleEventInputChange} defaultValue={this.state.numberOfGuestsPerTable} type="Number" class="form-control" id="numberOfGuestsPerTable" placeholder="Number of Guests Per Table" /> </div>
+                      <div className="row form-group">
+                        <label htmlFor="numberOfGuestsPerTable" className="col-md-2 control-label">Number of Guests Per Table</label>
+                        <div className="col-md-9">
+                          <input name="numberOfGuestsPerTable" onChange={this.handleEventInputChange} defaultValue={this.state.numberOfGuestsPerTable} type="Number" className="form-control" id="numberOfGuestsPerTable" placeholder="Number of Guests Per Table" /> </div>
                       </div>
-                      <div class="row form-group">
-                        <label for="numberOfSponsors" class="col-md-2 control-label">Number of Sponsors</label>
-                        <div class="col-md-9">
-                          <input name="numberOfSponsors" onChange={this.handleEventInputChange} defaultValue={this.state.numberOfSponsors} type="Number" class="form-control" id="numberOfSponsors" placeholder="Number of Sponsors" /> </div>
+                      <div className="row form-group">
+                        <label htmlFor="numberOfSponsors" className="col-md-2 control-label">Number of Sponsors</label>
+                        <div className="col-md-9">
+                          <input name="numberOfSponsors" onChange={this.handleEventInputChange} defaultValue={this.state.numberOfSponsors} type="Number" className="form-control" id="numberOfSponsors" placeholder="Number of Sponsors" /> </div>
                       </div>
+
 
                       <div class="row mt-2 pull-right">
                         <div class="offset-lg-2 col-lg-10">
@@ -416,7 +418,6 @@ class Events extends Component {
                           <button className="btn btn-raised btn-warning" onClick={this.handleBackButtonClick} style={ {margin: "5px"} }>Back</button>
                           <button class="btn btn-raised btn-primary save-button" onClick={this.eventSaveButton} style={ {margin: "5px"} }>Save Changes</button>
                           <button class="btn btn-raised btn-danger" onClick={this.eventDeleteButton} style={ {margin: "5px"} }>Delete Event</button>
-
                       </div>
                     </fieldset>
                   </form>
@@ -424,56 +425,59 @@ class Events extends Component {
               </div>
 
               <h3 className="animated fadeInUp animation-delay-10">Tablehosts</h3>
-              <div class="ms-collapse animated fadeInUp animation-delay-10" id="accordion2" role="tablist" aria-multiselectable="true" >
+              <div className="ms-collapse animated fadeInUp animation-delay-10" id="accordion2" role="tablist" aria-multiselectable="true" >
+
                 {this.state.tablehosts.map((tableHost, idx) => {
 
                   return (
-                    <div key={idx} class="mb-0 card card-primary">
-                      <div class="card-header" role="tab" id={"headingOne2" + idx}>
-                        <div class="card-title">
-                          <a class="collapsed withripple" role="button" data-toggle="collapse" data-parent="#accordion2" href={`#tablehost${idx}`} aria-expanded="false" aria-controls={"#collapseOne2" + idx}>
-                            <i class="zmdi zmdi-pin"></i> {tableHost.name} </a>
+                    <div key={idx} className="mb-0 card card-primary">
+                      <div className="card-header" role="tab" id={"headingOne2" + idx}>
+                        <div className="card-title">
+                          <a className="collapsed withripple" role="button" data-toggle="collapse" data-parent="#accordion2" href={`#tablehost${idx}`} aria-expanded="false" aria-controls={"#collapseOne2" + idx}>
+                            <i className="zmdi zmdi-pin"></i> {tableHost.name} </a>
                         </div>
                       </div>
 
-                      <div id={`tablehost${idx}`} class="card-collapse collapse" role="tabpanel" aria-labelledby={"headingOne2" + idx}>
-                        <div class="col-sm-5" style={{float: 'left'}}>
-                        <label for="tableHostName" class="col-md-5 control-label tablehost-label">Tablehost</label>
-                          <input name={tableHost._id} defaultValue={tableHost.name} onChange={this.handleTablehostNameChange} type="text" class="form-control"  placeholder="Tablehost" />
+                      <div id={`tablehost${idx}`} className="card-collapse collapse" role="tabpanel" aria-labelledby={"headingOne2" + idx}>
+                        <div className="col-sm-5" style={{float: 'left'}}>
+                        <label htmlFor="tableHostName" className="col-md-5 control-label tablehost-label">Tablehost</label>
+                          <input name={tableHost._id} defaultValue={tableHost.name} onChange={this.handleTablehostNameChange} type="text" className="form-control"  placeholder="Tablehost" />
                         </div>
 
-                        <div class="col-sm-5 email-input" style={{float: 'left'}}>
-                        <label for="tableHostEmail" class="col-md-5 control-label tablehost-label">Tablehost Email</label>
-                          <input name={tableHost._id} defaultValue={tableHost.email} onChange={this.handleTablehostEmailChange} type="text" class="form-control"  placeholder="Tablehost Email" />
+                        <div className="col-sm-5 email-input" style={{float: 'left'}}>
+                        <label htmlFor="tableHostEmail" className="col-md-5 control-label tablehost-label">Tablehost Email</label>
+                          <input name={tableHost._id} defaultValue={tableHost.email} onChange={this.handleTablehostEmailChange} type="text" className="form-control"  placeholder="Tablehost Email" />
                         </div>
 
-                        <a href="javascript:void(0)" style={{float: 'left'}}  id={tableHost._id} onClick={this.tablehostSaveButton} class="btn btn-raised btn-danger btn-sm save-button">Save</a>
-                        <a href="javascript:void(0)" style={{float: 'left'}}  id={tableHost._id} onClick={this.tablehostDeleteButton} class="btn btn-raised btn-danger btn-sm">Delete</a>
+                        <a href="javascript:void(0)" style={{float: 'left'}}  id={tableHost._id} onClick={this.tablehostSaveButton} className="btn btn-raised btn-danger btn-sm save-button">Save</a>
+                        <a href="javascript:void(0)" style={{float: 'left'}}  id={tableHost._id} onClick={this.tablehostDeleteButton} className="btn btn-raised btn-danger btn-sm">Delete</a>
 
 
-                        <div class="col-sm-12" style={{float: 'left'}}>
-                        <label for="url" class="col-md-2 control-label tablehost-label">Tablehost URL</label>
+                        <div className="col-sm-12" style={{float: 'left'}}>
+                        <label htmlFor="url" className="col-md-2 control-label tablehost-label">Tablehost URL</label>
 
-                          <Link to={`/GuestRegistration/${this.state.eventId}/${tableHost._id}`} activeclassname="active" target="_blank"><h4>{`localhost:3000/GuestRegistration/${this.state.eventId}/${tableHost._id}`}</h4></Link>
+
+                          <Link to={`/GuestRegistration/${this.state.eventId}/${tableHost._id}`} target="_blank"><h4>{`localhost:3000/GuestRegistration/${this.state.eventId}/${tableHost._id}`}</h4></Link>
+
                         </div>
                         {tableHost.guests.map((guest, idx) => {
-                          console.log('Guest: ' + guest.name)
+                          
                           return (
                             <div key={idx}>
 
-                              <div class="col-sm-5" style={{float: 'left'}}>
-                                <label for="guest" class="col-md-4 control-label tablehost-label">Guest {idx + 1}</label>
-                                <input name={guest._id} id={guest._id} defaultValue={guest.name} onChange={this.handleGuestNameChange} type="text" class="form-control"  placeholder="Guest" />
+                              <div className="col-sm-5" style={{float: 'left'}}>
+                                <label htmlFor="guest" className="col-md-4 control-label tablehost-label">Guest {idx + 1}</label>
+                                <input name={guest._id} id={guest._id} defaultValue={guest.name} onChange={this.handleGuestNameChange} type="text" className="form-control"  placeholder="Guest" />
                               </div>
 
-                              <div class="col-sm-5 email-input" style={{float: 'left'}}>
-                                <label for="guest" class="col-md-4 control-label tablehost-label">Guest Email</label>
-                                <input name={guest._id} defaultValue={guest.email} onChange={this.handleGuestEmailChange} type="text" class="form-control"  placeholder="Guest Email" />
+                              <div className="col-sm-5 email-input" style={{float: 'left'}}>
+                                <label htmlFor="guest" className="col-md-4 control-label tablehost-label">Guest Email</label>
+                                <input name={guest._id} defaultValue={guest.email} onChange={this.handleGuestEmailChange} type="text" className="form-control"  placeholder="Guest Email" />
                               </div>
 
 
-                              <a href="javascript:void(0)" style={{float: 'left'}} onClick={this.guestSaveButton} id={guest._id} class="btn btn-raised btn-danger btn-sm save-button">Save</a>
-                              <a href="javascript:void(0)" style={{float: 'left'}} onClick={this.guestDeleteButton} id={guest._id} class="btn btn-raised btn-danger btn-sm">Delete</a>
+                              <a href="javascript:void(0)" style={{float: 'left'}} onClick={this.guestSaveButton} id={guest._id} className="btn btn-raised btn-danger btn-sm save-button">Save</a>
+                              <a href="javascript:void(0)" style={{float: 'left'}} onClick={this.guestDeleteButton} id={guest._id} className="btn btn-raised btn-danger btn-sm">Delete</a>
 
 
                             </div>
@@ -502,9 +506,9 @@ class Events extends Component {
             </div>
 
             <Footer />
-            <div class="btn-back-top">
-              <a href="#" data-scroll id="back-top" class="btn-circle btn-circle-primary btn-circle-sm btn-circle-raised ">
-                <i class="zmdi zmdi-long-arrow-up"></i>
+            <div className="btn-back-top">
+              <a href="#" data-scroll id="back-top" className="btn-circle btn-circle-primary btn-circle-sm btn-circle-raised ">
+                <i className="zmdi zmdi-long-arrow-up"></i>
               </a>
             </div>
           </div>

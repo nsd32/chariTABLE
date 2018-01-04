@@ -336,8 +336,26 @@ app.post("/event/guest/:tableHostId", function(req, res) {
 
 });
 
+
+app.get('/account', (req, res, next) => {
+	if(!req.session.userId ) {
+		var err = new Error("You are not authorized to view this page");
+		err.status = 403;
+		return next(err);
+	}
+	User.findById(req.session.userId)
+		.then((data) => {
+			res.json(data);
+		})
+		.catch((err) => {
+			console.log(err);
+			res.status(500).send(err.message ? err.message : 'Internal server blowup');
+		});
+
+	});
+
 // Route for unique TableHost URL for guest registration
-app.get('/GuestRegistration/:eventId/:tableHostId', (req, res) => {
+app.get('/api/guestregister/:eventId/:tableHostId', (req, res) => {
 	console.log(req.params.eventId);
 	console.log(req.params.tableHostId);
 	let eventDetails = {
@@ -363,24 +381,6 @@ app.get('/GuestRegistration/:eventId/:tableHostId', (req, res) => {
 			console.log(err);
 		})
 })
-
-
-app.get('/account', (req, res, next) => {
-	if(!req.session.userId ) {
-		var err = new Error("You are not authorized to view this page");
-		err.status = 403;
-		return next(err);
-	}
-	User.findById(req.session.userId)
-		.then((data) => {
-			res.json(data);
-		})
-		.catch((err) => {
-			console.log(err);
-			res.status(500).send(err.message ? err.message : 'Internal server blowup');
-		});
-
-	});
 
 // Updating Event Information
 
@@ -558,13 +558,16 @@ app.delete('/api/companies/:companyID', (req, res) => {
 			})
 	});
 
-app.get('/*', (req, res) => {
-	res.sendFile(path.join(__dirname,'../public/index.html'));
-});
+// app.get('/*', (req, res) => {
+// 	res.sendFile(path.join(__dirname,'../public/index.html'));
+// });
 
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, './build', 'index.html'));
-});
+// app.get('/*', (req, res) => {
+//   res.sendFile(path.join(__dirname,'../public/index.html'));
+// });
+
+app.use('/*', staticFiles);
+
 
 // mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/chariTABLE');
 
