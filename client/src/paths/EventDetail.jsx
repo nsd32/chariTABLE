@@ -513,8 +513,8 @@ class Events extends Component {
             </div>
           </div>
 
-          <script src="assets/js/plugins.min.js"></script>
-          <script src="assets/js/app.min.js"></script>
+          <script src="/assets/js/plugins.min.js"></script>
+          <script src="/assets/js/app.min.js"></script>
 
         </Col>
       </Row>
