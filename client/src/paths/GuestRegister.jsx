@@ -62,17 +62,9 @@ class GuestRegister extends Component {
       )
     }
     return(
-      <div style={{ display: "block" !important}}>
+      <div id="eventDetails">
 
-        {/*<div id="ms-preload" className="ms-preload">
-          <div id="status">
-            <div className="spinner">
-              <div className="dot1"></div>
-              <div className="dot2"></div>
-            </div>
-          </div>
-        </div>*/}
-        <div className="bg-full-page ms-hero-img-coffee ms-hero-bg-primary ms-bg-fixed back-fixed" style={{ display: "block" !important}}>
+        <div id = className="bg-full-page ms-hero-img-coffee ms-hero-bg-primary ms-bg-fixed back-fixed">
 
           <header className="ms-header ms-header-primary">
             <div className="container container-full">
@@ -161,10 +153,6 @@ class GuestRegister extends Component {
             </div>
           </div>
         </div>
-        <script src="assets/js/plugins.min.js"></script>
-        <script src="assets/js/app.min.js"></script>
-        <script src="assets/js/coming.js"></script>
-
       </div>
     );
   }
