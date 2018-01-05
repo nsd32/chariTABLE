@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom'
 import LandingPageUpdated2 from './paths/LandingPageUpdated2'
 import Events from './paths/Events'
 import EventDetail from './paths/EventDetail'
@@ -35,7 +35,7 @@ class App extends Component {
   render() {
     return(
       <Router>
-        <div>
+        <Switch>
           <Route exact path="/" component={LandingPageUpdated2} />
           <Route exact path="/profile/:companyId" component={Events} />
           <Route exact path="/event/:eventId" component={EventDetail} />
@@ -47,7 +47,7 @@ class App extends Component {
           <Route exact path="/thanksforregistering" component={ThanksForRegistering} />
           <Route exact path="/GuestRegistration/:eventId/:tableHostId" component={GuestRegister} />
           <Route exact path="/error" component={ErrorMessage} />
-        </div>
+        </Switch>
       </Router>
     );
   }
