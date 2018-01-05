@@ -79,39 +79,39 @@ class AddEvent extends Component {
             <form className="form-horizontal">
               <fieldset>
                 <div className="row form-group">
-                  <label htmlFor="inputUser" className="col-md-2 control-label">Event Name</label>
+                  <label htmlFor="eventName" className="col-md-2 control-label">Event Name</label>
                   <div className="col-md-9">
                     <input name="eventName" onChange={this.handleInputChange} type="text" className="form-control" id="eventName" placeholder="Event Name" /> </div>
                 </div>
                 <div className="row form-group">
-                  <label htmlFor="inputEmail" className="col-md-2 control-label">Event Location</label>
+                  <label htmlFor="eventLocation" className="col-md-2 control-label">Event Location</label>
                   <div className="col-md-9">
-                    <input name="eventLocation" onChange={this.handleInputChange} type="email" className="form-control" id="eventLocation" placeholder="Event Location" /> </div>
+                    <input name="eventLocation" onChange={this.handleInputChange} type="text" className="form-control" id="eventLocation" placeholder="Event Location" /> </div>
                 </div>
                 <div className="row form-group">
                   <label htmlFor="inputDate" className="col-md-2 control-label">Event Date</label>
                   <div className="col-md-9">
-                    <input name="eventDate" onChange={this.handleInputChange} id="eventDate" type="text" className="form-control" placeholder="mm/dd/yy" /> </div>
+                    <input name="eventDate" onChange={this.handleInputChange} id="eventDate" type="date" className="form-control" placeholder="mm/dd/yy" /> </div>
                 </div>
                 <div className="row form-group">
                   <label htmlFor="eventTime" className="col-md-2 control-label">Event Time</label>
                   <div className="col-md-9">
-                    <input name="eventTime" onChange={this.handleInputChange} type="text" className="form-control" id="eventTime" placeholder="Event Time" /> </div>
+                    <input name="eventTime" onChange={this.handleInputChange} type="time" className="form-control" id="eventTime" placeholder="Event Time" /> </div>
                 </div>
                 <div className="row form-group">
-                  <label htmlFor="inputName" className="col-md-2 control-label">Contact Name</label>
+                  <label htmlFor="contactName" className="col-md-2 control-label">Contact Name</label>
                   <div className="col-md-9">
                     <input name="contactName" onChange={this.handleInputChange} type="text" className="form-control" id="contactName" placeholder="Contact Name" /> </div>
                 </div>
                 <div className="row form-group">
-                  <label htmlFor="inputLast" className="col-md-2 control-label">Contact Phone</label>
+                  <label htmlFor="contactPhone" className="col-md-2 control-label">Contact Phone</label>
                   <div className="col-md-9">
-                    <input name="contactPhone" onChange={this.handleInputChange} type="text" className="form-control" id="contactPhone" placeholder="Contact Phone" /> </div>
+                    <input name="contactPhone" onChange={this.handleInputChange} type="tel" className="form-control" id="contactPhone" pattern="^\d{3}-\d{3}-\d{4}$" placeholder="Contact Phone  ex(xxx-xxx-xxxx)" /> </div>
                 </div>
                 <div className="row form-group">
-                  <label htmlFor="inputEmail" className="col-md-2 control-label">Contact Email</label>
+                  <label htmlFor="contactEmail" className="col-md-2 control-label">Contact Email</label>
                   <div className="col-md-9">
-                    <input name="contactEmail" onChange={this.handleInputChange} type="text" className="form-control" id="contactEmail" placeholder="Contact Email" /> </div>
+                    <input name="contactEmail" onChange={this.handleInputChange} type="email" className="form-control" id="contactEmail" placeholder="Contact Email" /> </div>
                 </div>
                 <div className="row form-group">
                   <label htmlFor="numberOfTables" className="col-md-2 control-label">Number of Tables</label>

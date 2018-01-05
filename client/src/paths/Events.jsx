@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Route, Redirect} from 'react-router-dom'
 import '../styles/Event.css'
 import NavbarLogOut from '../components/NavbarLogOut'
 import Footer from '../components/Footer'
@@ -17,16 +18,16 @@ class Events extends Component {
   }
 
 
-  componentDidMount() {
+  componentWillMount() {
         console.log('Props: ', this.props);
 
     let url = this.props.location.pathname;
     let splitUrl = url.split('/');
-    console.log('Split URL: ', splitUrl);
+    // console.log('Split URL: ', splitUrl);
     let companyID = splitUrl[2].trim();
     // let companyID = this.props.match.params.companyId;
-    console.log('URL Company ID: ', companyID);
-    this.setState( {companyID: companyID} )
+    // console.log('URL Company ID: ', companyID);
+    // this.setState( {companyID: companyID} )
 
     axios.get(`/api/events/${companyID}`)
       .then((response) => {
@@ -40,8 +41,19 @@ class Events extends Component {
       })
       .catch((error) => {
         console.log(error);
+        <Redirect to={{
+          pathname: '/error',
+          state: { error: error }
+        }}/>
       });
 
+  }
+
+  componentWillUnmount() {
+      this.setState({
+          companyID: "",
+          events: []
+      })
   }
 
   handleDetailClick = (event) => {
@@ -154,8 +166,10 @@ class Events extends Component {
                         <img src="https://yt3.ggpht.com/-VJ74LAidPZ8/AAAAAAAAAAI/AAAAAAAAAAA/FJrUFq0qLbU/s900-c-k-no-mo-rj-c0xffffff/photo.jpg" alt="..." className="img-avatar-circle" /> </div>
                       <div className="card-block pt-4 text-center">
                         <h3 className="color-primary">Address</h3>
-                        <p>{this.state.events.addressLine1}</p>
-                        <p>{this.state.events.city}</p>
+                        <p>{this.state.events.addressLine1} {this.state.events.addressLine3}</p>
+                        <p>{this.state.events.city}, {this.state.events.state} {this.state.events.zipCode}</p>
+                        <p>{this.state.events.phoneNumber}</p>
+                        <p>{this.state.events.email}</p>
                         <a href="javascript:void(0)" className="btn-circle btn-circle-raised btn-circle-xs mt-1 mr-1 no-mr-md btn-facebook">
                           <i className="zmdi zmdi-facebook"></i>
                         </a>

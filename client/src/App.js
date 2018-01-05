@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {BrowserRouter as Router, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom'
 import LandingPageUpdated2 from './paths/LandingPageUpdated2'
 import Events from './paths/Events'
 import EventDetail from './paths/EventDetail'
@@ -9,6 +9,7 @@ import Profile from './paths/Profile'
 import AddEvent from './paths/AddEvent'
 import TableHost from './paths/TableHost'
 import Sponsor from './paths/Sponsor'
+import ErrorMessage from './paths/Error'
 import GuestRegister from './paths/GuestRegister'
 import ThanksForRegistering from './paths/ThanksForRegistering'
 import './App.css';
@@ -45,6 +46,7 @@ class App extends Component {
           <Route exact path="/sponsor" component={Sponsor} />
           <Route exact path="/thanksforregistering" component={ThanksForRegistering} />
           <Route exact path="/GuestRegistration/:eventId/:tableHostId" component={GuestRegister} />
+          <Route exact path="/error" component={ErrorMessage} />
         </div>
       </Router>
     );

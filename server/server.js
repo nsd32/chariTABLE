@@ -233,7 +233,7 @@ app.get('/api/event/:eventId', mid.requiresLogin, (req, res) => {
 });
 
 // Route for creating Events and associating them with a Company
-app.post("/events/:companyID", function(req, res) {
+app.post("/events/:companyID", mid.requiresLogin, function(req, res) {
 	console.log(req.params.companyID);
 	let newEvent = req.body;
 	console.log(newEvent);
@@ -337,7 +337,7 @@ app.post("/event/guest/:tableHostId", function(req, res) {
 });
 
 
-app.get('/account', (req, res, next) => {
+app.get('/account', mid.requiresLogin, (req, res, next) => {
 	if(!req.session.userId ) {
 		var err = new Error("You are not authorized to view this page");
 		err.status = 403;
@@ -384,7 +384,7 @@ app.get('/api/guestregister/:eventId/:tableHostId', (req, res) => {
 
 // Updating Event Information
 
-app.put('/api/events/:eventId', (req, res) => {
+app.put('/api/events/:eventId', mid.requiresLogin, (req, res) => {
     console.log('EventId: ', req.params.eventId);
     console.log('EventBody: ', req.body);
     Event.findByIdAndUpdate(req.params.eventId, {
