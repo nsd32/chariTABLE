@@ -16,20 +16,20 @@ import './App.css';
 
 class App extends Component {
 
-  // state = {
-  //   companyId: ""
-  // }
+  state = {
+    companyId: ""
+  }
 
-  // componentWillMount() {
-  //   axios.get('/login')
-  //   .then((companyID) => {
-  //     console.log('CompanyID: ', companyID);
-  //     let companyId = companyID.data.companyID;
-  //     console.log('This is the companyID getting transferred: ', companyID);
-  //     this.setState({companyID: companyID});
-  //     console.log('App State: ', this.state)
-  //   });
-  // }
+  componentWillMount() {
+    axios.get('/login')
+    .then((companyID) => {
+      console.log('CompanyID: ', companyID);
+      let companyId = companyID.data.companyID;
+      console.log('This is the companyID getting transferred: ', companyID);
+      this.setState({companyID: companyID});
+      console.log('App State: ', this.state)
+    });
+  }
 
 
   render() {
