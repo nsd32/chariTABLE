@@ -49,20 +49,20 @@ class GuestRegister extends Component {
   }
 
   render() {
-    // if(!this.state.tableHostData) {
-    //   return (
-    //     <div id="ms-preload" className="ms-preload">
-    //       <div id="status">
-    //         <div className="spinner">
-    //           <div className="dot1"></div>
-    //           <div className="dot2"></div>
-    //         </div>
-    //       </div>
-    //     </div>
-    //   )
-    // }
+    if(!this.state.tableHostData) {
+      return (
+        <div id="ms-preload" className="ms-preload">
+          <div id="status">
+            <div className="spinner">
+              <div className="dot1"></div>
+              <div className="dot2"></div>
+            </div>
+          </div>
+        </div>
+      )
+    }
     return(
-      <div style={{ display: "block"}}>
+      <div style={{ display: "block" !important}}>
 
         {/*<div id="ms-preload" className="ms-preload">
           <div id="status">
@@ -72,7 +72,7 @@ class GuestRegister extends Component {
             </div>
           </div>
         </div>*/}
-        <div className="bg-full-page ms-hero-img-coffee ms-hero-bg-primary ms-bg-fixed back-fixed" style={{ display: "block"}}>
+        <div className="bg-full-page ms-hero-img-coffee ms-hero-bg-primary ms-bg-fixed back-fixed" style={{ display: "block" !important}}>
 
           <header className="ms-header ms-header-primary">
             <div className="container container-full">
