@@ -62,7 +62,7 @@ class GuestRegister extends Component {
       )
     }
     return(
-      <div>
+      <div style={{ display: "block"}}>
 
         {/*<div id="ms-preload" className="ms-preload">
           <div id="status">
@@ -72,7 +72,7 @@ class GuestRegister extends Component {
             </div>
           </div>
         </div>*/}
-        <div className="bg-full-page ms-hero-img-coffee ms-hero-bg-primary ms-bg-fixed back-fixed">
+        <div className="bg-full-page ms-hero-img-coffee ms-hero-bg-primary ms-bg-fixed back-fixed" style={{ display: "block"}}>
 
           <header className="ms-header ms-header-primary">
             <div className="container container-full">
