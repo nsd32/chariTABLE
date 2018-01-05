@@ -26,7 +26,7 @@ class Events extends Component {
     // console.log('Split URL: ', splitUrl);
     let companyID = splitUrl[2].trim();
     // let companyID = this.props.match.params.companyId;
-    // console.log('URL Company ID: ', companyID);
+    console.log('URL Company ID: ', companyID);
     // this.setState( {companyID: companyID} )
 
     axios.get(`/api/events/${companyID}`)
