@@ -410,14 +410,14 @@ class Events extends Component {
                       </div>
 
 
-                      <div class="row mt-2 pull-right">
-                        <div class="offset-lg-2 col-lg-10">
+                      <div className="row mt-2 pull-right">
+                        <div className="offset-lg-2 col-lg-10">
 
                         </div>
 
                           <button className="btn btn-raised btn-warning" onClick={this.handleBackButtonClick} style={ {margin: "5px"} }>Back</button>
-                          <button class="btn btn-raised btn-primary save-button" onClick={this.eventSaveButton} style={ {margin: "5px"} }>Save Changes</button>
-                          <button class="btn btn-raised btn-danger" onClick={this.eventDeleteButton} style={ {margin: "5px"} }>Delete Event</button>
+                          <button className="btn btn-raised btn-primary save-button" onClick={this.eventSaveButton} style={ {margin: "5px"} }>Save Changes</button>
+                          <button className="btn btn-raised btn-danger" onClick={this.eventDeleteButton} style={ {margin: "5px"} }>Delete Event</button>
                       </div>
                     </fieldset>
                   </form>
