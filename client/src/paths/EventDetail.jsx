@@ -16,7 +16,7 @@ class Events extends Component {
 
 
   componentWillMount() {
-    
+
     this.setState({companyID: this.props.location.state.companyID});
 
     let eventID = this.props.location.state.eventInfo._id
@@ -461,7 +461,7 @@ class Events extends Component {
 
                         </div>
                         {tableHost.guests.map((guest, idx) => {
-                          
+
                           return (
                             <div key={idx}>
 

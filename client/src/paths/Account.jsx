@@ -27,16 +27,23 @@ class Account extends Component {
 
     });
     console.log(this.state);
+}
 
-    // let companyID =  this.state.companyInfo._id;
-    // console.log('Account Company ID: ', companyID);
-    // axios.get(`/api/account/${companyID}`)
-    //   .then((response) => {
-    //
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+  componentWillUnmount() {
+    this.setState({
+      companyName: "",
+      username: "",
+      addressLine1: "",
+      addressLine2: "",
+      city: "",
+      state: "",
+      zipCode: "",
+      phoneNumber: "",
+      website: "",
+      email: "",
+      createdOn: "",
+      companyID: "",
+    });
   }
 
   handleInputChange = (event) => {
@@ -134,12 +141,12 @@ class Account extends Component {
                 <div className="row form-group">
                   <label htmlFor="email" className="col-md-4 control-label text-left"><i className="zmdi zmdi-email mr-1 color-primary"></i> Email Address</label>
                   <div className="col-md-8">
-                    <input name="email" onChange={this.handleInputChange} defaultValue={this.state.email} type="email" className="form-control" validate /> </div>
+                    <input name="email" onChange={this.handleInputChange} defaultValue={this.state.email} type="email" className="form-control" /> </div>
                 </div>
                 <div className="row form-group">
                   <label htmlFor="website" className="col-md-4 control-label text-left"><i className="zmdi zmdi-store mr-1 color-danger"></i> Website</label>
                   <div className="col-md-8">
-                    <input name="website" onChange={this.handleInputChange} defaultValue={this.state.website} type="text" className="form-control" validate /> </div>
+                    <input name="website" onChange={this.handleInputChange} defaultValue={this.state.website} type="text" className="form-control" /> </div>
                 </div>
                 <div className="row form-group">
                   <label htmlFor="addressLine1" className="col-md-4 control-label text-left"><i className="zmdi zmdi-pin mr-1 color-warning"></i> Address Line 1</label>
@@ -167,9 +174,9 @@ class Account extends Component {
                     <input name="zipCode" onChange={this.handleInputChange} defaultValue={this.state.zipCode} type="text" className="form-control" /> </div>
                 </div>
                 <div className="row form-group">
-                  <label htmlFor="phone" className="col-md-4 control-label text-left"><i className="zmdi zmdi-phone mr-1 color-royal-light"></i> Phone</label>
+                  <label htmlFor="phone" className="col-md-4 control-label text-left"><i className="zmdi zmdi-phone mr-1 color-royal-light"></i> Phone (ex: xxx-xxx-xxxx)</label>
                   <div className="col-md-8">
-                    <input name="phoneNumber" onChange={this.handleInputChange} defaultValue={this.state.phoneNumber} type="text" className="form-control" /> </div>
+                    <input name="phoneNumber" onChange={this.handleInputChange} defaultValue={this.state.phoneNumber} type="tel" pattern="^\d{3}-\d{3}-\d{4}$" className="form-control" /> </div>
                 </div>
                 <div className="row form-group">
                   <label htmlFor="createdOn" className="col-md-4 control-label text-left"><i className="zmdi zmdi-calendar mr-1 color-primary"></i> Date Created</label>
