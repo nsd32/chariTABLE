@@ -148,7 +148,7 @@ class GuestRegister extends Component {
                   </div>
                 </div>
               </div>
-              <p className="lead lead-sm text-center mt-4 color-medium animated fadeInUp animation-delay-5">Jubatus Software &copy; Copyright 2017</p>
+              <p className="lead lead-sm text-center mt-4 color-medium animated fadeInUp animation-delay-16">Jubatus Software &copy; Copyright 2017</p>
             </div>
           </div>
         </div>
