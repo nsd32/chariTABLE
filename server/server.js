@@ -61,11 +61,11 @@ app.post('/login', (req, res, next) => {
 	}
 })
 
-app.get('/login', (req, res, next) => {
-	console.log('Signed In CompanyID: ', sessionID)
-	res.json({companyId: sessionID})
-
-});
+// app.get('/login', (req, res, next) => {
+// 	console.log('Signed In CompanyID: ', sessionID)
+// 	res.json({companyId: sessionID})
+//
+// });
 
 // GET /logout
 app.get('/logout', function(req, res, next) {
@@ -183,7 +183,7 @@ app.get('/api/events', (req, res) => {
 		});
 });
 
-app.get('/api/events/:id', mid.requiresLogin, (req, res) => {
+app.get('/api/events/:id', (req, res) => {
 
 	User.findById({_id:req.params.id})
 		.populate('events')
@@ -197,7 +197,7 @@ app.get('/api/events/:id', mid.requiresLogin, (req, res) => {
 		});
 });
 
-app.get('/api/eventDetails/:id', mid.requiresLogin, (req, res) => {
+app.get('/api/eventDetails/:id', (req, res) => {
 	console.log('Event Details Company IDs :', req.params.id);
 
 	const event = {
@@ -233,7 +233,7 @@ app.get('/api/event/:eventId', mid.requiresLogin, (req, res) => {
 });
 
 // Route for creating Events and associating them with a Company
-app.post("/events/:companyID", mid.requiresLogin, function(req, res) {
+app.post("/events/:companyID", function(req, res) {
 	console.log(req.params.companyID);
 	let newEvent = req.body;
 	console.log(newEvent);
@@ -384,7 +384,7 @@ app.get('/api/guestregister/:eventId/:tableHostId', (req, res) => {
 
 // Updating Event Information
 
-app.put('/api/events/:eventId', mid.requiresLogin, (req, res) => {
+app.put('/api/events/:eventId',  (req, res) => {
     console.log('EventId: ', req.params.eventId);
     console.log('EventBody: ', req.body);
     Event.findByIdAndUpdate(req.params.eventId, {
