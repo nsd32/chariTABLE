@@ -18,7 +18,7 @@ class Events extends Component {
   }
 
 
-  componentWillMount() {
+  componentDidMount() {
         console.log('Props: ', this.props);
 
     let url = this.props.location.pathname;
@@ -49,12 +49,6 @@ class Events extends Component {
 
   }
 
-  componentWillUnmount() {
-      this.setState({
-          companyID: "",
-          events: []
-      })
-  }
 
   handleDetailClick = (event) => {
     console.log(`Details Clicked ID# ${event.target.id}`);
