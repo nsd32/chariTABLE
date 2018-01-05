@@ -16,20 +16,20 @@ import './App.css';
 
 class App extends Component {
 
-  state = {
-    companyId: ""
-  }
+  // state = {
+  //   companyId: ""
+  // }
 
-  componentWillMount() {
-    axios.get('/login')
-    .then((companyID) => {
-      console.log('CompanyID: ', companyID);
-      let companyId = companyID.data.companyID;
-      console.log('This is the companyID getting transferred: ', companyID);
-      this.setState({companyID: companyID});
-      console.log('App State: ', this.state)
-    });
-  }
+  // componentWillMount() {
+  //   axios.get('/login')
+  //   .then((companyID) => {
+  //     console.log('CompanyID: ', companyID);
+  //     let companyId = companyID.data.companyID;
+  //     console.log('This is the companyID getting transferred: ', companyID);
+  //     this.setState({companyID: companyID});
+  //     console.log('App State: ', this.state)
+  //   });
+  // }
 
 
   render() {
@@ -38,7 +38,7 @@ class App extends Component {
         <div>
           <Route exact path="/" component={LandingPageUpdated2} />
           <Route exact path="/profile/:companyId" component={Events} />
-          <Route exact path="/event/:eventId" component={EventDetail} companyID={this.state.companyId} />
+          <Route exact path="/event/:eventId" component={EventDetail} />
           <Route exact path="/account" component={Account} />
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/addevent" component={AddEvent} />
