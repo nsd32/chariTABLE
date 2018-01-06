@@ -49,18 +49,7 @@ class GuestRegister extends Component {
   }
 
   render() {
-    if(!this.state.tableHostData) {
-      return (
-        <div id="ms-preload" className="ms-preload">
-          <div id="status">
-            <div className="spinner">
-              <div className="dot1"></div>
-              <div className="dot2"></div>
-            </div>
-          </div>
-        </div>
-      )
-    }
+
     return(
       <div>
         <div className="bg-full-page ms-hero-img-coffee ms-hero-bg-primary ms-bg-fixed back-fixed">
