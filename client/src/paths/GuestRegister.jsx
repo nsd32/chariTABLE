@@ -94,7 +94,7 @@ class GuestRegister extends Component {
                       </header>
                       <div className="row">
                         <div className="col-12">
-                          <div className="text-center card-block animated zoomIn animation-delay-10">
+                          <div className="text-center card-block animated zoomIn animation-delay-5">
                             <h2 className="animated zoomInDown animation-delay-5">Guests</h2>
                             <ul id="guest-list">
                               {this.state.tableHostData.tableHost.guests.map((guest, idx) => {
@@ -122,7 +122,7 @@ class GuestRegister extends Component {
                   </div>
                 </div>
                 <div className="col-xl-6">
-                  <div className="card index-1 animated zoomInRight animation-delay-7">
+                  <div className="card index-1 animated zoomInRight animation-delay-5">
                     <div className="card-block-big">
                       <h1 className="color-primary">Register</h1>
                       <hr style={{height:"10px", visibility:"hidden"}} />
@@ -148,7 +148,7 @@ class GuestRegister extends Component {
                   </div>
                 </div>
               </div>
-              <p className="lead lead-sm text-center mt-4 color-medium animated fadeInUp animation-delay-16">Jubatus Software &copy; Copyright 2017</p>
+              <p className="lead lead-sm text-center mt-4 color-medium animated fadeInUp animation-delay-5">Jubatus Software &copy; Copyright 2017</p>
             </div>
           </div>
         </div>

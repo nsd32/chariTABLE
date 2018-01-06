@@ -73,7 +73,7 @@ class Sponsor extends Component {
   	// console.log(this.state);
   	// console.log(this.props.location.state.eventObj.numberOfSponsors);
   	var rows = [];
-    for (var i = 0; i < this.props.location.state.eventObj.numberOfTableHosts; i++) {
+    for (var i = 0; i < this.props.location.state.eventObj.numberOfSponsors; i++) {
         rows.push(
         	<tr key={i}>
             <td className="addEventInput">
