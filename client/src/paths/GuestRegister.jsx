@@ -22,10 +22,10 @@ class GuestRegister extends Component {
       });
   }
 
-  compnentDidMount() {
-    document.querySelector("body div").style.display = 'inline-block';
-    document.querySelector("div.bg-full-page").style.display = 'inline-block';
-  }
+  // compnentDidMount() {
+  //   document.querySelector("body div").style.display = 'inline-block';
+  //   document.querySelector("div.bg-full-page").style.display = 'inline-block';
+  // }
 
   handleInputChange = (event) => {
     this.setState({
