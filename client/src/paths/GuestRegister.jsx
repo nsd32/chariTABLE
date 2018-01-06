@@ -70,8 +70,8 @@ class GuestRegister extends Component {
               <div className="ms-title">
                 <a href="index.html">
 
-                  <span className="ms-logo animated zoomInDown animation-delay-5">CH</span>
-                  <h1 className="animated fadeInRight animation-delay-6">chariTABLE Host
+                  <span className="ms-logo">CH</span>
+                  <h1 className="">chariTABLE Host
                   </h1>
                 </a>
               </div>
@@ -87,19 +87,19 @@ class GuestRegister extends Component {
                   <div className="card card-flat bg-transparent">
                     <div className="card-block color-white">
                       <header className="text-center mb-2">
-                        <h1 className="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5"><span>{this.state.tableHostData.searchedEvent.eventName}</span>
+                        <h1 className="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 "><span>{this.state.tableHostData.searchedEvent.eventName}</span>
                         </h1>
-                        <h1 className="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">Table Host: {this.state.tableHostData.tableHost.name}
+                        <h1 className="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 ">Table Host: {this.state.tableHostData.tableHost.name}
                         </h1>
                       </header>
                       <div className="row">
                         <div className="col-12">
-                          <div className="text-center card-block animated zoomIn animation-delay-5">
-                            <h2 className="animated zoomInDown animation-delay-5">Guests</h2>
+                          <div className="text-center card-block ">
+                            <h2 className="">Guests</h2>
                             <ul id="guest-list">
                               {this.state.tableHostData.tableHost.guests.map((guest, idx) => {
                                 return (
-                                  <li className="animated zoomInDown animation-delay-5" key={idx}><h4>{idx + 1}. {guest.name}</h4></li>
+                                  <li className="" key={idx}><h4>{idx + 1}. {guest.name}</h4></li>
                                 );
                               })}
                             </ul>
@@ -122,7 +122,7 @@ class GuestRegister extends Component {
                   </div>
                 </div>
                 <div className="col-xl-6">
-                  <div className="card index-1 animated zoomInRight animation-delay-5">
+                  <div className="card index-1">
                     <div className="card-block-big">
                       <h1 className="color-primary">Register</h1>
                       <hr style={{height:"10px", visibility:"hidden"}} />
@@ -148,7 +148,7 @@ class GuestRegister extends Component {
                   </div>
                 </div>
               </div>
-              <p className="lead lead-sm text-center mt-4 color-medium animated fadeInUp animation-delay-5">Jubatus Software &copy; Copyright 2017</p>
+              <p className="lead lead-sm text-center mt-4 color-medium">Jubatus Software &copy; Copyright 2017</p>
             </div>
           </div>
         </div>
