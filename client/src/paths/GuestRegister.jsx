@@ -22,6 +22,11 @@ class GuestRegister extends Component {
       });
   }
 
+  compnentDidMount() {
+    document.querySelector("body div").style.display = 'inline-block';
+    document.querySelector("div.bg-full-page").style.display = 'inline-block';
+  }
+
   handleInputChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value
@@ -63,7 +68,7 @@ class GuestRegister extends Component {
     }
     return(
       <div>
-        <div className="bg-full-page  ms-hero-bg-primary ms-bg-fixed back-fixed">
+        <div className="bg-full-page ms-hero-img-coffee ms-hero-bg-primary ms-bg-fixed back-fixed">
 
           <header className="ms-header ms-header-primary">
             <div className="container container-full">
