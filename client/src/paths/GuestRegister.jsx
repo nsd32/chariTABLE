@@ -75,8 +75,8 @@ class GuestRegister extends Component {
               <div className="ms-title">
                 <a href="index.html">
 
-                  <span className="ms-logo animated zoomInDown animation-delay-5">CH</span>
-                  <h1 className="animated fadeInRight animation-delay-6">chariTABLE Host
+                  <span className="ms-logo animated zoomInDown animation-delay-3">CH</span>
+                  <h1 className="animated fadeInRight animation-delay-4">chariTABLE Host
                   </h1>
                 </a>
               </div>
